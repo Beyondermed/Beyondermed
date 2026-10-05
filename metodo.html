@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Método BEYONDERMED</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Inter", sans-serif;
+      color: #171717;
+      background: #fff;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    nav {
+      height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 7%;
+      border-bottom: 1px solid #eee;
+    }
+
+    .logo {
+      height: 38px;
+      width: auto;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 34px;
+      font-size: 14px;
+    }
+
+    .nav-links a {
+      color: #444;
+    }
+
+    .nav-links a:hover {
+      color: #b3262e;
+    }
+
+    main {
+      max-width: 1000px;
+      margin: auto;
+      padding: 100px 7%;
+    }
+
+    .kicker {
+      color: #b3262e;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(45px, 6vw, 72px);
+      letter-spacing: -2px;
+      line-height: 1;
+      margin-bottom: 25px;
+    }
+
+    .intro {
+      max-width: 720px;
+      color: #666;
+      font-size: 17px;
+      margin-bottom: 70px;
+    }
+
+    .method-block {
+      border-top: 1px solid #ddd;
+      padding: 35px 0;
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      gap: 40px;
+    }
+
+    .number {
+      color: #b3262e;
+      font-family: "Space Grotesk", sans-serif;
+      font-weight: 700;
+    }
+
+    h2 {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    .method-block p {
+      color: #666;
+      max-width: 700px;
+    }
+
+    .notice {
+      margin-top: 50px;
+      padding: 25px;
+      background: #f7f7f7;
+      border-left: 3px solid #b3262e;
+      color: #555;
+      font-size: 14px;
+    }
+
+    footer {
+      background: #151515;
+      color: white;
+      padding: 45px 7%;
+    }
+
+    .footer-inner {
+      max-width: 1000px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .footer-brand {
+      font-family: "Space Grotesk", sans-serif;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 25px;
+      color: #aaa;
+      font-size: 13px;
+    }
+
+    @media (max-width: 700px) {
+
+      nav {
+        padding: 0 5%;
+      }
+
+      .nav-links {
+        gap: 14px;
+      }
+
+      main {
+        padding: 70px 5%;
+      }
+
+      .method-block {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        gap: 20px;
+      }
+
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <nav>
+
+    <a href="index.html">
+      <img src="beyondermed-logo.png" alt="BEYONDERMED" class="logo">
+    </a>
+
+    <div class="nav-links">
+      <a href="index.html">Inicio</a>
+      <a href="metodo.html">Método</a>
+      <a href="cursos.html">Cursos</a>
+    </div>
+
+  </nav>
+
+
+  <main>
+
+    <div class="kicker">
+      BEYONDERMED · Método
+    </div>
+
+    <h1>
+      Método BEYONDERMED
+    </h1>
+
+    <p class="intro">
+      Un sistema de estudio orientado a transformar la información médica
+      en conocimiento comprendido, relacionado, aplicado y recuperable.
+      El desarrollo completo del método se incorporará progresivamente
+      en esta sección.
+    </p>
+
+
+    <section class="method-block">
+
+      <div class="number">
+        01
+      </div>
+
+      <div>
+        <h2>Comprender</h2>
+
+        <p>
+          Construir una representación clara de los conceptos fundamentales,
+          sus mecanismos y relaciones antes de recurrir a la memorización.
+        </p>
+      </div>
+
+    </section>
+
+
+    <section class="method-block">
+
+      <div class="number">
+        02
+      </div>
+
+      <div>
+        <h2>Integrar</h2>
+
+        <p>
+          Conectar los conceptos dentro de una estructura coherente,
+          relacionando mecanismos fisiológicos, fisiopatológicos,
+          microbiológicos, inmunológicos y clínicos.
+        </p>
+      </div>
+
+    </section>
+
+
+    <section class="method-block">
+
+      <div class="number">
+        03
+      </div>
+
+      <div>
+        <h2>Aplicar</h2>
+
+        <p>
+          Trasladar el conocimiento a preguntas, problemas y casos clínicos
+          para desarrollar razonamiento y capacidad de interpretación.
+        </p>
+      </div>
+
+    </section>
+
+
+    <section class="method-block">
+
+      <div class="number">
+        04
+      </div>
+
+      <div>
+        <h2>Recordar</h2>
+
+        <p>
+          Consolidar la información mediante recuperación activa,
+          repetición espaciada y herramientas de revisión como Anki.
+        </p>
+      </div>
+
+    </section>
+
+
+    <div class="notice">
+
+      Esta página contiene actualmente una estructura preliminar.
+      El método BEYONDERMED completo se desarrollará aquí posteriormente
+      siguiendo el sistema de estudio definido para la plataforma.
+
+    </div>
+
+  </main>
+
+
+  <footer>
+
+    <div class="footer-inner">
+
+      <div class="footer-brand">
+        BEYONDERMED
+      </div>
+
+      <div class="footer-links">
+        <a href="index.html">Inicio</a>
+        <a href="metodo.html">Método</a>
+        <a href="cursos.html">Cursos</a>
+      </div>
+
+    </div>
+
+  </footer>
+
+</body>
+</html>
