@@ -8,12 +8,20 @@
 
   <title>BEYONDERMED | Estudio médico</title>
 
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+    rel="stylesheet"
+  >
 
   <style>
+
+    /* =========================
+       RESET
+    ========================= */
 
     * {
       box-sizing: border-box;
@@ -55,11 +63,15 @@
 
       padding: 0 6%;
 
-      background: rgba(255,255,255,0.94);
+      background: rgba(255, 255, 255, 0.96);
+
       backdrop-filter: blur(12px);
 
       border-bottom: 1px solid #eeeeee;
     }
+
+
+    /* LOGO ANTERIOR */
 
     .brand {
       display: flex;
@@ -72,9 +84,13 @@
       display: block;
     }
 
+
+    /* NAVIGATION */
+
     .nav-links {
       display: flex;
       align-items: center;
+
       gap: 42px;
 
       font-size: 14px;
@@ -83,7 +99,9 @@
 
     .nav-links a {
       position: relative;
+
       color: #34373d;
+
       transition: color 0.2s ease;
     }
 
@@ -93,6 +111,7 @@
 
     .nav-links a.active {
       color: #a8242d;
+
       font-weight: 600;
     }
 
@@ -100,8 +119,10 @@
       content: "";
 
       position: absolute;
+
       left: 0;
       right: 0;
+
       bottom: -10px;
 
       height: 2px;
@@ -128,7 +149,7 @@
     }
 
 
-    /* Imagen médica */
+    /* IMAGEN MÉDICA */
 
     .hero-image {
       position: absolute;
@@ -139,15 +160,25 @@
       width: 63%;
       height: 100%;
 
-      background-image: url("beyondermed-hero.png");
+      /*
+        IMPORTANTE:
+        Este es exactamente el nombre
+        del archivo que tienes en GitHub.
+      */
+
+      background-image: url("beyondermed-hero(1).png");
+
       background-size: cover;
+
       background-position: center center;
+
+      background-repeat: no-repeat;
 
       z-index: 1;
     }
 
 
-    /* Degradado que integra la imagen con el fondo */
+    /* DEGRADADO PARA INTEGRAR IMAGEN CON EL TEXTO */
 
     .hero-image::after {
       content: "";
@@ -168,7 +199,7 @@
     }
 
 
-    /* Capa ligera inferior */
+    /* LIGERO CONTROL DE CONTRASTE */
 
     .hero-image::before {
       content: "";
@@ -186,13 +217,17 @@
     }
 
 
-    /* Contenido */
+    /* =========================
+       HERO CONTENT
+    ========================= */
 
     .hero-content {
       position: relative;
+
       z-index: 5;
 
       width: 100%;
+
       max-width: 1280px;
 
       margin: 0 auto;
@@ -200,14 +235,19 @@
       padding: 80px 6%;
 
       display: flex;
+
       align-items: center;
     }
 
+
     .hero-text {
       width: 54%;
+
       max-width: 690px;
     }
 
+
+    /* PEQUEÑO TITULO */
 
     .hero-kicker {
       margin-bottom: 20px;
@@ -215,12 +255,16 @@
       color: #a8242d;
 
       font-size: 12px;
+
       font-weight: 700;
 
       letter-spacing: 3px;
+
       text-transform: uppercase;
     }
 
+
+    /* TITULO PRINCIPAL */
 
     h1 {
       font-family: "Space Grotesk", sans-serif;
@@ -241,10 +285,13 @@
       color: #151922;
     }
 
+
     .headline-red {
       color: #a8242d;
     }
 
+
+    /* DESCRIPCIÓN */
 
     .hero-description {
       max-width: 590px;
@@ -265,7 +312,9 @@
 
     .hero-buttons {
       display: flex;
+
       align-items: center;
+
       gap: 14px;
 
       flex-wrap: wrap;
@@ -274,7 +323,9 @@
 
     .button {
       display: inline-flex;
+
       align-items: center;
+
       justify-content: center;
 
       min-height: 49px;
@@ -284,6 +335,7 @@
       border-radius: 7px;
 
       font-size: 14px;
+
       font-weight: 600;
 
       transition:
@@ -293,16 +345,23 @@
     }
 
 
+    /* BOTÓN PRINCIPAL */
+
     .button-primary {
       background: #a8242d;
+
       color: white;
     }
 
+
     .button-primary:hover {
       background: #8f2028;
+
       transform: translateY(-2px);
     }
 
+
+    /* BOTÓN SECUNDARIO */
 
     .button-secondary {
       background: rgba(255,255,255,0.72);
@@ -312,8 +371,10 @@
       color: #272c34;
     }
 
+
     .button-secondary:hover {
       border-color: #a8242d;
+
       color: #a8242d;
 
       transform: translateY(-2px);
@@ -321,7 +382,7 @@
 
 
     /* =========================
-       SMALL HERO DETAIL
+       DETALLE INFERIOR
     ========================= */
 
     .hero-detail {
@@ -330,6 +391,7 @@
       z-index: 4;
 
       right: 4%;
+
       bottom: 32px;
 
       color: rgba(255,255,255,0.55);
@@ -354,22 +416,28 @@
       padding: 25px 6%;
     }
 
+
     .footer-inner {
       max-width: 1280px;
 
       margin: 0 auto;
 
       display: flex;
+
       justify-content: space-between;
+
       align-items: center;
     }
+
 
     .footer-brand {
       font-family: "Space Grotesk", sans-serif;
 
       font-size: 14px;
+
       letter-spacing: 2px;
     }
+
 
     .footer-copy {
       color: #858b94;
@@ -388,13 +456,16 @@
         padding: 0 5%;
       }
 
+
       .brand img {
         width: 205px;
       }
 
+
       .nav-links {
         gap: 22px;
       }
+
 
       .hero {
         min-height: auto;
@@ -404,16 +475,19 @@
         flex-direction: column;
       }
 
+
       .hero-image {
         position: relative;
 
         width: 100%;
+
         height: 500px;
 
         order: 2;
 
         background-position: center;
       }
+
 
       .hero-image::after {
         background:
@@ -425,25 +499,30 @@
           );
       }
 
+
       .hero-content {
         order: 1;
 
         padding: 80px 6% 45px;
       }
 
+
       .hero-text {
         width: 100%;
+
         max-width: 700px;
       }
+
 
       .hero-detail {
         display: none;
       }
+
     }
 
 
     /* =========================
-       MOBILE
+       CELULAR
     ========================= */
 
     @media (max-width: 600px) {
@@ -452,9 +531,11 @@
         height: 70px;
       }
 
+
       .brand img {
         width: 175px;
       }
+
 
       .nav-links {
         gap: 15px;
@@ -462,13 +543,16 @@
         font-size: 12px;
       }
 
+
       .nav-links a.active::after {
         bottom: -7px;
       }
 
+
       .hero-content {
         padding: 65px 6% 35px;
       }
+
 
       h1 {
         font-size: 51px;
@@ -476,28 +560,35 @@
         letter-spacing: -2.5px;
       }
 
+
       .hero-description {
         font-size: 15px;
       }
+
 
       .hero-image {
         height: 380px;
       }
 
+
       .hero-buttons {
         width: 100%;
       }
+
 
       .button {
         width: 100%;
       }
 
+
       .footer-inner {
         flex-direction: column;
+
         gap: 10px;
 
         text-align: center;
       }
+
     }
 
   </style>
@@ -514,10 +605,15 @@
 
   <nav>
 
-    <a href="index.html" class="brand">
+    <a
+      href="index.html"
+      class="brand"
+    >
+
+      <!-- LOGO ANTERIOR -->
 
       <img
-        src="beyondermed-logo-new.png"
+        src="beyondermed-logo.png"
         alt="BEYONDERMED"
       >
 
@@ -533,9 +629,11 @@
         Inicio
       </a>
 
+
       <a href="metodo.html">
         Método
       </a>
+
 
       <a href="cursos.html">
         Cursos
@@ -548,7 +646,7 @@
 
 
   <!-- =========================
-       HERO
+       MAIN
   ========================= -->
 
   <main>
@@ -556,8 +654,12 @@
     <section class="hero">
 
 
+      <!-- IMAGEN MÉDICA -->
+
       <div class="hero-image"></div>
 
+
+      <!-- CONTENIDO -->
 
       <div class="hero-content">
 
@@ -614,13 +716,18 @@
 
           </div>
 
+
         </div>
 
       </div>
 
 
+      <!-- DETALLE DECORATIVO -->
+
       <div class="hero-detail">
+
         Medical knowledge · Integration · Clinical reasoning
+
       </div>
 
 
@@ -638,13 +745,16 @@
 
     <div class="footer-inner">
 
+
       <div class="footer-brand">
         BEYONDERMED
       </div>
 
+
       <div class="footer-copy">
         Estudio médico y conocimiento integrado.
       </div>
+
 
     </div>
 
