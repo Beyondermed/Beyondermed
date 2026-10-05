@@ -4,34 +4,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>BEYONDERMED — Medicina más allá de la memorización</title>
+    <title>BEYONDERMED — Go beyond memorization.</title>
 
-    <meta name="description" content="BEYONDERMED — Plataforma de estudio médico para comprender, integrar, aplicar y recordar.">
+    <meta
+        name="description"
+        content="BEYONDERMED — Plataforma personal de estudio médico, razonamiento clínico y conocimiento integrado."
+    >
 
-    <!-- Tipografías -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
 
     <style>
 
+        /* =========================
+           VARIABLES
+        ========================= */
+
         :root {
-            --red: #B3262E;
-            --red-dark: #8F1E25;
-            --red-light: #D14A51;
+            --background: #f7f7f5;
+            --surface: #ffffff;
+            --surface-soft: #f1f1ef;
 
-            --black: #0A0A0A;
+            --text: #171717;
+            --text-secondary: #626262;
+            --text-light: #858585;
+
+            --accent: #b3262e;
+            --accent-dark: #8e1d24;
+            --accent-soft: #f4e4e5;
+
+            --border: #e3e3e0;
+
             --dark: #111111;
-            --gray-dark: #272727;
+            --dark-soft: #1a1a1a;
 
-            --gray: #666666;
-            --gray-light: #F3F3F3;
-
-            --white: #FFFFFF;
+            --radius: 18px;
+            --radius-small: 12px;
 
             --max-width: 1180px;
         }
+
+
+        /* =========================
+           RESET
+        ========================= */
 
         * {
             margin: 0;
@@ -45,19 +67,56 @@
 
         body {
             font-family: "Inter", sans-serif;
-            color: var(--black);
-            background: var(--white);
+            background: var(--background);
+            color: var(--text);
             line-height: 1.6;
         }
 
         a {
-            color: inherit;
             text-decoration: none;
+            color: inherit;
         }
+
+        button {
+            font-family: inherit;
+        }
+
+
+        /* =========================
+           GENERAL
+        ========================= */
 
         .container {
             width: min(92%, var(--max-width));
             margin: auto;
+        }
+
+        .section {
+            padding: 90px 0;
+        }
+
+        .section-label {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: clamp(32px, 5vw, 48px);
+            line-height: 1.05;
+            letter-spacing: -0.035em;
+            margin-bottom: 18px;
+        }
+
+        .section-description {
+            max-width: 650px;
+            color: var(--text-secondary);
+            font-size: 16px;
         }
 
 
@@ -65,32 +124,34 @@
            NAVBAR
         ========================= */
 
-        header {
+        .navbar {
             position: sticky;
             top: 0;
             z-index: 1000;
 
-            background: rgba(255,255,255,0.94);
+            background: rgba(247, 247, 245, 0.92);
             backdrop-filter: blur(14px);
 
-            border-bottom: 1px solid #EAEAEA;
+            border-bottom: 1px solid rgba(227, 227, 224, 0.8);
         }
 
-        nav {
-            height: 78px;
+        .nav-inner {
+            min-height: 74px;
 
             display: flex;
             align-items: center;
             justify-content: space-between;
+            gap: 30px;
         }
 
         .nav-logo {
             display: flex;
             align-items: center;
+            max-width: 190px;
         }
 
         .nav-logo img {
-            width: 190px;
+            width: 100%;
             height: auto;
             display: block;
         }
@@ -98,16 +159,19 @@
         .nav-links {
             display: flex;
             align-items: center;
-            gap: 34px;
-
-            font-family: "Space Grotesk", sans-serif;
-            font-size: 14px;
-            font-weight: 500;
+            gap: 32px;
         }
 
         .nav-links a {
             position: relative;
-            transition: 0.25s ease;
+
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+
+            color: #454545;
+
+            transition: color 0.2s ease;
         }
 
         .nav-links a::after {
@@ -118,15 +182,15 @@
             bottom: -7px;
 
             width: 0;
-            height: 2px;
+            height: 1px;
 
-            background: var(--red);
+            background: var(--accent);
 
-            transition: 0.25s ease;
+            transition: width 0.2s ease;
         }
 
         .nav-links a:hover {
-            color: var(--red);
+            color: var(--accent);
         }
 
         .nav-links a:hover::after {
@@ -139,256 +203,256 @@
         ========================= */
 
         .hero {
-            min-height: calc(100vh - 78px);
+            min-height: calc(100vh - 74px);
 
             display: flex;
             align-items: center;
 
-            position: relative;
-            overflow: hidden;
+            padding: 70px 0 90px;
         }
 
-        .hero::before {
-            content: "";
-
-            position: absolute;
-            width: 600px;
-            height: 600px;
-
-            right: -220px;
-            top: -180px;
-
-            background: radial-gradient(
-                circle,
-                rgba(179,38,46,0.08),
-                transparent 68%
-            );
-
-            pointer-events: none;
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            align-items: center;
+            gap: 70px;
         }
 
         .hero-content {
-            max-width: 850px;
-            position: relative;
-            z-index: 2;
+            max-width: 720px;
         }
 
-        .hero-label {
+        .hero-kicker {
             display: inline-flex;
             align-items: center;
             gap: 10px;
 
-            margin-bottom: 26px;
+            margin-bottom: 24px;
 
             font-family: "Space Grotesk", sans-serif;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 600;
-            letter-spacing: 2px;
+            letter-spacing: 0.14em;
             text-transform: uppercase;
 
-            color: var(--red);
+            color: var(--accent);
         }
 
-        .hero-label::before {
+        .hero-kicker::before {
             content: "";
 
             width: 28px;
-            height: 2px;
+            height: 1px;
 
-            background: var(--red);
+            background: var(--accent);
         }
 
         .hero h1 {
             font-family: "Space Grotesk", sans-serif;
 
-            font-size: clamp(54px, 8vw, 100px);
+            font-size: clamp(58px, 8vw, 105px);
+            line-height: 0.91;
+            letter-spacing: -0.065em;
 
-            line-height: 0.95;
-            letter-spacing: -4px;
-
-            font-weight: 700;
-
-            margin-bottom: 32px;
+            margin-bottom: 28px;
         }
 
         .hero h1 span {
-            color: var(--red);
+            display: block;
+            color: var(--accent);
         }
 
-        .hero-description {
-            max-width: 650px;
+        .hero-subtitle {
+            max-width: 620px;
 
-            font-size: 19px;
-            line-height: 1.7;
+            font-size: clamp(18px, 2vw, 21px);
+            line-height: 1.55;
 
-            color: var(--gray);
+            color: var(--text-secondary);
 
-            margin-bottom: 42px;
+            margin-bottom: 34px;
         }
 
-        .hero-buttons {
+        .hero-actions {
             display: flex;
-            gap: 14px;
+            align-items: center;
             flex-wrap: wrap;
+            gap: 12px;
         }
 
         .btn {
             display: inline-flex;
-
             align-items: center;
             justify-content: center;
 
-            padding: 14px 24px;
+            min-height: 48px;
+            padding: 0 22px;
 
-            border-radius: 4px;
+            border-radius: 10px;
 
             font-family: "Space Grotesk", sans-serif;
             font-size: 14px;
             font-weight: 600;
 
-            transition: 0.25s ease;
+            transition:
+                transform 0.2s ease,
+                background 0.2s ease,
+                border-color 0.2s ease;
         }
 
         .btn-primary {
-            background: var(--red);
             color: white;
+            background: var(--accent);
         }
 
         .btn-primary:hover {
-            background: var(--red-dark);
+            background: var(--accent-dark);
             transform: translateY(-2px);
         }
 
         .btn-secondary {
-            border: 1px solid #D7D7D7;
-            color: var(--black);
+            color: var(--text);
+            background: transparent;
+            border: 1px solid var(--border);
         }
 
         .btn-secondary:hover {
-            border-color: var(--red);
-            color: var(--red);
+            border-color: #bcbcb8;
+            transform: translateY(-2px);
         }
 
 
         /* =========================
-           SECTION GENERAL
+           HERO VISUAL
         ========================= */
 
-        section {
-            padding: 110px 0;
-        }
-
-        .section-header {
-            margin-bottom: 55px;
-        }
-
-        .section-number {
-            font-family: "Space Grotesk", sans-serif;
-
-            color: var(--red);
-
-            font-size: 12px;
-            font-weight: 700;
-
-            letter-spacing: 2px;
-
-            margin-bottom: 14px;
-        }
-
-        .section-title {
-            font-family: "Space Grotesk", sans-serif;
-
-            font-size: clamp(36px, 5vw, 58px);
-
-            line-height: 1.05;
-            letter-spacing: -2px;
-
-            font-weight: 600;
-        }
-
-        .section-description {
-            max-width: 650px;
-
-            color: var(--gray);
-
-            margin-top: 18px;
-
-            font-size: 17px;
-        }
-
-
-        /* =========================
-           AREAS
-        ========================= */
-
-        .areas {
-            background: #F7F7F7;
-        }
-
-        .areas-grid {
-            display: grid;
-
-            grid-template-columns: repeat(4, 1fr);
-
-            border-top: 1px solid #DADADA;
-            border-left: 1px solid #DADADA;
-        }
-
-        .area {
-            min-height: 260px;
-
-            padding: 32px;
-
-            border-right: 1px solid #DADADA;
-            border-bottom: 1px solid #DADADA;
-
-            transition: 0.3s ease;
-
+        .hero-visual {
             position: relative;
+
+            min-height: 380px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .area:hover {
-            background: white;
-        }
-
-        .area-number {
-            font-family: "Space Grotesk", sans-serif;
-
-            font-size: 13px;
-
-            color: var(--red);
-
-            margin-bottom: 70px;
-        }
-
-        .area h3 {
-            font-family: "Space Grotesk", sans-serif;
-
-            font-size: 25px;
-
-            margin-bottom: 12px;
-        }
-
-        .area p {
-            font-size: 14px;
-            color: var(--gray);
-        }
-
-        .area-arrow {
+        .hero-orbit {
             position: absolute;
 
-            right: 28px;
-            bottom: 26px;
+            width: 340px;
+            height: 340px;
 
-            color: var(--red);
-
-            font-size: 20px;
-
-            transition: 0.3s ease;
+            border: 1px solid rgba(179, 38, 46, 0.15);
+            border-radius: 50%;
         }
 
-        .area:hover .area-arrow {
-            transform: translateX(5px);
+        .hero-orbit::before {
+            content: "";
+
+            position: absolute;
+
+            inset: 35px;
+
+            border: 1px solid rgba(179, 38, 46, 0.1);
+            border-radius: 50%;
+        }
+
+        .hero-symbol {
+            position: relative;
+
+            width: 180px;
+            height: 180px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: var(--dark);
+
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        .hero-symbol::before {
+            content: "B";
+
+            font-family: "Space Grotesk", sans-serif;
+
+            font-size: 100px;
+            font-weight: 600;
+
+            color: white;
+            line-height: 1;
+        }
+
+        .hero-symbol::after {
+            content: "";
+
+            position: absolute;
+
+            width: 10px;
+            height: 10px;
+
+            border-radius: 50%;
+
+            background: var(--accent);
+
+            top: 25px;
+            right: 28px;
+        }
+
+
+        /* =========================
+           QUICK ACCESS
+        ========================= */
+
+        .quick-access {
+            padding: 0 0 100px;
+        }
+
+        .quick-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .quick-card {
+            background: var(--surface);
+
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+
+            padding: 30px;
+
+            transition:
+                transform 0.2s ease,
+                border-color 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        .quick-card:hover {
+            transform: translateY(-4px);
+            border-color: #cececa;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.05);
+        }
+
+        .quick-number {
+            font-family: "Space Mono", monospace;
+            font-size: 11px;
+            color: var(--accent);
+            margin-bottom: 22px;
+        }
+
+        .quick-card h3 {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        .quick-card p {
+            color: var(--text-secondary);
+            font-size: 14px;
         }
 
 
@@ -396,150 +460,291 @@
            METHOD
         ========================= */
 
-        .method-grid {
-            display: grid;
+        .method-section {
+            background: var(--dark);
+            color: white;
+        }
 
+        .method-section .section-description {
+            color: #a8a8a8;
+        }
+
+        .method-grid {
+            margin-top: 48px;
+
+            display: grid;
             grid-template-columns: repeat(4, 1fr);
 
-            border-top: 1px solid #DADADA;
+            border-top: 1px solid #303030;
+            border-bottom: 1px solid #303030;
         }
 
         .method-item {
-            padding: 34px 26px;
+            padding: 32px 26px;
 
-            border-bottom: 1px solid #DADADA;
-
-            border-right: 1px solid #DADADA;
+            border-right: 1px solid #303030;
         }
 
-        .method-item:first-child {
-            border-left: 1px solid #DADADA;
+        .method-item:last-child {
+            border-right: none;
         }
 
         .method-number {
-            font-family: "Space Grotesk", sans-serif;
+            font-family: "Space Mono", monospace;
 
-            color: #999;
+            color: #777;
 
-            font-size: 13px;
+            font-size: 12px;
 
-            margin-bottom: 35px;
+            margin-bottom: 34px;
         }
 
         .method-item h3 {
             font-family: "Space Grotesk", sans-serif;
 
-            font-size: 22px;
+            font-size: 24px;
 
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
 
         .method-item p {
-            color: var(--gray);
-
+            color: #a8a8a8;
             font-size: 14px;
+        }
+
+        .method-link {
+            display: inline-block;
+
+            margin-top: 36px;
+
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+
+            color: white;
+
+            border-bottom: 1px solid #666;
+            padding-bottom: 4px;
+        }
+
+        .method-link:hover {
+            color: var(--accent);
+            border-color: var(--accent);
         }
 
 
         /* =========================
-           RESOURCES
+           COURSES
         ========================= */
 
-        .resources {
-            background: var(--black);
-            color: white;
-        }
-
-        .resources .section-description {
-            color: #A8A8A8;
-        }
-
-        .resources-grid {
-            display: grid;
-
-            grid-template-columns: repeat(4, 1fr);
-
-            gap: 12px;
-        }
-
-        .resource {
-            padding: 32px;
-
-            min-height: 190px;
-
-            border: 1px solid #2B2B2B;
-
-            background: #101010;
-
-            transition: 0.3s ease;
-        }
-
-        .resource:hover {
-            border-color: var(--red);
-            transform: translateY(-4px);
-        }
-
-        .resource-icon {
-            color: var(--red);
-
-            font-family: "Space Grotesk", sans-serif;
-
-            font-size: 13px;
+        .courses-header {
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+            gap: 40px;
 
             margin-bottom: 45px;
         }
 
-        .resource h3 {
-            font-family: "Space Grotesk", sans-serif;
+        .course-card {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
 
-            font-size: 22px;
+            background: var(--surface);
 
-            margin-bottom: 8px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+
+            overflow: hidden;
         }
 
-        .resource p {
-            color: #999;
+        .course-intro {
+            padding: 42px;
 
+            background: var(--dark);
+            color: white;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .course-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            width: fit-content;
+
+            padding: 7px 10px;
+
+            border: 1px solid #383838;
+            border-radius: 30px;
+
+            color: #c7c7c7;
+
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .course-status::before {
+            content: "";
+
+            width: 6px;
+            height: 6px;
+
+            border-radius: 50%;
+
+            background: var(--accent);
+        }
+
+        .course-intro h3 {
+            font-family: "Space Grotesk", sans-serif;
+
+            font-size: clamp(32px, 4vw, 48px);
+            line-height: 1.02;
+
+            margin: 35px 0 18px;
+        }
+
+        .course-intro p {
+            color: #a8a8a8;
+            font-size: 14px;
+            max-width: 400px;
+        }
+
+        .course-content {
+            padding: 20px;
+        }
+
+        .course-module {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 25px;
+
+            padding: 25px 22px;
+
+            border-bottom: 1px solid var(--border);
+
+            transition: background 0.2s ease;
+        }
+
+        .course-module:last-child {
+            border-bottom: none;
+        }
+
+        .course-module:hover {
+            background: var(--surface-soft);
+        }
+
+        .course-module-left {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .module-number {
+            width: 38px;
+            height: 38px;
+
+            flex-shrink: 0;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 10px;
+
+            background: var(--accent-soft);
+            color: var(--accent);
+
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .course-module h4 {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 17px;
+            margin-bottom: 3px;
+        }
+
+        .course-module p {
             font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .module-arrow {
+            font-size: 20px;
+            color: #aaa;
+            transition: transform 0.2s ease;
+        }
+
+        .course-module:hover .module-arrow {
+            color: var(--accent);
+            transform: translateX(4px);
         }
 
 
         /* =========================
-           FINAL CTA
+           COURSE STRUCTURE
         ========================= */
 
-        .final {
-            text-align: center;
-
-            padding: 130px 0;
+        .structure {
+            margin-top: 80px;
         }
 
-        .final-logo {
-            width: min(520px, 80%);
-
-            margin: 0 auto 40px;
-
-            display: block;
-        }
-
-        .final h2 {
+        .structure-title {
             font-family: "Space Grotesk", sans-serif;
 
-            font-size: clamp(35px, 5vw, 58px);
-
-            line-height: 1.05;
-
-            letter-spacing: -2px;
-
-            margin-bottom: 20px;
+            font-size: 28px;
+            margin-bottom: 10px;
         }
 
-        .final p {
-            max-width: 580px;
+        .structure-description {
+            color: var(--text-secondary);
+            font-size: 14px;
 
-            margin: 0 auto 35px;
+            max-width: 700px;
 
-            color: var(--gray);
+            margin-bottom: 30px;
+        }
+
+        .structure-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .structure-card {
+            padding: 25px;
+
+            border: 1px solid var(--border);
+            background: var(--surface);
+
+            border-radius: var(--radius-small);
+        }
+
+        .structure-card span {
+            font-family: "Space Mono", monospace;
+
+            font-size: 11px;
+            color: var(--accent);
+        }
+
+        .structure-card h4 {
+            font-family: "Space Grotesk", sans-serif;
+
+            font-size: 19px;
+
+            margin: 14px 0 8px;
+        }
+
+        .structure-card p {
+            font-size: 13px;
+            color: var(--text-secondary);
         }
 
 
@@ -548,38 +753,68 @@
         ========================= */
 
         footer {
-            background: #070707;
+            background: var(--dark);
 
             color: white;
 
-            padding: 35px 0;
+            padding: 50px 0 30px;
+
+            margin-top: 30px;
         }
 
-        .footer-content {
+        .footer-top {
             display: flex;
-
             justify-content: space-between;
-            align-items: center;
+            align-items: flex-start;
 
-            gap: 20px;
+            gap: 40px;
+
+            padding-bottom: 45px;
+
+            border-bottom: 1px solid #303030;
         }
 
-        .footer-logo {
+        .footer-brand {
+            max-width: 400px;
+        }
+
+        .footer-brand h2 {
             font-family: "Space Grotesk", sans-serif;
 
-            font-weight: 700;
+            font-size: 28px;
 
-            letter-spacing: 1px;
+            margin-bottom: 12px;
         }
 
-        .footer-logo span {
-            color: var(--red);
+        .footer-brand p {
+            color: #999;
+
+            font-size: 13px;
         }
 
-        .footer-text {
-            color: #777;
+        .footer-nav {
+            display: flex;
+            gap: 30px;
+        }
 
-            font-size: 12px;
+        .footer-nav a {
+            color: #aaa;
+            font-size: 13px;
+        }
+
+        .footer-nav a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+
+            padding-top: 25px;
+
+            color: #666;
+
+            font-size: 11px;
         }
 
 
@@ -589,61 +824,138 @@
 
         @media (max-width: 900px) {
 
-            .nav-links {
-                display: none;
+            .hero {
+                min-height: auto;
             }
 
-            .areas-grid,
-            .method-grid,
-            .resources-grid {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                gap: 45px;
+            }
+
+            .hero-visual {
+                min-height: 280px;
+            }
+
+            .hero-orbit {
+                width: 260px;
+                height: 260px;
+            }
+
+            .hero-symbol {
+                width: 140px;
+                height: 140px;
+            }
+
+            .hero-symbol::before {
+                font-size: 75px;
+            }
+
+            .quick-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .method-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
 
-            .hero h1 {
-                letter-spacing: -3px;
+            .method-item:nth-child(2) {
+                border-right: none;
+            }
+
+            .method-item:nth-child(-n+2) {
+                border-bottom: 1px solid #303030;
+            }
+
+            .course-card {
+                grid-template-columns: 1fr;
+            }
+
+            .structure-grid {
+                grid-template-columns: 1fr;
             }
         }
 
 
-        @media (max-width: 600px) {
+        @media (max-width: 650px) {
 
-            .nav-logo img {
-                width: 155px;
+            .nav-inner {
+                min-height: 65px;
             }
 
-            section {
-                padding: 80px 0;
+            .nav-logo {
+                max-width: 145px;
+            }
+
+            .nav-links {
+                gap: 15px;
+            }
+
+            .nav-links a {
+                font-size: 12px;
             }
 
             .hero {
-                min-height: auto;
-
-                padding: 90px 0 100px;
+                padding: 55px 0 70px;
             }
 
             .hero h1 {
                 font-size: 55px;
-                letter-spacing: -2.5px;
             }
 
-            .hero-description {
-                font-size: 16px;
+            .hero-subtitle {
+                font-size: 17px;
             }
 
-            .areas-grid,
-            .method-grid,
-            .resources-grid {
+            .section {
+                padding: 70px 0;
+            }
+
+            .method-grid {
                 grid-template-columns: 1fr;
             }
 
-            .area,
             .method-item {
-                min-height: auto;
+                border-right: none;
+                border-bottom: 1px solid #303030;
             }
 
-            .footer-content {
-                flex-direction: column;
-                align-items: flex-start;
+            .method-item:last-child {
+                border-bottom: none;
+            }
+
+            .courses-header {
+                display: block;
+            }
+
+            .course-intro {
+                padding: 30px;
+            }
+
+            .course-module {
+                padding: 20px 10px;
+            }
+
+            .course-module p {
+                font-size: 12px;
+            }
+
+            .footer-top {
+                display: block;
+            }
+
+            .footer-nav {
+                margin-top: 30px;
+                flex-wrap: wrap;
+            }
+
+            .footer-bottom {
+                display: block;
+            }
+
+            .footer-bottom span:last-child {
+                display: block;
+                margin-top: 8px;
             }
         }
 
@@ -653,453 +965,636 @@
 
 <body>
 
+    <!-- =========================
+         NAVBAR
+    ========================== -->
 
-<!-- =========================
-     NAVIGATION
-========================= -->
+    <header class="navbar">
 
-<header>
+        <div class="container nav-inner">
 
-    <div class="container">
-
-        <nav>
-
-            <a href="#" class="nav-logo">
-                <img src="beyondermed-logo.png" alt="BEYONDERMED">
+            <a href="#inicio" class="nav-logo">
+                <img
+                    src="beyondermed-logo.png"
+                    alt="BEYONDERMED"
+                >
             </a>
 
-            <div class="nav-links">
-
-                <a href="#areas">Áreas</a>
-
+            <nav class="nav-links">
+                <a href="#inicio">Inicio</a>
                 <a href="#metodo">Método</a>
+                <a href="#cursos">Cursos</a>
+            </nav>
 
-                <a href="#recursos">Recursos</a>
+        </div>
 
-                <a href="#sobre">BEYONDERMED</a>
+    </header>
+
+
+    <main>
+
+
+        <!-- =========================
+             HERO
+        ========================== -->
+
+        <section class="hero" id="inicio">
+
+            <div class="container hero-grid">
+
+                <div class="hero-content">
+
+                    <div class="hero-kicker">
+                        Medical study system
+                    </div>
+
+                    <h1>
+                        Go beyond
+                        <span>memorization.</span>
+                    </h1>
+
+                    <p class="hero-subtitle">
+                        Estudio médico, razonamiento clínico y conocimiento integrado.
+                        Un espacio para organizar el aprendizaje, conectar conceptos
+                        y llevar el conocimiento hacia la práctica.
+                    </p>
+
+                    <div class="hero-actions">
+
+                        <a
+                            href="#cursos"
+                            class="btn btn-primary"
+                        >
+                            Explorar cursos
+                        </a>
+
+                        <a
+                            href="#metodo"
+                            class="btn btn-secondary"
+                        >
+                            Conocer el método
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <div class="hero-visual">
+
+                    <div class="hero-orbit"></div>
+
+                    <div class="hero-symbol"></div>
+
+                </div>
 
             </div>
 
-        </nav>
-
-    </div>
-
-</header>
+        </section>
 
 
+        <!-- =========================
+             QUICK ACCESS
+        ========================== -->
 
-<!-- =========================
-     HERO
-========================= -->
+        <section class="quick-access">
 
-<main>
+            <div class="container">
 
-<section class="hero">
+                <div class="quick-grid">
 
-    <div class="container">
+                    <a href="#cursos" class="quick-card">
 
-        <div class="hero-content">
+                        <div class="quick-number">
+                            01
+                        </div>
 
-            <div class="hero-label">
-                Medicina · Aprendizaje · Integración
+                        <h3>
+                            Cursos
+                        </h3>
+
+                        <p>
+                            Contenido organizado por asignatura y tema,
+                            con una estructura diseñada para estudiar de forma progresiva.
+                        </p>
+
+                    </a>
+
+
+                    <a href="#metodo" class="quick-card">
+
+                        <div class="quick-number">
+                            02
+                        </div>
+
+                        <h3>
+                            Método
+                        </h3>
+
+                        <p>
+                            Un sistema de estudio que conecta comprensión,
+                            integración, aplicación y recuperación del conocimiento.
+                        </p>
+
+                    </a>
+
+
+                    <a href="#cursos" class="quick-card">
+
+                        <div class="quick-number">
+                            03
+                        </div>
+
+                        <h3>
+                            Aplicación
+                        </h3>
+
+                        <p>
+                            Preguntas y casos clínicos orientados a transformar
+                            el conocimiento en razonamiento.
+                        </p>
+
+                    </a>
+
+                </div>
+
             </div>
 
-            <h1>
-                Go beyond<br>
-                <span>memorization.</span>
-            </h1>
+        </section>
 
-            <p class="hero-description">
-                Un espacio para estudiar medicina desde la comprensión.
-                Conecta mecanismos, integra conceptos y lleva el conocimiento
-                hacia la aplicación clínica.
-            </p>
 
-            <div class="hero-buttons">
+        <!-- =========================
+             METHOD
+        ========================== -->
 
-                <a href="#areas" class="btn btn-primary">
-                    Explorar contenido
+        <section class="section method-section" id="metodo">
+
+            <div class="container">
+
+                <div class="section-label">
+                    Método BEYONDERMED
+                </div>
+
+                <h2 class="section-title">
+                    Más allá de memorizar.
+                </h2>
+
+                <p class="section-description">
+                    BEYONDERMED parte de una idea sencilla:
+                    estudiar no consiste únicamente en almacenar información,
+                    sino en comprenderla, relacionarla, utilizarla y recuperarla
+                    cuando sea necesario.
+                </p>
+
+
+                <div class="method-grid">
+
+                    <div class="method-item">
+
+                        <div class="method-number">
+                            01
+                        </div>
+
+                        <h3>
+                            Comprender
+                        </h3>
+
+                        <p>
+                            Construir una base conceptual clara antes de
+                            intentar memorizar los detalles.
+                        </p>
+
+                    </div>
+
+
+                    <div class="method-item">
+
+                        <div class="method-number">
+                            02
+                        </div>
+
+                        <h3>
+                            Integrar
+                        </h3>
+
+                        <p>
+                            Relacionar mecanismos, conceptos y conocimientos
+                            para formar una visión más completa.
+                        </p>
+
+                    </div>
+
+
+                    <div class="method-item">
+
+                        <div class="method-number">
+                            03
+                        </div>
+
+                        <h3>
+                            Aplicar
+                        </h3>
+
+                        <p>
+                            Utilizar lo aprendido mediante preguntas,
+                            casos clínicos y situaciones de razonamiento.
+                        </p>
+
+                    </div>
+
+
+                    <div class="method-item">
+
+                        <div class="method-number">
+                            04
+                        </div>
+
+                        <h3>
+                            Recordar
+                        </h3>
+
+                        <p>
+                            Consolidar el conocimiento mediante recuperación
+                            activa y repetición espaciada.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <a
+                    href="#"
+                    class="method-link"
+                    onclick="alert('El método completo se incorporará próximamente.'); return false;"
+                >
+                    Ver el método completo →
                 </a>
 
-                <a href="#metodo" class="btn btn-secondary">
-                    Conocer el método
-                </a>
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             COURSES
+        ========================== -->
+
+        <section class="section" id="cursos">
+
+            <div class="container">
+
+                <div class="courses-header">
+
+                    <div>
+
+                        <div class="section-label">
+                            Cursos
+                        </div>
+
+                        <h2 class="section-title">
+                            Estudia por sistema.
+                        </h2>
+
+                        <p class="section-description">
+                            Cada curso reúne el contenido, la práctica y las
+                            herramientas necesarias para trabajar el conocimiento
+                            de forma organizada.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- CURRENT COURSE -->
+
+                <div class="course-card">
+
+
+                    <div class="course-intro">
+
+                        <div>
+
+                            <div class="course-status">
+                                Curso actual
+                            </div>
+
+                            <h3>
+                                Inmunidad e Infectología
+                            </h3>
+
+                            <p>
+                                Contenido organizado para estudiar los fundamentos
+                                de inmunología y su relación con los procesos
+                                infecciosos.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="course-content">
+
+
+                        <!-- MODULE 01 -->
+
+                        <a href="#material" class="course-module">
+
+                            <div class="course-module-left">
+
+                                <div class="module-number">
+                                    01
+                                </div>
+
+                                <div>
+
+                                    <h4>
+                                        Material de estudio
+                                    </h4>
+
+                                    <p>
+                                        Esquemas, resúmenes y contenido organizado.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                            <div class="module-arrow">
+                                →
+                            </div>
+
+                        </a>
+
+
+                        <!-- MODULE 02 -->
+
+                        <a href="#preguntas" class="course-module">
+
+                            <div class="course-module-left">
+
+                                <div class="module-number">
+                                    02
+                                </div>
+
+                                <div>
+
+                                    <h4>
+                                        Preguntas y casos clínicos
+                                    </h4>
+
+                                    <p>
+                                        Aplicación y entrenamiento para evaluaciones.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                            <div class="module-arrow">
+                                →
+                            </div>
+
+                        </a>
+
+
+                        <!-- MODULE 03 -->
+
+                        <a href="#anki" class="course-module">
+
+                            <div class="course-module-left">
+
+                                <div class="module-number">
+                                    03
+                                </div>
+
+                                <div>
+
+                                    <h4>
+                                        Anki / Flashcards
+                                    </h4>
+
+                                    <p>
+                                        Recuperación activa y repaso espaciado.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                            <div class="module-arrow">
+                                →
+                            </div>
+
+                        </a>
+
+
+                    </div>
+
+                </div>
+
+
+                <!-- =========================
+                     COURSE STRUCTURE
+                ========================== -->
+
+                <div class="structure" id="material">
+
+                    <div class="section-label">
+                        Organización
+                    </div>
+
+                    <h3 class="structure-title">
+                        Material de estudio
+                    </h3>
+
+                    <p class="structure-description">
+                        El contenido del curso se organiza por áreas para facilitar
+                        la navegación y mantener una estructura clara a medida que
+                        la plataforma crezca.
+                    </p>
+
+
+                    <div class="structure-grid">
+
+
+                        <div class="structure-card">
+
+                            <span>
+                                ÁREA 01
+                            </span>
+
+                            <h4>
+                                Inmunología
+                            </h4>
+
+                            <p>
+                                Conceptos, mecanismos inmunológicos,
+                                integración y correlación clínica.
+                            </p>
+
+                        </div>
+
+
+                        <div class="structure-card">
+
+                            <span>
+                                ÁREA 02
+                            </span>
+
+                            <h4>
+                                Bacteriología
+                            </h4>
+
+                            <p>
+                                Microorganismos, mecanismos de patogenicidad,
+                                respuesta inmune y correlación clínica.
+                            </p>
+
+                        </div>
+
+
+                        <div class="structure-card">
+
+                            <span>
+                                ÁREA 03
+                            </span>
+
+                            <h4>
+                                Virología
+                            </h4>
+
+                            <p>
+                                Estructura, patogenia, respuesta inmune,
+                                evasión y manifestaciones clínicas.
+                            </p>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+                <!-- =========================
+                     FUTURE SECTIONS
+                ========================== -->
+
+                <div
+                    class="structure"
+                    id="preguntas"
+                >
+
+                    <div class="section-label">
+                        Aplicación
+                    </div>
+
+                    <h3 class="structure-title">
+                        Preguntas y casos clínicos
+                    </h3>
+
+                    <p class="structure-description">
+                        Esta sección reunirá preguntas de evaluación y casos
+                        clínicos organizados según los temas del curso.
+                        Su objetivo será trasladar el conocimiento desde la
+                        teoría hacia el razonamiento.
+                    </p>
+
+                </div>
+
+
+                <div
+                    class="structure"
+                    id="anki"
+                >
+
+                    <div class="section-label">
+                        Recuperación
+                    </div>
+
+                    <h3 class="structure-title">
+                        Anki / Flashcards
+                    </h3>
+
+                    <p class="structure-description">
+                        Tarjetas orientadas a recuperar activamente conceptos,
+                        mecanismos y relaciones relevantes, utilizando la
+                        repetición espaciada como herramienta de consolidación.
+                    </p>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer>
+
+        <div class="container">
+
+            <div class="footer-top">
+
+                <div class="footer-brand">
+
+                    <h2>
+                        BEYONDERMED
+                    </h2>
+
+                    <p>
+                        Go beyond memorization.
+                        Un sistema personal para estudiar,
+                        integrar y aplicar conocimiento médico.
+                    </p>
+
+                </div>
+
+
+                <nav class="footer-nav">
+
+                    <a href="#inicio">
+                        Inicio
+                    </a>
+
+                    <a href="#metodo">
+                        Método
+                    </a>
+
+                    <a href="#cursos">
+                        Cursos
+                    </a>
+
+                </nav>
+
+            </div>
+
+
+            <div class="footer-bottom">
+
+                <span>
+                    © 2026 BEYONDERMED
+                </span>
+
+                <span>
+                    Medical study system
+                </span>
 
             </div>
 
         </div>
 
-    </div>
-
-</section>
-
-
-
-<!-- =========================
-     AREAS
-========================= -->
-
-<section class="areas" id="areas">
-
-    <div class="container">
-
-        <div class="section-header">
-
-            <div class="section-number">
-                01 / ÁREAS
-            </div>
-
-            <h2 class="section-title">
-                Construye conocimiento.
-            </h2>
-
-            <p class="section-description">
-                Contenido médico organizado alrededor de los mecanismos
-                que permiten entender la enfermedad y la respuesta del organismo.
-            </p>
-
-        </div>
-
-
-        <div class="areas-grid">
-
-            <article class="area">
-
-                <div class="area-number">
-                    01
-                </div>
-
-                <h3>Inmunología</h3>
-
-                <p>
-                    Respuesta inmune, mecanismos celulares,
-                    mediadores y correlación clínica.
-                </p>
-
-                <div class="area-arrow">
-                    →
-                </div>
-
-            </article>
-
-
-            <article class="area">
-
-                <div class="area-number">
-                    02
-                </div>
-
-                <h3>Bacteriología</h3>
-
-                <p>
-                    Microorganismos, virulencia, patogenia
-                    y manifestaciones clínicas.
-                </p>
-
-                <div class="area-arrow">
-                    →
-                </div>
-
-            </article>
-
-
-            <article class="area">
-
-                <div class="area-number">
-                    03
-                </div>
-
-                <h3>Virología</h3>
-
-                <p>
-                    Replicación, patogénesis, evasión inmune
-                    y correlación clínica.
-                </p>
-
-                <div class="area-arrow">
-                    →
-                </div>
-
-            </article>
-
-
-            <article class="area">
-
-                <div class="area-number">
-                    04
-                </div>
-
-                <h3>Farmacología</h3>
-
-                <p>
-                    Mecanismos de acción, efectos,
-                    indicaciones y razonamiento terapéutico.
-                </p>
-
-                <div class="area-arrow">
-                    →
-                </div>
-
-            </article>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-
-<!-- =========================
-     METHOD
-========================= -->
-
-<section id="metodo">
-
-    <div class="container">
-
-        <div class="section-header">
-
-            <div class="section-number">
-                02 / MÉTODO
-            </div>
-
-            <h2 class="section-title">
-                No memorices.<br>
-                Comprende.
-            </h2>
-
-            <p class="section-description">
-                BEYONDERMED organiza el estudio en cuatro etapas:
-                entender el mecanismo, relacionarlo con otros conceptos,
-                aplicarlo y finalmente consolidarlo mediante recuperación activa.
-            </p>
-
-        </div>
-
-
-        <div class="method-grid">
-
-            <article class="method-item">
-
-                <div class="method-number">
-                    01
-                </div>
-
-                <h3>Comprender</h3>
-
-                <p>
-                    Identifica qué ocurre y por qué ocurre.
-                </p>
-
-            </article>
-
-
-            <article class="method-item">
-
-                <div class="method-number">
-                    02
-                </div>
-
-                <h3>Integrar</h3>
-
-                <p>
-                    Relaciona mecanismos, sistemas y conceptos.
-                </p>
-
-            </article>
-
-
-            <article class="method-item">
-
-                <div class="method-number">
-                    03
-                </div>
-
-                <h3>Aplicar</h3>
-
-                <p>
-                    Lleva el conocimiento hacia casos clínicos.
-                </p>
-
-            </article>
-
-
-            <article class="method-item">
-
-                <div class="method-number">
-                    04
-                </div>
-
-                <h3>Recordar</h3>
-
-                <p>
-                    Consolida mediante preguntas y repetición espaciada.
-                </p>
-
-            </article>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-
-<!-- =========================
-     RESOURCES
-========================= -->
-
-<section class="resources" id="recursos">
-
-    <div class="container">
-
-        <div class="section-header">
-
-            <div class="section-number">
-                03 / RECURSOS
-            </div>
-
-            <h2 class="section-title">
-                Herramientas para estudiar.
-            </h2>
-
-            <p class="section-description">
-                Recursos diseñados para transformar información
-                en conocimiento utilizable.
-            </p>
-
-        </div>
-
-
-        <div class="resources-grid">
-
-            <article class="resource">
-
-                <div class="resource-icon">
-                    / 01
-                </div>
-
-                <h3>Apuntes</h3>
-
-                <p>
-                    Información sintetizada y estructurada.
-                </p>
-
-            </article>
-
-
-            <article class="resource">
-
-                <div class="resource-icon">
-                    / 02
-                </div>
-
-                <h3>Casos clínicos</h3>
-
-                <p>
-                    Aplicación del conocimiento al contexto clínico.
-                </p>
-
-            </article>
-
-
-            <article class="resource">
-
-                <div class="resource-icon">
-                    / 03
-                </div>
-
-                <h3>Preguntas</h3>
-
-                <p>
-                    Recuperación activa y razonamiento médico.
-                </p>
-
-            </article>
-
-
-            <article class="resource">
-
-                <div class="resource-icon">
-                    / 04
-                </div>
-
-                <h3>Anki</h3>
-
-                <p>
-                    Consolidación mediante repetición espaciada.
-                </p>
-
-            </article>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-
-<!-- =========================
-     FINAL
-========================= -->
-
-<section class="final" id="sobre">
-
-    <div class="container">
-
-        <img
-            src="beyondermed-logo.png"
-            alt="BEYONDERMED"
-            class="final-logo"
-        >
-
-        <h2>
-            Go beyond memorization.
-        </h2>
-
-        <p>
-            Estudiar medicina no consiste únicamente en recordar información.
-            Consiste en comprenderla, conectarla y saber utilizarla.
-        </p>
-
-        <a href="#areas" class="btn btn-primary">
-            Comenzar
-        </a>
-
-    </div>
-
-</section>
-
-</main>
-
-
-
-<!-- =========================
-     FOOTER
-========================= -->
-
-<footer>
-
-    <div class="container">
-
-        <div class="footer-content">
-
-            <div class="footer-logo">
-                BEYONDER<span>MED</span>
-            </div>
-
-            <div class="footer-text">
-                Medicina · Ciencia · Aprendizaje
-            </div>
-
-        </div>
-
-    </div>
-
-</footer>
+    </footer>
 
 
 </body>
