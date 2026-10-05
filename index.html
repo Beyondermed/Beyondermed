@@ -8,7 +8,6 @@
 
   <title>BEYONDERMED | Estudio médico</title>
 
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
@@ -18,10 +17,6 @@
   >
 
   <style>
-
-    /* =========================
-       RESET
-    ========================= */
 
     * {
       box-sizing: border-box;
@@ -63,15 +58,12 @@
 
       padding: 0 6%;
 
-      background: rgba(255, 255, 255, 0.96);
+      background: rgba(255,255,255,0.96);
 
       backdrop-filter: blur(12px);
 
       border-bottom: 1px solid #eeeeee;
     }
-
-
-    /* LOGO ANTERIOR */
 
     .brand {
       display: flex;
@@ -84,13 +76,9 @@
       display: block;
     }
 
-
-    /* NAVIGATION */
-
     .nav-links {
       display: flex;
       align-items: center;
-
       gap: 42px;
 
       font-size: 14px;
@@ -111,7 +99,6 @@
 
     .nav-links a.active {
       color: #a8242d;
-
       font-weight: 600;
     }
 
@@ -160,12 +147,6 @@
       width: 63%;
       height: 100%;
 
-      /*
-        IMPORTANTE:
-        Este es exactamente el nombre
-        del archivo que tienes en GitHub.
-      */
-
       background-image: url("beyondermed-hero(1).png");
 
       background-size: cover;
@@ -176,9 +157,6 @@
 
       z-index: 1;
     }
-
-
-    /* DEGRADADO PARA INTEGRAR IMAGEN CON EL TEXTO */
 
     .hero-image::after {
       content: "";
@@ -197,9 +175,6 @@
           rgba(255,255,255,0) 55%
         );
     }
-
-
-    /* LIGERO CONTROL DE CONTRASTE */
 
     .hero-image::before {
       content: "";
@@ -239,32 +214,31 @@
       align-items: center;
     }
 
-
     .hero-text {
-      width: 54%;
+      width: 56%;
 
-      max-width: 690px;
+      max-width: 710px;
     }
 
 
-    /* PEQUEÑO TITULO */
+    /* IDENTIDAD */
 
     .hero-kicker {
       margin-bottom: 20px;
 
       color: #a8242d;
 
-      font-size: 12px;
+      font-size: 11px;
 
       font-weight: 700;
 
-      letter-spacing: 3px;
+      letter-spacing: 2.6px;
 
       text-transform: uppercase;
     }
 
 
-    /* TITULO PRINCIPAL */
+    /* TITULO */
 
     h1 {
       font-family: "Space Grotesk", sans-serif;
@@ -277,14 +251,12 @@
 
       font-weight: 600;
 
-      margin-bottom: 32px;
+      margin-bottom: 30px;
     }
-
 
     .headline-black {
       color: #151922;
     }
-
 
     .headline-red {
       color: #a8242d;
@@ -294,15 +266,34 @@
     /* DESCRIPCIÓN */
 
     .hero-description {
-      max-width: 590px;
+      max-width: 600px;
 
       color: #59616d;
 
-      font-size: 17px;
+      font-size: 16px;
 
       line-height: 1.75;
 
-      margin-bottom: 38px;
+      margin-bottom: 16px;
+    }
+
+
+    /* SEGUNDA LÍNEA */
+
+    .hero-note {
+      max-width: 590px;
+
+      color: #737a84;
+
+      font-size: 13px;
+
+      line-height: 1.65;
+
+      margin-bottom: 34px;
+
+      padding-left: 15px;
+
+      border-left: 2px solid #a8242d;
     }
 
 
@@ -319,7 +310,6 @@
 
       flex-wrap: wrap;
     }
-
 
     .button {
       display: inline-flex;
@@ -344,24 +334,17 @@
         border-color 0.2s ease;
     }
 
-
-    /* BOTÓN PRINCIPAL */
-
     .button-primary {
       background: #a8242d;
 
       color: white;
     }
 
-
     .button-primary:hover {
       background: #8f2028;
 
       transform: translateY(-2px);
     }
-
-
-    /* BOTÓN SECUNDARIO */
 
     .button-secondary {
       background: rgba(255,255,255,0.72);
@@ -370,7 +353,6 @@
 
       color: #272c34;
     }
-
 
     .button-secondary:hover {
       border-color: #a8242d;
@@ -382,7 +364,7 @@
 
 
     /* =========================
-       DETALLE INFERIOR
+       DETALLE DECORATIVO
     ========================= */
 
     .hero-detail {
@@ -416,7 +398,6 @@
       padding: 25px 6%;
     }
 
-
     .footer-inner {
       max-width: 1280px;
 
@@ -429,7 +410,6 @@
       align-items: center;
     }
 
-
     .footer-brand {
       font-family: "Space Grotesk", sans-serif;
 
@@ -437,7 +417,6 @@
 
       letter-spacing: 2px;
     }
-
 
     .footer-copy {
       color: #858b94;
@@ -456,16 +435,13 @@
         padding: 0 5%;
       }
 
-
       .brand img {
         width: 205px;
       }
 
-
       .nav-links {
         gap: 22px;
       }
-
 
       .hero {
         min-height: auto;
@@ -474,7 +450,6 @@
 
         flex-direction: column;
       }
-
 
       .hero-image {
         position: relative;
@@ -488,7 +463,6 @@
         background-position: center;
       }
 
-
       .hero-image::after {
         background:
           linear-gradient(
@@ -499,20 +473,17 @@
           );
       }
 
-
       .hero-content {
         order: 1;
 
         padding: 80px 6% 45px;
       }
 
-
       .hero-text {
         width: 100%;
 
         max-width: 700px;
       }
-
 
       .hero-detail {
         display: none;
@@ -531,11 +502,9 @@
         height: 70px;
       }
 
-
       .brand img {
         width: 175px;
       }
-
 
       .nav-links {
         gap: 15px;
@@ -543,16 +512,13 @@
         font-size: 12px;
       }
 
-
       .nav-links a.active::after {
         bottom: -7px;
       }
 
-
       .hero-content {
         padding: 65px 6% 35px;
       }
-
 
       h1 {
         font-size: 51px;
@@ -560,26 +526,25 @@
         letter-spacing: -2.5px;
       }
 
-
       .hero-description {
         font-size: 15px;
       }
 
+      .hero-note {
+        font-size: 12.5px;
+      }
 
       .hero-image {
         height: 380px;
       }
 
-
       .hero-buttons {
         width: 100%;
       }
 
-
       .button {
         width: 100%;
       }
-
 
       .footer-inner {
         flex-direction: column;
@@ -610,8 +575,6 @@
       class="brand"
     >
 
-      <!-- LOGO ANTERIOR -->
-
       <img
         src="beyondermed-logo.png"
         alt="BEYONDERMED"
@@ -629,11 +592,9 @@
         Inicio
       </a>
 
-
       <a href="metodo.html">
         Método
       </a>
-
 
       <a href="cursos.html">
         Cursos
@@ -646,7 +607,7 @@
 
 
   <!-- =========================
-       MAIN
+       HERO
   ========================= -->
 
   <main>
@@ -667,7 +628,7 @@
 
 
           <div class="hero-kicker">
-            Sistema de estudio médico
+            Estudiante de Medicina · Aprendizaje compartido
           </div>
 
 
@@ -688,11 +649,20 @@
 
           <p class="hero-description">
 
-            Estudio médico, razonamiento clínico y conocimiento integrado.
-            Un espacio para organizar el aprendizaje, conectar conceptos
-            y llevar el conocimiento hacia la práctica.
+            BEYONDERMED es un espacio personal de estudio creado
+            desde la perspectiva de un estudiante de Medicina.
+            Aquí comparto mis apuntes, materiales, síntesis y formas
+            de comprender e integrar los contenidos de la carrera.
 
           </p>
+
+
+          <div class="hero-note">
+
+            Un proyecto académico basado en mi propio proceso
+            de aprendizaje, organización y comprensión del conocimiento médico.
+
+          </div>
 
 
           <div class="hero-buttons">
@@ -752,7 +722,7 @@
 
 
       <div class="footer-copy">
-        Estudio médico y conocimiento integrado.
+        Estudio médico · Aprendizaje · Conocimiento integrado
       </div>
 
 
