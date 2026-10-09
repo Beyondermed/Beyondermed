@@ -1,24 +1,20 @@
-```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <meta name="theme-color" content="#101010">
-  <meta name="description" content="BEYONDERMED: un espacio personal de estudio médico para compartir materiales, apuntes y formas de comprender e integrar los contenidos de Medicina.">
+  <meta name="description" content="BEYONDERMED: un espacio personal de estudio médico para compartir materiales, apuntes y formas de integrar el conocimiento médico.">
 
   <title>BEYONDERMED | Go beyond memorization</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
       --bg: #101010;
-      --bg-secondary: #171717;
       --text: #f4f2ef;
       --muted: #a7a5a2;
       --accent: #a8242d;
@@ -53,12 +49,14 @@
       margin: 0 auto;
     }
 
-    /* NAVBAR */
+    /* NAVEGACIÓN */
 
     .navbar {
+      position: relative;
+      z-index: 5;
       width: 100%;
       border-bottom: 1px solid var(--line);
-      background: rgba(16, 16, 16, 0.94);
+      background: #101010;
     }
 
     .nav-inner {
@@ -103,7 +101,7 @@
       color: var(--text);
     }
 
-    /* HERO */
+    /* PORTADA */
 
     .hero {
       min-height: 620px;
@@ -137,6 +135,7 @@
       width: 27px;
       height: 2px;
       background: var(--accent);
+      flex-shrink: 0;
     }
 
     h1 {
@@ -208,11 +207,12 @@
       border-color: rgba(255, 255, 255, 0.48);
     }
 
-    /* HERO IMAGE */
+    /* IMAGEN MÉDICA DIFUMINADA */
 
     .hero-visual {
       position: relative;
       min-width: 0;
+      isolation: isolate;
     }
 
     .hero-image {
@@ -220,38 +220,58 @@
       width: 100%;
       aspect-ratio: 0.91;
       max-height: 535px;
-      background-color: #191919;
-      background-image: url("beyondermed-hero(1).png");
+      overflow: hidden;
+      background-color: #101010;
+
+      background-image:
+        linear-gradient(
+          180deg,
+          rgba(16, 16, 16, 0.04) 35%,
+          rgba(16, 16, 16, 0.32) 72%,
+          #101010 100%
+        ),
+        url("beyondermed-hero(1).png");
+
       background-size: cover;
       background-position: center center;
       background-repeat: no-repeat;
-      border: 1px solid rgba(255, 255, 255, 0.09);
-    }
 
-    .hero-image::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        180deg,
-        rgba(16, 16, 16, 0.02) 55%,
-        rgba(16, 16, 16, 0.34) 100%
+      /* Reduce el exceso de saturación y contraste */
+      filter: saturate(0.78) contrast(0.91) brightness(0.84);
+
+      /* Suaviza los bordes para integrar la imagen con el fondo */
+      -webkit-mask-image: radial-gradient(
+        ellipse at center,
+        #000 43%,
+        rgba(0, 0, 0, 0.96) 56%,
+        rgba(0, 0, 0, 0.72) 70%,
+        rgba(0, 0, 0, 0.25) 86%,
+        transparent 100%
       );
-      pointer-events: none;
+
+      mask-image: radial-gradient(
+        ellipse at center,
+        #000 43%,
+        rgba(0, 0, 0, 0.96) 56%,
+        rgba(0, 0, 0, 0.72) 70%,
+        rgba(0, 0, 0, 0.25) 86%,
+        transparent 100%
+      );
     }
 
     .image-caption {
       position: absolute;
-      bottom: 20px;
-      left: 22px;
-      z-index: 1;
-      color: rgba(255, 255, 255, 0.78);
-      font-size: 0.67rem;
-      letter-spacing: 0.15em;
+      bottom: 27px;
+      left: 25px;
+      z-index: 2;
+      color: rgba(255, 255, 255, 0.68);
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
+      pointer-events: none;
     }
 
-    /* FOOTER */
+    /* PIE DE PÁGINA */
 
     .footer {
       border-top: 1px solid var(--line);
@@ -328,11 +348,11 @@
       stroke: none;
     }
 
-    /* RESPONSIVE */
+    /* TABLETAS */
 
     @media (max-width: 850px) {
       .container {
-        width: min(100% - 40px, var(--max-width));
+        width: min(calc(100% - 40px), var(--max-width));
       }
 
       .nav-inner {
@@ -364,6 +384,8 @@
       }
     }
 
+    /* MÓVILES */
+
     @media (max-width: 620px) {
       .container {
         width: calc(100% - 36px);
@@ -392,9 +414,9 @@
 
       .hero {
         grid-template-columns: 1fr;
-        gap: 36px;
-        padding-top: 52px;
-        padding-bottom: 48px;
+        gap: 25px;
+        padding-top: 48px;
+        padding-bottom: 40px;
       }
 
       .hero-kicker {
@@ -429,9 +451,14 @@
       }
 
       .hero-image {
-        aspect-ratio: 1 / 0.95;
-        max-height: none;
-        background-position: center center;
+        aspect-ratio: 1 / 0.88;
+        max-height: 440px;
+      }
+
+      .image-caption {
+        bottom: 30px;
+        left: 20px;
+        font-size: 0.58rem;
       }
 
       .footer-inner {
@@ -441,10 +468,6 @@
         gap: 25px;
         padding-top: 30px;
         padding-bottom: 30px;
-      }
-
-      .footer-social {
-        margin-top: 0;
       }
     }
 
@@ -522,11 +545,11 @@
           class="hero-image"
           role="img"
           aria-label="Ilustración médica de BEYONDERMED"
-        >
-          <span class="image-caption">
-            Medicine · Learning · Integration
-          </span>
-        </div>
+        ></div>
+
+        <span class="image-caption">
+          Medicine · Learning · Integration
+        </span>
       </div>
 
     </section>
@@ -547,44 +570,24 @@
         <span class="footer-label">Proyecto</span>
 
         <a
-          href="https://www.instagram.com/beyondermed?stkn=OHhiM2xiaDk2Z21w"
+          href="https://www.instagram.com/beyondermed/"
           target="_blank"
           rel="noopener noreferrer"
           class="instagram-link"
           aria-label="Visitar el Instagram de BEYONDERMED"
         >
-
           <svg
             class="instagram-icon"
             viewBox="0 0 24 24"
-            role="img"
-            aria-label="Instagram"
+            aria-hidden="true"
+            focusable="false"
           >
-            <rect
-              x="3"
-              y="3"
-              width="18"
-              height="18"
-              rx="5"
-              ry="5"
-            ></rect>
-
-            <circle
-              cx="12"
-              cy="12"
-              r="4.2"
-            ></circle>
-
-            <circle
-              cx="17.4"
-              cy="6.7"
-              r="1.1"
-              class="instagram-dot"
-            ></circle>
+            <rect x="3" y="3" width="18" height="18" rx="5"></rect>
+            <circle cx="12" cy="12" r="4.2"></circle>
+            <circle cx="17.4" cy="6.7" r="1.1" class="instagram-dot"></circle>
           </svg>
 
           <span>@beyondermed</span>
-
         </a>
       </div>
 
@@ -593,4 +596,3 @@
 
 </body>
 </html>
-```
