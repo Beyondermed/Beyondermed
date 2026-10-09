@@ -1,0 +1,1051 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Casos clínicos y preguntas | BEYONDERMED</title>
+  <meta name="description" content="Resuelve casos clínicos y preguntas de inmunología, bacteriología y virología en BEYONDERMED.">
+  <meta name="theme-color" content="#101010">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #101010;
+      --surface: #181818;
+      --surface-hover: #202020;
+      --red: #b3262e;
+      --red-light: #e05a61;
+      --white: #f5f5f5;
+      --text: #c5c5c5;
+      --muted: #929292;
+      --border: #333333;
+      --success: #77c69a;
+      --error: #e47d7d;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Inter", sans-serif;
+      background: var(--bg);
+      color: var(--white);
+      line-height: 1.65;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    nav {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 7%;
+      border-bottom: 1px solid #252525;
+    }
+
+    .logo {
+      height: 38px;
+      width: auto;
+      display: block;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 30px;
+      font-size: 14px;
+    }
+
+    .nav-links a {
+      color: #b8b8b8;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--white);
+    }
+
+    .nav-links a.active {
+      text-decoration: underline;
+      text-decoration-color: var(--red);
+      text-underline-offset: 7px;
+    }
+
+    main {
+      width: 100%;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 58px 7% 100px;
+      flex: 1;
+    }
+
+    .breadcrumb {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 42px;
+    }
+
+    .breadcrumb a:hover {
+      color: white;
+    }
+
+    .breadcrumb span {
+      color: var(--red-light);
+    }
+
+    .kicker {
+      color: var(--red-light);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: 700;
+      margin-bottom: 17px;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: "Space Grotesk", sans-serif;
+      font-weight: 600;
+    }
+
+    h1 {
+      font-size: clamp(35px, 5vw, 54px);
+      line-height: 1.12;
+      letter-spacing: -1.7px;
+      margin-bottom: 18px;
+    }
+
+    .intro {
+      max-width: 720px;
+      color: var(--text);
+      font-size: 15px;
+      line-height: 1.85;
+      margin-bottom: 38px;
+    }
+
+    .overview {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 45px;
+    }
+
+    .overview-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 17px 19px;
+    }
+
+    .overview-item strong {
+      display: block;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 23px;
+      margin-bottom: 3px;
+    }
+
+    .overview-item span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .section-line {
+      width: 28px;
+      height: 2px;
+      background: var(--red);
+      flex-shrink: 0;
+    }
+
+    .section-heading h2 {
+      font-size: 19px;
+    }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-bottom: 25px;
+    }
+
+    .filter-button {
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 9px 15px;
+      background: #171717;
+      color: #c5c5c5;
+      cursor: pointer;
+      font-size: 12px;
+      transition: 0.2s ease;
+    }
+
+    .filter-button:hover {
+      border-color: #777;
+      color: white;
+    }
+
+    .filter-button.active {
+      background: #351719;
+      border-color: #8c292f;
+      color: #f1a1a5;
+    }
+
+    .case-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+
+    .case-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      min-height: 235px;
+      transition: border-color 0.2s ease;
+    }
+
+    .case-card:hover {
+      border-color: #555;
+    }
+
+    .case-card[hidden] {
+      display: none;
+    }
+
+    .case-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 19px;
+    }
+
+    .tag {
+      border: 1px solid #393939;
+      background: #202020;
+      color: #bdbdbd;
+      border-radius: 4px;
+      padding: 4px 8px;
+      font-size: 10px;
+      letter-spacing: 0.2px;
+    }
+
+    .tag-red {
+      color: #e58b91;
+      border-color: #572529;
+      background: #291719;
+    }
+
+    .case-card h3 {
+      font-size: 21px;
+      line-height: 1.35;
+      margin-bottom: 10px;
+    }
+
+    .case-card p {
+      color: var(--text);
+      font-size: 13px;
+      line-height: 1.8;
+      margin-bottom: 22px;
+    }
+
+    .case-card-bottom {
+      margin-top: auto;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .question-count {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .text-button {
+      border: 0;
+      background: none;
+      color: var(--red-light);
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 6px 0 6px 8px;
+    }
+
+    .text-button:hover {
+      color: white;
+    }
+
+    .empty-state {
+      display: none;
+      color: var(--muted);
+      font-size: 13px;
+      padding: 20px 0;
+    }
+
+    .empty-state.visible {
+      display: block;
+    }
+
+    .quiz {
+      display: none;
+      scroll-margin-top: 25px;
+      background: #151515;
+      border: 1px solid #393939;
+      border-radius: 10px;
+      padding: clamp(22px, 4vw, 38px);
+      margin-top: 10px;
+    }
+
+    .quiz.visible {
+      display: block;
+    }
+
+    .quiz-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 27px;
+    }
+
+    .quiz-label {
+      color: var(--red-light);
+      text-transform: uppercase;
+      letter-spacing: 1.4px;
+      font-weight: 700;
+      font-size: 10px;
+      margin-bottom: 8px;
+    }
+
+    .quiz-header h2 {
+      font-size: clamp(22px, 3vw, 29px);
+    }
+
+    .quiz-counter {
+      white-space: nowrap;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .progress-track {
+      height: 3px;
+      background: #333;
+      margin-bottom: 27px;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0;
+      background: var(--red);
+      transition: width 0.25s ease;
+    }
+
+    .clinical-case {
+      color: #d3d3d3;
+      font-size: 14px;
+      line-height: 1.9;
+      margin-bottom: 25px;
+    }
+
+    .question {
+      font-weight: 600;
+      font-size: 15px;
+      margin-bottom: 18px;
+    }
+
+    .options {
+      display: grid;
+      gap: 10px;
+      margin-bottom: 22px;
+    }
+
+    .option {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      width: 100%;
+      padding: 14px 15px;
+      text-align: left;
+      background: #1b1b1b;
+      border: 1px solid #383838;
+      border-radius: 7px;
+      color: #d5d5d5;
+      cursor: pointer;
+      font-size: 13px;
+      line-height: 1.7;
+      transition: border-color 0.15s ease, background 0.15s ease;
+    }
+
+    .option:hover:not(:disabled) {
+      border-color: #777;
+      background: #222;
+    }
+
+    .option:disabled {
+      cursor: default;
+      opacity: 1;
+    }
+
+    .option-letter {
+      width: 25px;
+      height: 25px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #4a4a4a;
+      border-radius: 5px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .option.correct {
+      border-color: #367d54;
+      background: #17251c;
+    }
+
+    .option.correct .option-letter {
+      border-color: #367d54;
+      color: var(--success);
+    }
+
+    .option.incorrect {
+      border-color: #8d363b;
+      background: #29191a;
+    }
+
+    .option.incorrect .option-letter {
+      border-color: #8d363b;
+      color: var(--error);
+    }
+
+    .feedback {
+      display: none;
+      border-left: 3px solid #555;
+      background: #1d1d1d;
+      padding: 17px 18px;
+      border-radius: 0 6px 6px 0;
+      margin-bottom: 22px;
+    }
+
+    .feedback.visible {
+      display: block;
+    }
+
+    .feedback.correct-feedback {
+      border-left-color: var(--success);
+    }
+
+    .feedback.incorrect-feedback {
+      border-left-color: var(--error);
+    }
+
+    .feedback h3 {
+      font-size: 15px;
+      margin-bottom: 8px;
+    }
+
+    .feedback p {
+      color: #c8c8c8;
+      font-size: 13px;
+      line-height: 1.85;
+    }
+
+    .feedback .key-point {
+      margin-top: 10px;
+      color: #e6b1b4;
+    }
+
+    .quiz-actions {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .primary-button,
+    .secondary-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 6px;
+      padding: 12px 18px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .primary-button {
+      background: var(--red);
+      border: 1px solid var(--red);
+      color: white;
+    }
+
+    .primary-button:hover:not(:disabled) {
+      background: #922029;
+    }
+
+    .primary-button:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    .secondary-button {
+      background: transparent;
+      border: 1px solid #444;
+      color: #ccc;
+    }
+
+    .secondary-button:hover {
+      border-color: #777;
+      color: white;
+    }
+
+    .quiz-result {
+      display: none;
+      padding: 22px 0 5px;
+    }
+
+    .quiz-result.visible {
+      display: block;
+    }
+
+    .quiz-result h3 {
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+
+    .quiz-result p {
+      color: var(--text);
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    footer {
+      background: #0c0c0c;
+      border-top: 1px solid #252525;
+      padding: 35px 7%;
+    }
+
+    .footer-inner {
+      max-width: 1180px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 22px;
+    }
+
+    .footer-brand {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 25px;
+      color: #999;
+      font-size: 12px;
+    }
+
+    .footer-links a:hover {
+      color: white;
+    }
+
+    button:focus-visible,
+    a:focus-visible {
+      outline: 2px solid #e05a61;
+      outline-offset: 4px;
+    }
+
+    @media (max-width: 800px) {
+      .case-list {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 700px) {
+      nav {
+        min-height: 70px;
+        padding: 0 5%;
+      }
+
+      .logo {
+        height: 32px;
+        max-width: 145px;
+        object-fit: contain;
+      }
+
+      .nav-links {
+        gap: 13px;
+        font-size: 12px;
+      }
+
+      main {
+        padding: 45px 5% 75px;
+      }
+
+      .overview {
+        gap: 8px;
+      }
+
+      .overview-item {
+        padding: 13px 10px;
+      }
+
+      .overview-item strong {
+        font-size: 19px;
+      }
+
+      .overview-item span {
+        font-size: 10px;
+      }
+
+      .quiz-header {
+        flex-direction: column;
+      }
+
+      .footer-inner {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .footer-links {
+        gap: 20px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav aria-label="Navegación principal">
+    <a href="index.html" aria-label="BEYONDERMED, inicio">
+      <img src="beyondermed-logo.png" alt="BEYONDERMED" class="logo">
+    </a>
+
+    <div class="nav-links">
+      <a href="index.html">Inicio</a>
+      <a href="metodo.html">Método</a>
+      <a href="cursos.html" class="active">Cursos</a>
+    </div>
+  </nav>
+
+  <main>
+    <div class="breadcrumb">
+      <a href="index.html">Inicio</a>
+      <span>/</span>
+      <a href="cursos.html">Cursos</a>
+      <span>/</span>
+      <a href="inmunidad-infectologia.html">Inmunidad e Infectología</a>
+      <span>/</span>
+      <span>Casos clínicos</span>
+    </div>
+
+    <div class="kicker">BEYONDERMED / Aplicación clínica</div>
+
+    <h1>Casos clínicos y preguntas</h1>
+
+    <p class="intro">
+      No memorices únicamente el nombre del microorganismo.
+      Interpreta los hallazgos, identifica el mecanismo de patogenia
+      y conecta cada pista clínica con la respuesta más probable.
+    </p>
+
+    <div class="overview">
+      <div class="overview-item">
+        <strong id="available-count">01</strong>
+        <span>Casos disponibles</span>
+      </div>
+      <div class="overview-item">
+        <strong>MCQ</strong>
+        <span>Preguntas de opción múltiple</span>
+      </div>
+      <div class="overview-item">
+        <strong>ENFOQUE</strong>
+        <span>Razonamiento clínico</span>
+      </div>
+    </div>
+
+    <div class="section-heading">
+      <span class="section-line"></span>
+      <h2>Explorar por área</h2>
+    </div>
+
+    <div class="filters" aria-label="Filtrar casos por área">
+      <button class="filter-button active" data-filter="todos" aria-pressed="true">
+        Todos
+      </button>
+      <button class="filter-button" data-filter="inmunologia" aria-pressed="false">
+        Inmunología
+      </button>
+      <button class="filter-button" data-filter="bacteriologia" aria-pressed="false">
+        Bacteriología
+      </button>
+      <button class="filter-button" data-filter="virologia" aria-pressed="false">
+        Virología
+      </button>
+    </div>
+
+    <section class="case-list" aria-label="Lista de casos clínicos">
+
+      <article class="case-card" data-area="bacteriologia">
+        <div class="case-meta">
+          <span class="tag tag-red">Bacteriología</span>
+          <span class="tag">Dificultad media</span>
+        </div>
+
+        <h3>Diarrea del viajero</h3>
+
+        <p>
+          Un paciente presenta diarrea acuosa después de viajar.
+          Analiza los datos clínicos para identificar el patotipo
+          de Escherichia coli más probable.
+        </p>
+
+        <div class="case-card-bottom">
+          <span class="question-count">01 pregunta · Caso introductorio</span>
+          <button class="text-button" id="open-case">
+            Resolver caso →
+          </button>
+        </div>
+      </article>
+
+      <article class="case-card" data-area="inmunologia">
+        <div class="case-meta">
+          <span class="tag">Inmunología</span>
+          <span class="tag">Próximamente</span>
+        </div>
+
+        <h3>Respuesta inmunitaria</h3>
+
+        <p>
+          Casos orientados a identificar células, mediadores,
+          mecanismos de defensa y alteraciones de la respuesta inmune.
+        </p>
+
+        <div class="case-card-bottom">
+          <span class="question-count">En preparación</span>
+        </div>
+      </article>
+
+      <article class="case-card" data-area="virologia">
+        <div class="case-meta">
+          <span class="tag">Virología</span>
+          <span class="tag">Próximamente</span>
+        </div>
+
+        <h3>Patogenia viral</h3>
+
+        <p>
+          Casos para relacionar el tipo de genoma, la replicación,
+          los mecanismos de lesión y las manifestaciones clínicas.
+        </p>
+
+        <div class="case-card-bottom">
+          <span class="question-count">En preparación</span>
+        </div>
+      </article>
+
+    </section>
+
+    <p class="empty-state" id="empty-state">
+      No hay casos disponibles en esta área todavía.
+    </p>
+
+    <section class="quiz" id="quiz" aria-labelledby="quiz-title">
+      <div class="quiz-header">
+        <div>
+          <div class="quiz-label">Caso clínico 01 / Bacteriología</div>
+          <h2 id="quiz-title">Diarrea del viajero</h2>
+        </div>
+        <div class="quiz-counter" id="quiz-counter">Pregunta 1 de 1</div>
+      </div>
+
+      <div class="progress-track" aria-hidden="true">
+        <div class="progress-fill" id="progress-fill"></div>
+      </div>
+
+      <p class="clinical-case">
+        Un varón de 24 años regresa de un viaje de cinco días.
+        Desde hace 24 horas presenta deposiciones acuosas abundantes,
+        cólicos abdominales y náuseas. No presenta fiebre alta ni
+        sangre visible en las heces. Otros viajeros que consumieron
+        alimentos en el mismo lugar desarrollaron síntomas similares.
+        Se sospecha una infección intestinal por Escherichia coli.
+      </p>
+
+      <p class="question">
+        ¿Qué patotipo es el más probable en este paciente?
+      </p>
+
+      <div class="options" id="options">
+        <button class="option" data-answer="A">
+          <span class="option-letter">A</span>
+          <span>Escherichia coli enteroinvasiva (EIEC).</span>
+        </button>
+
+        <button class="option" data-answer="B">
+          <span class="option-letter">B</span>
+          <span>Escherichia coli productora de toxina Shiga (STEC).</span>
+        </button>
+
+        <button class="option" data-answer="C">
+          <span class="option-letter">C</span>
+          <span>Escherichia coli enterotoxigénica (ETEC).</span>
+        </button>
+
+        <button class="option" data-answer="D">
+          <span class="option-letter">D</span>
+          <span>Escherichia coli enteropatógena (EPEC).</span>
+        </button>
+      </div>
+
+      <div class="feedback" id="feedback" aria-live="polite">
+        <h3 id="feedback-title"></h3>
+        <p id="feedback-text"></p>
+        <p class="key-point" id="key-point"></p>
+      </div>
+
+      <div class="quiz-actions" id="quiz-actions">
+        <button class="primary-button" id="check-answer" disabled>
+          Comprobar respuesta
+        </button>
+        <button class="secondary-button" id="close-quiz">
+          Cerrar caso
+        </button>
+      </div>
+
+      <div class="quiz-result" id="quiz-result" aria-live="polite">
+        <h3 id="result-title">Caso completado</h3>
+        <p id="result-text"></p>
+        <button class="primary-button" id="retry-case">
+          Volver a resolver
+        </button>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">BEYONDERMED</div>
+
+      <div class="footer-links">
+        <a href="index.html">Inicio</a>
+        <a href="metodo.html">Método</a>
+        <a href="cursos.html">Cursos</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const filterButtons = document.querySelectorAll(".filter-button");
+    const caseCards = document.querySelectorAll(".case-card");
+    const emptyState = document.getElementById("empty-state");
+    const quiz = document.getElementById("quiz");
+    const openCaseButton = document.getElementById("open-case");
+    const closeQuizButton = document.getElementById("close-quiz");
+    const optionButtons = document.querySelectorAll(".option");
+    const checkButton = document.getElementById("check-answer");
+    const feedback = document.getElementById("feedback");
+    const feedbackTitle = document.getElementById("feedback-title");
+    const feedbackText = document.getElementById("feedback-text");
+    const keyPoint = document.getElementById("key-point");
+    const resultPanel = document.getElementById("quiz-result");
+    const resultTitle = document.getElementById("result-title");
+    const resultText = document.getElementById("result-text");
+    const retryButton = document.getElementById("retry-case");
+
+    let selectedAnswer = null;
+    let answered = false;
+    let score = 0;
+
+    filterButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const filter = button.dataset.filter;
+
+        filterButtons.forEach((item) => {
+          const active = item === button;
+          item.classList.toggle("active", active);
+          item.setAttribute("aria-pressed", String(active));
+        });
+
+        let visibleCount = 0;
+
+        caseCards.forEach((card) => {
+          const visible =
+            filter === "todos" || card.dataset.area === filter;
+
+          card.hidden = !visible;
+
+          if (visible) visibleCount++;
+        });
+
+        emptyState.classList.toggle("visible", visibleCount === 0);
+      });
+    });
+
+    function resetCase() {
+      selectedAnswer = null;
+      answered = false;
+      score = 0;
+
+      optionButtons.forEach((button) => {
+        button.disabled = false;
+        button.classList.remove("correct", "incorrect");
+        button.setAttribute("aria-pressed", "false");
+      });
+
+      feedback.className = "feedback";
+      feedbackTitle.textContent = "";
+      feedbackText.textContent = "";
+      keyPoint.textContent = "";
+
+      checkButton.disabled = true;
+      checkButton.hidden = false;
+      checkButton.textContent = "Comprobar respuesta";
+
+      document.getElementById("quiz-actions").hidden = false;
+      resultPanel.classList.remove("visible");
+      document.getElementById("progress-fill").style.width = "0%";
+    }
+
+    function openQuiz() {
+      resetCase();
+      quiz.classList.add("visible");
+      quiz.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    openCaseButton.addEventListener("click", openQuiz);
+    retryButton.addEventListener("click", openQuiz);
+
+    closeQuizButton.addEventListener("click", () => {
+      quiz.classList.remove("visible");
+    });
+
+    optionButtons.forEach((button) => {
+      button.setAttribute("aria-pressed", "false");
+
+      button.addEventListener("click", () => {
+        if (answered) return;
+
+        selectedAnswer = button.dataset.answer;
+
+        optionButtons.forEach((item) => {
+          item.setAttribute(
+            "aria-pressed",
+            String(item === button)
+          );
+
+          item.style.borderColor =
+            item === button ? "#b3262e" : "";
+        });
+
+        checkButton.disabled = false;
+      });
+    });
+
+    checkButton.addEventListener("click", () => {
+      if (!selectedAnswer || answered) return;
+
+      answered = true;
+
+      const correctAnswer = "C";
+      const isCorrect = selectedAnswer === correctAnswer;
+
+      if (isCorrect) score++;
+
+      optionButtons.forEach((button) => {
+        button.disabled = true;
+        button.style.borderColor = "";
+
+        if (button.dataset.answer === correctAnswer) {
+          button.classList.add("correct");
+        } else if (button.dataset.answer === selectedAnswer) {
+          button.classList.add("incorrect");
+        }
+      });
+
+      feedback.classList.add("visible");
+      feedback.classList.add(
+        isCorrect ? "correct-feedback" : "incorrect-feedback"
+      );
+
+      feedbackTitle.textContent = isCorrect
+        ? "Respuesta correcta"
+        : "Respuesta incorrecta";
+
+      feedbackText.textContent =
+        "ETEC produce enterotoxinas que alteran el transporte de agua y electrolitos en el intestino delgado, generando diarrea acuosa. La asociación con viajes y alimentos o agua contaminados es una pista clásica. La ausencia de sangre y de un síndrome inflamatorio marcado también orienta hacia este patotipo.";
+
+      keyPoint.textContent =
+        "Clave de razonamiento: diarrea acuosa del viajero → considerar ETEC. Si predominan diarrea sanguinolenta y riesgo de síndrome urémico hemolítico, considera STEC.";
+
+      document.getElementById("progress-fill").style.width = "100%";
+      checkButton.hidden = true;
+
+      resultPanel.classList.add("visible");
+      resultTitle.textContent = isCorrect
+        ? "Caso completado: 1/1"
+        : "Caso completado: 0/1";
+
+      resultText.textContent = isCorrect
+        ? "Identificaste el patotipo más probable a partir de las pistas clínicas."
+        : "Revisa la explicación y compara el patrón clínico con las características de cada patotipo.";
+    });
+  </script>
+
+</body>
+</html>
