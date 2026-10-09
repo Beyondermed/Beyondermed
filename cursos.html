@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -5,12 +6,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Cursos | BEYONDERMED</title>
+  <meta name="description" content="Explora los cursos y espacios de estudio de BEYONDERMED, un proyecto de aprendizaje médico.">
+  <meta name="theme-color" content="#101010">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 
   <style>
+    :root {
+      --bg: #101010;
+      --surface: #171717;
+      --surface-hover: #1d1d1d;
+      --red: #b3262e;
+      --red-hover: #922029;
+      --white: #f5f5f5;
+      --text: #c5c5c5;
+      --muted: #888888;
+      --border: #303030;
+    }
 
     * {
       box-sizing: border-box;
@@ -18,11 +32,18 @@
       padding: 0;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       font-family: "Inter", sans-serif;
-      background: #ffffff;
-      color: #171717;
+      background: var(--bg);
+      color: var(--white);
       line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
 
     a {
@@ -31,131 +52,189 @@
     }
 
     nav {
-      height: 76px;
+      min-height: 76px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 0 7%;
-      border-bottom: 1px solid #eeeeee;
-      background: white;
+      border-bottom: 1px solid #252525;
+      background: var(--bg);
     }
 
     .logo {
       height: 38px;
       width: auto;
+      display: block;
     }
 
     .nav-links {
       display: flex;
-      gap: 34px;
+      gap: 32px;
       font-size: 14px;
     }
 
     .nav-links a {
-      color: #444;
+      color: #b8b8b8;
+      transition: color 0.2s ease;
     }
 
-    .nav-links a:hover {
-      color: #b3262e;
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--white);
+    }
+
+    .nav-links a.active {
+      text-decoration: underline;
+      text-decoration-color: var(--red);
+      text-underline-offset: 7px;
     }
 
     main {
+      width: 100%;
       max-width: 1180px;
-      margin: auto;
-      padding: 100px 7%;
+      margin: 0 auto;
+      padding: 100px 7% 115px;
+      flex: 1;
     }
 
     .kicker {
-      color: #b3262e;
+      color: #d0474f;
       font-size: 12px;
       text-transform: uppercase;
       letter-spacing: 2px;
       font-weight: 700;
-      margin-bottom: 15px;
+      margin-bottom: 20px;
+    }
+
+    h1,
+    h2 {
+      font-family: "Space Grotesk", sans-serif;
+      font-weight: 600;
     }
 
     h1 {
-      font-family: "Space Grotesk", sans-serif;
-      font-size: clamp(45px, 6vw, 70px);
-      letter-spacing: -2px;
-      line-height: 1;
+      font-size: clamp(44px, 6vw, 68px);
+      letter-spacing: -2.5px;
+      line-height: 1.08;
       margin-bottom: 22px;
     }
 
     .intro {
-      max-width: 650px;
-      color: #666;
+      max-width: 680px;
+      color: var(--text);
       font-size: 17px;
-      margin-bottom: 65px;
+      line-height: 1.8;
+      margin-bottom: 58px;
     }
 
     .course-card {
-      border: 1px solid #dedede;
-      border-radius: 16px;
-      padding: 42px;
-      max-width: 850px;
-      transition: 0.2s ease;
+      display: block;
+      max-width: 900px;
+      padding: clamp(28px, 5vw, 48px);
+      background: var(--surface);
+      border: 1px solid #343434;
+      border-radius: 12px;
+      transition:
+        background 0.25s ease,
+        border-color 0.25s ease,
+        transform 0.25s ease;
     }
 
     .course-card:hover {
-      border-color: #bdbdbd;
-      transform: translateY(-2px);
+      background: var(--surface-hover);
+      border-color: #555;
+      transform: translateY(-3px);
+    }
+
+    .course-card:focus-visible,
+    .button:focus-visible,
+    .nav-links a:focus-visible,
+    .footer-links a:focus-visible {
+      outline: 2px solid #d0474f;
+      outline-offset: 5px;
     }
 
     .course-number {
+      color: #d0474f;
       font-size: 12px;
-      color: #b3262e;
       font-weight: 700;
-      letter-spacing: 1px;
-      margin-bottom: 18px;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      margin-bottom: 17px;
     }
 
     h2 {
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 30px;
-      margin-bottom: 10px;
+      font-size: clamp(27px, 4vw, 36px);
+      line-height: 1.25;
+      letter-spacing: -0.8px;
+      margin-bottom: 16px;
     }
 
     .course-description {
-      color: #666;
-      max-width: 650px;
-      margin-bottom: 25px;
-    }
-
-    .tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
+      max-width: 690px;
+      color: var(--text);
+      font-size: 15px;
+      line-height: 1.85;
       margin-bottom: 30px;
     }
 
-    .tag {
-      padding: 7px 12px;
-      border: 1px solid #e0e0e0;
-      border-radius: 5px;
+    .course-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .course-status {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      color: #b8b8b8;
       font-size: 12px;
-      color: #555;
-      background: #fafafa;
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      background: #b3262e;
+      border-radius: 50%;
+      flex-shrink: 0;
     }
 
     .button {
-      display: inline-block;
-      background: #b3262e;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      background: var(--red);
       color: white;
-      padding: 13px 21px;
+      padding: 14px 22px;
       border-radius: 7px;
       font-size: 14px;
       font-weight: 600;
+      transition: background 0.2s ease;
     }
 
+    .course-card:hover .button,
     .button:hover {
-      background: #922029;
+      background: var(--red-hover);
+    }
+
+    .button-arrow {
+      font-size: 18px;
+      line-height: 1;
+      transition: transform 0.2s ease;
+    }
+
+    .course-card:hover .button-arrow {
+      transform: translateX(3px);
     }
 
     footer {
-      background: #151515;
-      color: white;
-      padding: 45px 7%;
+      background: #0c0c0c;
+      border-top: 1px solid #252525;
+      padding: 35px 7%;
     }
 
     .footer-inner {
@@ -163,130 +242,152 @@
       margin: auto;
       display: flex;
       justify-content: space-between;
+      align-items: center;
+      gap: 22px;
     }
 
     .footer-brand {
       font-family: "Space Grotesk", sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
     }
 
     .footer-links {
       display: flex;
       gap: 25px;
-      color: #aaa;
-      font-size: 13px;
+      color: #999;
+      font-size: 12px;
+    }
+
+    .footer-links a:hover {
+      color: white;
     }
 
     @media (max-width: 700px) {
-
       nav {
+        min-height: 70px;
         padding: 0 5%;
       }
 
+      .logo {
+        height: 32px;
+        max-width: 150px;
+        object-fit: contain;
+      }
+
       .nav-links {
-        gap: 14px;
+        gap: 15px;
+        font-size: 12px;
       }
 
       main {
-        padding: 70px 5%;
+        padding: 75px 5% 85px;
+      }
+
+      h1 {
+        letter-spacing: -1.8px;
+      }
+
+      .intro {
+        font-size: 15px;
+        margin-bottom: 42px;
       }
 
       .course-card {
-        padding: 28px;
+        padding: 27px 23px;
+      }
+
+      .course-bottom {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .button {
+        width: 100%;
       }
 
       .footer-inner {
+        align-items: flex-start;
         flex-direction: column;
-        gap: 20px;
       }
 
+      .footer-links {
+        gap: 20px;
+      }
     }
 
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+      }
+    }
   </style>
 </head>
 
 <body>
 
-  <nav>
-
-    <a href="index.html">
+  <nav aria-label="Navegación principal">
+    <a href="index.html" aria-label="BEYONDERMED, página de inicio">
       <img src="beyondermed-logo.png" alt="BEYONDERMED" class="logo">
     </a>
 
     <div class="nav-links">
       <a href="index.html">Inicio</a>
       <a href="metodo.html">Método</a>
-      <a href="cursos.html">Cursos</a>
+      <a href="cursos.html" class="active" aria-current="page">Cursos</a>
     </div>
-
   </nav>
 
-
   <main>
+    <div class="kicker">BEYONDERMED / Cursos</div>
 
-    <div class="kicker">
-      BEYONDERMED · Cursos
-    </div>
-
-    <h1>
-      Cursos
-    </h1>
+    <h1>Cursos</h1>
 
     <p class="intro">
-      Espacio destinado al estudio organizado de las diferentes áreas
-      de la formación médica. Cada curso contará con su propio sistema
-      de contenidos, aplicación y recuperación.
+      Espacios de estudio diseñados para organizar el material médico,
+      comprender los mecanismos y aplicar los conocimientos mediante
+      razonamiento clínico.
     </p>
 
-
     <a href="inmunidad-infectologia.html" class="course-card">
+      <div class="course-number">Curso actual · 01</div>
 
-      <div class="course-number">
-        CURSO ACTUAL
-      </div>
-
-      <h2>
-        Inmunidad e Infectología
-      </h2>
+      <h2>Inmunidad e Infectología</h2>
 
       <p class="course-description">
-        Estudio integrado de inmunología, bacteriología, virología
-        y los fundamentos necesarios para comprender la interacción
-        entre microorganismos, sistema inmune y enfermedad.
+        Estudio integrado de inmunología, bacteriología y virología.
+        Un espacio para conectar los mecanismos de defensa, la patogenia
+        de los microorganismos y sus manifestaciones clínicas.
       </p>
 
-      <div class="tags">
-        <span class="tag">Inmunología</span>
-        <span class="tag">Bacteriología</span>
-        <span class="tag">Virología</span>
-        <span class="tag">Casos clínicos</span>
-        <span class="tag">Anki</span>
+      <div class="course-bottom">
+        <span class="course-status">
+          <span class="status-dot"></span>
+          Espacio de estudio
+        </span>
+
+        <span class="button">
+          Abrir espacio de estudio
+          <span class="button-arrow" aria-hidden="true">→</span>
+        </span>
       </div>
-
-      <span class="button">
-        Ingresar al curso →
-      </span>
-
     </a>
-
   </main>
 
-
   <footer>
-
     <div class="footer-inner">
-
-      <div class="footer-brand">
-        BEYONDERMED
-      </div>
+      <div class="footer-brand">BEYONDERMED</div>
 
       <div class="footer-links">
         <a href="index.html">Inicio</a>
         <a href="metodo.html">Método</a>
         <a href="cursos.html">Cursos</a>
       </div>
-
     </div>
-
   </footer>
 
 </body>
