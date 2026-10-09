@@ -1,0 +1,519 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Inmunidad e Infectología | BEYONDERMED</title>
+  <meta name="description" content="Espacio de estudio de Inmunidad e Infectología: casos clínicos, preguntas, esquemas, resúmenes y Anki.">
+  <meta name="theme-color" content="#101010">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #101010;
+      --surface: #181818;
+      --surface-hover: #202020;
+      --red: #b3262e;
+      --white: #f5f5f5;
+      --text: #c5c5c5;
+      --muted: #929292;
+      --border: #333333;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Inter", sans-serif;
+      background: var(--bg);
+      color: var(--white);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    nav {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 7%;
+      border-bottom: 1px solid #252525;
+    }
+
+    .logo {
+      height: 38px;
+      width: auto;
+      display: block;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 30px;
+      font-size: 14px;
+    }
+
+    .nav-links a {
+      color: #b8b8b8;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--white);
+    }
+
+    .nav-links a.active {
+      text-decoration: underline;
+      text-decoration-color: var(--red);
+      text-underline-offset: 7px;
+    }
+
+    main {
+      width: 100%;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 75px 7% 100px;
+      flex: 1;
+    }
+
+    .breadcrumb {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 48px;
+    }
+
+    .breadcrumb a:hover {
+      color: white;
+    }
+
+    .breadcrumb span {
+      color: var(--red);
+    }
+
+    .kicker {
+      color: #d0474f;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    h1,
+    h2 {
+      font-family: "Space Grotesk", sans-serif;
+      font-weight: 600;
+    }
+
+    h1 {
+      max-width: 850px;
+      font-size: clamp(36px, 5vw, 56px);
+      line-height: 1.12;
+      letter-spacing: -1.8px;
+      margin-bottom: 20px;
+    }
+
+    .intro {
+      max-width: 720px;
+      color: var(--text);
+      font-size: 16px;
+      line-height: 1.85;
+      margin-bottom: 55px;
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 24px;
+    }
+
+    .section-line {
+      width: 34px;
+      height: 2px;
+      background: var(--red);
+      flex-shrink: 0;
+    }
+
+    .section-heading p {
+      color: #dedede;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+    }
+
+    .study-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .study-card {
+      position: relative;
+      min-height: 280px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 27px 24px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      transition:
+        background 0.25s ease,
+        border-color 0.25s ease,
+        transform 0.25s ease;
+    }
+
+    .study-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 38px;
+      height: 2px;
+      background: var(--red);
+      transition: width 0.25s ease;
+    }
+
+    .study-card:hover {
+      background: var(--surface-hover);
+      border-color: #555;
+      transform: translateY(-4px);
+    }
+
+    .study-card:hover::before {
+      width: 100%;
+    }
+
+    .card-number {
+      color: #d0474f;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 12px;
+      letter-spacing: 1px;
+      margin-bottom: 28px;
+    }
+
+    .card-icon {
+      width: 42px;
+      height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #e05a61;
+      background: #291719;
+      border: 1px solid #492326;
+      border-radius: 8px;
+      margin-bottom: 22px;
+    }
+
+    .card-icon svg {
+      width: 21px;
+      height: 21px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.7;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    h2 {
+      font-size: 21px;
+      line-height: 1.35;
+      letter-spacing: -0.4px;
+      margin-bottom: 12px;
+    }
+
+    .card-description {
+      color: var(--text);
+      font-size: 13px;
+      line-height: 1.8;
+      margin-bottom: 27px;
+    }
+
+    .card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin-top: auto;
+      color: #e05a61;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .card-link span {
+      transition: transform 0.2s ease;
+    }
+
+    .study-card:hover .card-link span {
+      transform: translateX(4px);
+    }
+
+    .study-card:focus-visible,
+    .nav-links a:focus-visible,
+    .breadcrumb a:focus-visible,
+    .footer-links a:focus-visible {
+      outline: 2px solid #d0474f;
+      outline-offset: 5px;
+    }
+
+    footer {
+      background: #0c0c0c;
+      border-top: 1px solid #252525;
+      padding: 35px 7%;
+    }
+
+    .footer-inner {
+      max-width: 1180px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 22px;
+    }
+
+    .footer-brand {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 25px;
+      color: #999;
+      font-size: 12px;
+    }
+
+    .footer-links a:hover {
+      color: white;
+    }
+
+    @media (max-width: 900px) {
+      .study-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+
+      .study-card {
+        min-height: 0;
+        padding: 25px;
+      }
+
+      .card-number {
+        margin-bottom: 20px;
+      }
+
+      .card-icon {
+        margin-bottom: 16px;
+      }
+
+      .card-description {
+        margin-bottom: 22px;
+      }
+    }
+
+    @media (max-width: 700px) {
+      nav {
+        min-height: 70px;
+        padding: 0 5%;
+      }
+
+      .logo {
+        height: 32px;
+        max-width: 150px;
+        object-fit: contain;
+      }
+
+      .nav-links {
+        gap: 14px;
+        font-size: 12px;
+      }
+
+      main {
+        padding: 50px 5% 75px;
+      }
+
+      .breadcrumb {
+        margin-bottom: 38px;
+      }
+
+      h1 {
+        letter-spacing: -1.2px;
+      }
+
+      .intro {
+        font-size: 14px;
+        margin-bottom: 42px;
+      }
+
+      .footer-inner {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .footer-links {
+        gap: 20px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav aria-label="Navegación principal">
+    <a href="index.html" aria-label="BEYONDERMED, página de inicio">
+      <img src="beyondermed-logo.png" alt="BEYONDERMED" class="logo">
+    </a>
+
+    <div class="nav-links">
+      <a href="index.html">Inicio</a>
+      <a href="metodo.html">Método</a>
+      <a href="cursos.html" class="active" aria-current="page">Cursos</a>
+    </div>
+  </nav>
+
+  <main>
+    <div class="breadcrumb">
+      <a href="index.html">Inicio</a>
+      <span>/</span>
+      <a href="cursos.html">Cursos</a>
+      <span>/</span>
+      <span>Inmunidad e Infectología</span>
+    </div>
+
+    <div class="kicker">BEYONDERMED · Espacio académico</div>
+
+    <h1>Inmunidad e Infectología</h1>
+
+    <p class="intro">
+      Comprende los mecanismos, conecta la fisiopatología y aplica
+      lo aprendido. Organiza tu estudio mediante preguntas clínicas,
+      esquemas integradores y tarjetas de memoria activa.
+    </p>
+
+    <div class="section-heading">
+      <span class="section-line"></span>
+      <p>ÁREAS DE ESTUDIO</p>
+    </div>
+
+    <section class="study-grid" aria-label="Áreas de estudio">
+
+      <a class="study-card" href="casos-clinicos.html"
+         aria-label="Abrir casos clínicos y preguntas">
+        <div class="card-number">01 / APLICACIÓN</div>
+
+        <div class="card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <path d="M8 4H5a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-3"/>
+            <rect x="8" y="2" width="8" height="4" rx="1"/>
+            <path d="M8 12h8M8 16h5"/>
+          </svg>
+        </div>
+
+        <h2>Casos clínicos y preguntas</h2>
+
+        <p class="card-description">
+          Preguntas de opción múltiple, casos clínicos y simulacros
+          orientados al razonamiento y la aplicación de conocimientos.
+        </p>
+
+        <span class="card-link">
+          Explorar sección <span aria-hidden="true">→</span>
+        </span>
+      </a>
+
+      <a class="study-card" href="esquemas.html"
+         aria-label="Abrir esquemas y resúmenes">
+        <div class="card-number">02 / INTEGRACIÓN</div>
+
+        <div class="card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <rect x="8" y="2" width="8" height="5" rx="1"/>
+            <rect x="2" y="17" width="8" height="5" rx="1"/>
+            <rect x="14" y="17" width="8" height="5" rx="1"/>
+            <path d="M12 7v5M6 17v-3h12v3"/>
+          </svg>
+        </div>
+
+        <h2>Esquemas y resúmenes</h2>
+
+        <p class="card-description">
+          Mecanismos inmunológicos, fisiopatología, esquemas causales
+          y cuadros comparativos para integrar los temas.
+        </p>
+
+        <span class="card-link">
+          Explorar sección <span aria-hidden="true">→</span>
+        </span>
+      </a>
+
+      <a class="study-card" href="anki.html"
+         aria-label="Abrir tarjetas Anki">
+        <div class="card-number">03 / RETENCIÓN</div>
+
+        <div class="card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <rect x="3" y="4" width="14" height="16" rx="2"/>
+            <path d="M7 8h6M7 12h6M7 16h3"/>
+            <path d="M17 8h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-8"/>
+          </svg>
+        </div>
+
+        <h2>Anki</h2>
+
+        <p class="card-description">
+          Tarjetas de memoria activa y repasos para consolidar
+          conceptos, mecanismos y asociaciones clínicas.
+        </p>
+
+        <span class="card-link">
+          Explorar sección <span aria-hidden="true">→</span>
+        </span>
+      </a>
+
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">BEYONDERMED</div>
+
+      <div class="footer-links">
+        <a href="index.html">Inicio</a>
+        <a href="metodo.html">Método</a>
+        <a href="cursos.html">Cursos</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
