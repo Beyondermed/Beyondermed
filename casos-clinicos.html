@@ -1,1051 +1,567 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Casos clínicos y preguntas | BEYONDERMED</title>
-  <meta name="description" content="Resuelve casos clínicos y preguntas de inmunología, bacteriología y virología en BEYONDERMED.">
-  <meta name="theme-color" content="#101010">
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-
-  <style>
-    :root {
-      --bg: #101010;
-      --surface: #181818;
-      --surface-hover: #202020;
-      --red: #b3262e;
-      --red-light: #e05a61;
-      --white: #f5f5f5;
-      --text: #c5c5c5;
-      --muted: #929292;
-      --border: #333333;
-      --success: #77c69a;
-      --error: #e47d7d;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: "Inter", sans-serif;
-      background: var(--bg);
-      color: var(--white);
-      line-height: 1.65;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    button {
-      font: inherit;
-    }
-
-    nav {
-      min-height: 76px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 7%;
-      border-bottom: 1px solid #252525;
-    }
-
-    .logo {
-      height: 38px;
-      width: auto;
-      display: block;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 30px;
-      font-size: 14px;
-    }
-
-    .nav-links a {
-      color: #b8b8b8;
-    }
-
-    .nav-links a:hover,
-    .nav-links a.active {
-      color: var(--white);
-    }
-
-    .nav-links a.active {
-      text-decoration: underline;
-      text-decoration-color: var(--red);
-      text-underline-offset: 7px;
-    }
-
-    main {
-      width: 100%;
-      max-width: 1180px;
-      margin: 0 auto;
-      padding: 58px 7% 100px;
-      flex: 1;
-    }
-
-    .breadcrumb {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 9px;
-      color: var(--muted);
-      font-size: 12px;
-      margin-bottom: 42px;
-    }
-
-    .breadcrumb a:hover {
-      color: white;
-    }
-
-    .breadcrumb span {
-      color: var(--red-light);
-    }
-
-    .kicker {
-      color: var(--red-light);
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      font-weight: 700;
-      margin-bottom: 17px;
-    }
-
-    h1,
-    h2,
-    h3 {
-      font-family: "Space Grotesk", sans-serif;
-      font-weight: 600;
-    }
-
-    h1 {
-      font-size: clamp(35px, 5vw, 54px);
-      line-height: 1.12;
-      letter-spacing: -1.7px;
-      margin-bottom: 18px;
-    }
-
-    .intro {
-      max-width: 720px;
-      color: var(--text);
-      font-size: 15px;
-      line-height: 1.85;
-      margin-bottom: 38px;
-    }
-
-    .overview {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
-      margin-bottom: 45px;
-    }
-
-    .overview-item {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 17px 19px;
-    }
-
-    .overview-item strong {
-      display: block;
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 23px;
-      margin-bottom: 3px;
-    }
-
-    .overview-item span {
-      color: var(--muted);
-      font-size: 12px;
-    }
-
-    .section-heading {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 18px;
-    }
-
-    .section-line {
-      width: 28px;
-      height: 2px;
-      background: var(--red);
-      flex-shrink: 0;
-    }
-
-    .section-heading h2 {
-      font-size: 19px;
-    }
-
-    .filters {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 9px;
-      margin-bottom: 25px;
-    }
-
-    .filter-button {
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 9px 15px;
-      background: #171717;
-      color: #c5c5c5;
-      cursor: pointer;
-      font-size: 12px;
-      transition: 0.2s ease;
-    }
-
-    .filter-button:hover {
-      border-color: #777;
-      color: white;
-    }
-
-    .filter-button.active {
-      background: #351719;
-      border-color: #8c292f;
-      color: #f1a1a5;
-    }
-
-    .case-list {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px;
-      margin-bottom: 48px;
-    }
-
-    .case-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 9px;
-      padding: 24px;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      min-height: 235px;
-      transition: border-color 0.2s ease;
-    }
-
-    .case-card:hover {
-      border-color: #555;
-    }
-
-    .case-card[hidden] {
-      display: none;
-    }
-
-    .case-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 19px;
-    }
-
-    .tag {
-      border: 1px solid #393939;
-      background: #202020;
-      color: #bdbdbd;
-      border-radius: 4px;
-      padding: 4px 8px;
-      font-size: 10px;
-      letter-spacing: 0.2px;
-    }
-
-    .tag-red {
-      color: #e58b91;
-      border-color: #572529;
-      background: #291719;
-    }
-
-    .case-card h3 {
-      font-size: 21px;
-      line-height: 1.35;
-      margin-bottom: 10px;
-    }
-
-    .case-card p {
-      color: var(--text);
-      font-size: 13px;
-      line-height: 1.8;
-      margin-bottom: 22px;
-    }
-
-    .case-card-bottom {
-      margin-top: auto;
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-    }
-
-    .question-count {
-      color: var(--muted);
-      font-size: 11px;
-    }
-
-    .text-button {
-      border: 0;
-      background: none;
-      color: var(--red-light);
-      cursor: pointer;
-      font-size: 12px;
-      font-weight: 600;
-      padding: 6px 0 6px 8px;
-    }
-
-    .text-button:hover {
-      color: white;
-    }
-
-    .empty-state {
-      display: none;
-      color: var(--muted);
-      font-size: 13px;
-      padding: 20px 0;
-    }
-
-    .empty-state.visible {
-      display: block;
-    }
-
-    .quiz {
-      display: none;
-      scroll-margin-top: 25px;
-      background: #151515;
-      border: 1px solid #393939;
-      border-radius: 10px;
-      padding: clamp(22px, 4vw, 38px);
-      margin-top: 10px;
-    }
-
-    .quiz.visible {
-      display: block;
-    }
-
-    .quiz-header {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 18px;
-      margin-bottom: 27px;
-    }
-
-    .quiz-label {
-      color: var(--red-light);
-      text-transform: uppercase;
-      letter-spacing: 1.4px;
-      font-weight: 700;
-      font-size: 10px;
-      margin-bottom: 8px;
-    }
-
-    .quiz-header h2 {
-      font-size: clamp(22px, 3vw, 29px);
-    }
-
-    .quiz-counter {
-      white-space: nowrap;
-      color: var(--muted);
-      font-size: 12px;
-    }
-
-    .progress-track {
-      height: 3px;
-      background: #333;
-      margin-bottom: 27px;
-      border-radius: 4px;
-      overflow: hidden;
-    }
-
-    .progress-fill {
-      height: 100%;
-      width: 0;
-      background: var(--red);
-      transition: width 0.25s ease;
-    }
-
-    .clinical-case {
-      color: #d3d3d3;
-      font-size: 14px;
-      line-height: 1.9;
-      margin-bottom: 25px;
-    }
-
-    .question {
-      font-weight: 600;
-      font-size: 15px;
-      margin-bottom: 18px;
-    }
-
-    .options {
-      display: grid;
-      gap: 10px;
-      margin-bottom: 22px;
-    }
-
-    .option {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      width: 100%;
-      padding: 14px 15px;
-      text-align: left;
-      background: #1b1b1b;
-      border: 1px solid #383838;
-      border-radius: 7px;
-      color: #d5d5d5;
-      cursor: pointer;
-      font-size: 13px;
-      line-height: 1.7;
-      transition: border-color 0.15s ease, background 0.15s ease;
-    }
-
-    .option:hover:not(:disabled) {
-      border-color: #777;
-      background: #222;
-    }
-
-    .option:disabled {
-      cursor: default;
-      opacity: 1;
-    }
-
-    .option-letter {
-      width: 25px;
-      height: 25px;
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid #4a4a4a;
-      border-radius: 5px;
-      font-size: 11px;
-      font-weight: 700;
-    }
-
-    .option.correct {
-      border-color: #367d54;
-      background: #17251c;
-    }
-
-    .option.correct .option-letter {
-      border-color: #367d54;
-      color: var(--success);
-    }
-
-    .option.incorrect {
-      border-color: #8d363b;
-      background: #29191a;
-    }
-
-    .option.incorrect .option-letter {
-      border-color: #8d363b;
-      color: var(--error);
-    }
-
-    .feedback {
-      display: none;
-      border-left: 3px solid #555;
-      background: #1d1d1d;
-      padding: 17px 18px;
-      border-radius: 0 6px 6px 0;
-      margin-bottom: 22px;
-    }
-
-    .feedback.visible {
-      display: block;
-    }
-
-    .feedback.correct-feedback {
-      border-left-color: var(--success);
-    }
-
-    .feedback.incorrect-feedback {
-      border-left-color: var(--error);
-    }
-
-    .feedback h3 {
-      font-size: 15px;
-      margin-bottom: 8px;
-    }
-
-    .feedback p {
-      color: #c8c8c8;
-      font-size: 13px;
-      line-height: 1.85;
-    }
-
-    .feedback .key-point {
-      margin-top: 10px;
-      color: #e6b1b4;
-    }
-
-    .quiz-actions {
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    .primary-button,
-    .secondary-button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 6px;
-      padding: 12px 18px;
-      font-size: 12px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: 0.2s ease;
-    }
-
-    .primary-button {
-      background: var(--red);
-      border: 1px solid var(--red);
-      color: white;
-    }
-
-    .primary-button:hover:not(:disabled) {
-      background: #922029;
-    }
-
-    .primary-button:disabled {
-      opacity: 0.45;
-      cursor: not-allowed;
-    }
-
-    .secondary-button {
-      background: transparent;
-      border: 1px solid #444;
-      color: #ccc;
-    }
-
-    .secondary-button:hover {
-      border-color: #777;
-      color: white;
-    }
-
-    .quiz-result {
-      display: none;
-      padding: 22px 0 5px;
-    }
-
-    .quiz-result.visible {
-      display: block;
-    }
-
-    .quiz-result h3 {
-      font-size: 24px;
-      margin-bottom: 8px;
-    }
-
-    .quiz-result p {
-      color: var(--text);
-      font-size: 14px;
-      margin-bottom: 20px;
-    }
-
-    footer {
-      background: #0c0c0c;
-      border-top: 1px solid #252525;
-      padding: 35px 7%;
-    }
-
-    .footer-inner {
-      max-width: 1180px;
-      margin: auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 22px;
-    }
-
-    .footer-brand {
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 14px;
-      font-weight: 700;
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 25px;
-      color: #999;
-      font-size: 12px;
-    }
-
-    .footer-links a:hover {
-      color: white;
-    }
-
-    button:focus-visible,
-    a:focus-visible {
-      outline: 2px solid #e05a61;
-      outline-offset: 4px;
-    }
-
-    @media (max-width: 800px) {
-      .case-list {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 700px) {
-      nav {
-        min-height: 70px;
-        padding: 0 5%;
-      }
-
-      .logo {
-        height: 32px;
-        max-width: 145px;
-        object-fit: contain;
-      }
-
-      .nav-links {
-        gap: 13px;
-        font-size: 12px;
-      }
-
-      main {
-        padding: 45px 5% 75px;
-      }
-
-      .overview {
-        gap: 8px;
-      }
-
-      .overview-item {
-        padding: 13px 10px;
-      }
-
-      .overview-item strong {
-        font-size: 19px;
-      }
-
-      .overview-item span {
-        font-size: 10px;
-      }
-
-      .quiz-header {
-        flex-direction: column;
-      }
-
-      .footer-inner {
-        align-items: flex-start;
-        flex-direction: column;
-      }
-
-      .footer-links {
-        gap: 20px;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      *,
-      *::before,
-      *::after {
-        scroll-behavior: auto !important;
-        transition: none !important;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Casos clínicos y preguntas | BEYONDERMED</title>
+<meta name="description" content="35 casos clínicos integrados de bacteriología, virulencia, fisiopatología y diagnóstico en BEYONDERMED.">
+<meta name="theme-color" content="#101010">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#101010;--surface:#181818;--hover:#202020;--red:#b3262e;--redlight:#e05a61;--white:#f5f5f5;--text:#c5c5c5;--muted:#929292;--border:#333;--green:#77c69a;--error:#e47d7d}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Inter,sans-serif;background:var(--bg);color:var(--white);line-height:1.65;min-height:100vh;display:flex;flex-direction:column}
+a{color:inherit;text-decoration:none}
+button,input{font:inherit}
+nav{min-height:76px;display:flex;align-items:center;justify-content:space-between;padding:0 7%;border-bottom:1px solid #252525}
+.logo{height:38px;width:auto;display:block}
+.nav-links{display:flex;gap:30px;font-size:14px}
+.nav-links a{color:#b8b8b8}
+.nav-links a:hover,.nav-links a.active{color:white}
+.nav-links a.active{text-decoration:underline;text-decoration-color:var(--red);text-underline-offset:7px}
+main{width:100%;max-width:1180px;margin:0 auto;padding:55px 7% 90px;flex:1}
+.breadcrumb{display:flex;flex-wrap:wrap;gap:9px;color:var(--muted);font-size:12px;margin-bottom:40px}
+.breadcrumb span{color:var(--redlight)}
+.kicker{color:var(--redlight);font-size:12px;text-transform:uppercase;letter-spacing:2px;font-weight:700;margin-bottom:16px}
+h1,h2,h3{font-family:"Space Grotesk",sans-serif;font-weight:600}
+h1{font-size:clamp(35px,5vw,54px);line-height:1.12;letter-spacing:-1.7px;margin-bottom:18px}
+.intro{max-width:740px;color:var(--text);font-size:15px;line-height:1.85;margin-bottom:34px}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:38px}
+.stat{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:15px 18px}
+.stat strong{display:block;font-family:"Space Grotesk",sans-serif;font-size:23px}
+.stat span{font-size:12px;color:var(--muted)}
+.tools{display:flex;gap:12px;margin-bottom:18px}
+.search{width:100%;max-width:390px;background:#171717;border:1px solid #383838;border-radius:6px;padding:11px 13px;color:white;font-size:13px;outline:none}
+.search:focus{border-color:#8d363b}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:25px}
+.filter{border:1px solid #393939;border-radius:6px;padding:8px 13px;background:#171717;color:#c5c5c5;cursor:pointer;font-size:12px}
+.filter:hover{border-color:#777}
+.filter.active{background:#351719;border-color:#8c292f;color:#f1a1a5}
+.case-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.case-card{background:var(--surface);border:1px solid var(--border);border-radius:9px;padding:21px;display:flex;flex-direction:column;align-items:flex-start;min-height:220px;transition:border-color .2s}
+.case-card:hover{border-color:#555}
+.meta{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:15px}
+.tag{border:1px solid #393939;background:#202020;color:#bdbdbd;border-radius:4px;padding:3px 7px;font-size:10px}
+.tag.red{color:#e58b91;border-color:#572529;background:#291719}
+.case-card h3{font-size:19px;line-height:1.35;margin-bottom:8px}
+.case-card p{color:var(--text);font-size:12px;line-height:1.8;margin-bottom:18px}
+.card-bottom{margin-top:auto;width:100%;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.card-bottom small{color:var(--muted);font-size:10px}
+.open-case{border:0;background:none;color:var(--redlight);cursor:pointer;font-size:12px;font-weight:700;padding:6px 0 6px 8px}
+.open-case:hover{color:white}
+.empty{display:none;color:var(--muted);font-size:13px;padding:20px 0}
+.empty.visible{display:block}
+.quiz{display:none;scroll-margin-top:25px;background:#151515;border:1px solid #393939;border-radius:10px;padding:clamp(22px,4vw,38px);margin-top:38px}
+.quiz.visible{display:block}
+.quiz-header{display:flex;justify-content:space-between;gap:18px;margin-bottom:23px}
+.quiz-label{color:var(--redlight);text-transform:uppercase;letter-spacing:1.3px;font-weight:700;font-size:10px;margin-bottom:8px}
+.quiz-header h2{font-size:clamp(22px,3vw,29px)}
+.counter{white-space:nowrap;color:var(--muted);font-size:12px}
+.progress{height:3px;background:#333;margin-bottom:24px;border-radius:4px;overflow:hidden}
+.progress-fill{height:100%;width:0;background:var(--red);transition:width .2s}
+.case-text{color:#d3d3d3;font-size:14px;line-height:1.9;margin-bottom:23px}
+.question{font-size:15px;font-weight:700;margin-bottom:16px}
+.options{display:grid;gap:9px;margin-bottom:21px}
+.option{display:flex;align-items:flex-start;gap:12px;width:100%;padding:13px 14px;text-align:left;background:#1b1b1b;border:1px solid #383838;border-radius:7px;color:#d5d5d5;cursor:pointer;font-size:13px;line-height:1.7}
+.option:hover:not(:disabled){border-color:#777;background:#222}
+.option:disabled{cursor:default;opacity:1}
+.letter{width:25px;height:25px;flex-shrink:0;display:flex;align-items:center;justify-content:center;border:1px solid #4a4a4a;border-radius:5px;font-size:11px;font-weight:700}
+.option.selected{border-color:var(--red)}
+.option.correct{border-color:#367d54;background:#17251c}
+.option.correct .letter{border-color:#367d54;color:var(--green)}
+.option.incorrect{border-color:#8d363b;background:#29191a}
+.option.incorrect .letter{border-color:#8d363b;color:var(--error)}
+.feedback{display:none;border-left:3px solid #555;background:#1d1d1d;padding:16px 18px;border-radius:0 6px 6px 0;margin-bottom:20px}
+.feedback.visible{display:block}
+.feedback.good{border-left-color:var(--green)}
+.feedback.bad{border-left-color:var(--error)}
+.feedback h3{font-size:15px;margin-bottom:7px}
+.feedback p{color:#c8c8c8;font-size:13px;line-height:1.8}
+.feedback .key{margin-top:8px;color:#e6b1b4}
+.actions{display:flex;align-items:center;flex-wrap:wrap;gap:10px}
+.primary,.secondary{display:inline-flex;align-items:center;justify-content:center;border-radius:6px;padding:11px 17px;font-size:12px;font-weight:600;cursor:pointer}
+.primary{background:var(--red);border:1px solid var(--red);color:white}
+.primary:hover:not(:disabled){background:#922029}
+.primary:disabled{opacity:.45;cursor:not-allowed}
+.secondary{background:transparent;border:1px solid #444;color:#ccc}
+.secondary:hover{border-color:#777;color:white}
+.result{display:none;margin-top:18px;padding-top:17px;border-top:1px solid #333}
+.result.visible{display:block}
+.result p{color:var(--text);font-size:13px;margin-bottom:15px}
+.mode-bar{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:18px 20px;margin:0 0 24px;background:#151515;border:1px solid #333;border-radius:8px}
+.mode-copy h2{font-size:17px;margin-bottom:3px}
+.mode-copy p{font-size:12px;color:var(--muted)}
+.mode-actions{display:flex;flex-wrap:wrap;gap:8px}
+.mode-btn{background:#1b1b1b;border:1px solid #414141;color:#ccc;border-radius:6px;padding:10px 13px;font-size:12px;cursor:pointer}
+.mode-btn.active{background:#351719;border-color:#8c292f;color:#f1a1a5}
+.sim-results{display:none;margin-top:35px;padding:clamp(22px,4vw,38px);background:#151515;border:1px solid #393939;border-radius:10px}
+.sim-results.visible{display:block}
+.sim-results h2{font-size:clamp(24px,3vw,32px);margin-bottom:10px}
+.sim-summary{color:var(--text);font-size:14px;margin-bottom:22px}
+.sim-review{display:grid;gap:10px}
+.sim-item{padding:15px 17px;border:1px solid #383838;border-radius:7px;background:#1a1a1a}
+.sim-item summary{cursor:pointer;font-size:13px;font-weight:600}
+.sim-item summary.correct-summary{color:var(--green)}
+.sim-item summary.incorrect-summary{color:var(--error)}
+.sim-item p{font-size:12px;color:#c8c8c8;line-height:1.8;margin-top:12px}
+.sim-item .sim-answer{color:#e6b1b4}
+.mode-hidden{display:none!important}
+footer{background:#0c0c0c;border-top:1px solid #252525;padding:32px 7%}
+.footer-inner{max-width:1180px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:22px}
+.footer-brand{font-family:"Space Grotesk",sans-serif;font-size:14px;font-weight:700}
+.footer-links{display:flex;gap:25px;color:#999;font-size:12px}
+.footer-links a:hover{color:white}
+button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid #e05a61;outline-offset:4px}
+@media(max-width:800px){.case-list{grid-template-columns:1fr}.mode-bar{align-items:flex-start;flex-direction:column}.mode-actions{width:100%}.mode-btn{flex:1}}
+@media(max-width:700px){nav{min-height:70px;padding:0 5%}.logo{height:32px;max-width:145px;object-fit:contain}.nav-links{gap:13px;font-size:12px}main{padding:42px 5% 70px}.stats{gap:7px}.stat{padding:12px 9px}.stat strong{font-size:19px}.stat span{font-size:10px}.quiz-header{flex-direction:column}.footer-inner{align-items:flex-start;flex-direction:column}.footer-links{gap:20px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
 </head>
-
 <body>
-
-  <nav aria-label="Navegación principal">
-    <a href="index.html" aria-label="BEYONDERMED, inicio">
-      <img src="beyondermed-logo.png" alt="BEYONDERMED" class="logo">
-    </a>
-
-    <div class="nav-links">
-      <a href="index.html">Inicio</a>
-      <a href="metodo.html">Método</a>
-      <a href="cursos.html" class="active">Cursos</a>
+<nav aria-label="Navegación principal">
+  <a href="index.html" aria-label="BEYONDERMED, inicio"><img src="beyondermed-logo.png" alt="BEYONDERMED" class="logo"></a>
+  <div class="nav-links"><a href="index.html">Inicio</a><a href="metodo.html">Método</a><a href="cursos.html" class="active">Cursos</a></div>
+</nav>
+<main>
+  <div class="breadcrumb"><a href="index.html">Inicio</a><span>/</span><a href="cursos.html">Cursos</a><span>/</span><a href="inmunidad-infectologia.html">Inmunidad e Infectología</a><span>/</span><span>Casos clínicos</span></div>
+  <div class="kicker">BEYONDERMED / Aplicación clínica</div>
+  <h1>Casos clínicos y preguntas</h1>
+  <p class="intro">35 casos clínicos para integrar morfología, factores de virulencia, patogenia, clínica y diagnóstico microbiológico. En práctica individual recibirás retroalimentación al responder; en simulacro, las respuestas y explicaciones se mostrarán al finalizar.</p>
+  <div class="stats">
+    <div class="stat"><strong id="case-count">35</strong><span>Casos disponibles</span></div>
+    <div class="stat"><strong>MCQ</strong><span>Opción múltiple</span></div>
+    <div class="stat"><strong>IRMA</strong><span>Razonamiento clínico</span></div>
+  </div>
+  <div class="tools"><input class="search" id="search" type="search" placeholder="Buscar microorganismo, síndrome o tema..." aria-label="Buscar casos"></div>
+  <div class="mode-bar">
+    <div class="mode-copy"><h2>Modo de estudio</h2><p>Elige práctica por casos o un simulacro completo.</p></div>
+    <div class="mode-actions"><button id="practice-mode" class="mode-btn active" type="button" aria-pressed="true">Práctica individual</button><button id="simulation-mode" class="mode-btn" type="button" aria-pressed="false">Simulacro · 35 casos</button></div>
+  </div>
+  <div class="filters" aria-label="Filtrar por área">
+    <button class="filter active" data-filter="todos" aria-pressed="true">Todos</button>
+    <button class="filter" data-filter="e-coli" aria-pressed="false">E. coli</button>
+    <button class="filter" data-filter="enterobacterales" aria-pressed="false">Otros Enterobacterales</button>
+    <button class="filter" data-filter="gram-positive-cocci" aria-pressed="false">Cocos grampositivos</button>
+    <button class="filter" data-filter="gram-negative-cocci" aria-pressed="false">Cocos gramnegativos</button>
+    <button class="filter" data-filter="other-bacteria" aria-pressed="false">Otros patógenos</button>
+  </div>
+  <section class="case-list" id="case-list" aria-label="Casos clínicos"></section>
+  <p class="empty" id="empty">No se encontraron casos con ese filtro o búsqueda.</p>
+  <section class="quiz" id="quiz" aria-labelledby="quiz-title">
+    <div class="quiz-header">
+      <div><div class="quiz-label" id="quiz-label">CASO CLÍNICO</div><h2 id="quiz-title">Caso</h2></div>
+      <div class="counter" id="quiz-counter">Caso 1 de 35</div>
     </div>
-  </nav>
+    <div class="progress"><div class="progress-fill" id="progress-fill"></div></div>
+    <p class="case-text" id="case-text"></p>
+    <p class="question" id="question"></p>
+    <div class="options" id="options"></div>
+    <div class="feedback" id="feedback" aria-live="polite"><h3 id="feedback-title"></h3><p id="feedback-text"></p><p class="key" id="key-point"></p></div>
+    <div class="actions" id="actions"><button class="primary" id="check" disabled>Comprobar respuesta</button><button class="secondary" id="close">Cerrar caso</button></div>
+    <div class="result" id="result" aria-live="polite"><p id="result-text"></p><div class="actions"><button class="primary" id="next">Siguiente caso →</button><button class="secondary" id="back-to-list">Volver a los casos</button></div></div>
+  </section>
+  <section class="sim-results" id="sim-results" aria-labelledby="sim-results-title">
+    <div class="kicker">SIMULACRO FINALIZADO</div>
+    <h2 id="sim-results-title">Resultados del simulacro</h2>
+    <p class="sim-summary" id="sim-summary"></p>
+    <div class="sim-review" id="sim-review"></div>
+    <div class="actions" style="margin-top:22px"><button class="primary" id="return-practice" type="button">Volver a práctica individual</button><button class="secondary" id="repeat-simulation" type="button">Repetir simulacro</button></div>
+  </section>
+</main>
+<footer><div class="footer-inner"><div class="footer-brand">BEYONDERMED</div><div class="footer-links"><a href="index.html">Inicio</a><a href="metodo.html">Método</a><a href="cursos.html">Cursos</a></div></div></footer>
+<script>
+const cases = [
+  {"organism":"E. coli · STEC","group":"e-coli","difficulty":"Alta","stem":"Un niño de 6 años presenta cólicos abdominales intensos y diarrea que progresa de acuosa a sanguinolenta tras consumir una hamburguesa poco cocida. No tiene fiebre alta. Días después desarrolla palidez, oliguria y petequias. El frotis muestra esquistocitos y la creatinina está elevada. En heces se detecta una cepa de E. coli con stx2 y un fenotipo compatible con STEC.","question":"¿Qué evento conecta de forma más directa la infección intestinal con la lesión renal?","options":["La toxina se une a Gb3 e inhibe la síntesis proteica en células susceptibles","La bacteria invade el citoplasma y se propaga entre enterocitos mediante actina","Una enterotoxina eleva el AMPc y causa pérdida de agua sin lesión endotelial","La ureasa alcaliniza la orina y favorece la obstrucción por estruvita"],"correct":0,"explanation":"El cuadro corresponde a una infección por E. coli productora de toxina Shiga, complicada con síndrome urémico hemolítico. La toxina se une al receptor Gb3 de células susceptibles e inhibe la síntesis proteica, favoreciendo lesión endotelial, microtrombos y daño renal. La combinación de anemia hemolítica microangiopática, trombocitopenia y lesión renal aguda es el patrón clínico clave. La diarrea puede comenzar acuosa y hacerse sanguinolenta antes de aparecer las alteraciones hematológicas y renales.","key":"La tríada anemia hemolítica microangiopática + trombocitopenia + lesión renal aguda tras diarrea hemorrágica es una asociación clásica con STEC.","title":"Caso 01","summary":"Caso clínico integrado: interpreta los datos antes de elegir la mejor respuesta.","number":1},
+  {"organism":"E. coli · ETEC","group":"e-coli","difficulty":"Alta","stem":"Un estudiante de 21 años desarrolla diarrea acuosa abundante, cólicos y náuseas tres días después de llegar a otro país. No tiene fiebre alta ni sangre en las heces. El estudio molecular detecta factores de colonización y dos enterotoxinas de E. coli. En ensayos celulares, una aumenta la actividad de adenilato ciclasa y la otra estimula guanilato ciclasa C.","question":"¿Qué alteración fisiológica explica mejor la pérdida de líquidos?","options":["Aumento de AMPc y GMPc, con estimulación de la secreción intestinal","Invasión del epitelio colónico con destrucción tisular","Lesión endotelial microvascular por inhibición de la síntesis proteica","Adhesión íntima con borramiento de microvellosidades"],"correct":0,"explanation":"ETEC causa diarrea secretora mediante enterotoxinas. LT activa la adenilato ciclasa y aumenta el AMPc; ST activa la guanilato ciclasa C y aumenta el GMPc. Estos segundos mensajeros alteran el transporte de electrolitos y favorecen la secreción de agua hacia la luz intestinal. Como el mecanismo principal no requiere invasión ni destrucción de la mucosa, puede haber una diarrea muy abundante sin sangre ni inflamación intensa.","key":"La pérdida de agua puede ser grave sin sangre en las heces: el patrón apunta a una diarrea secretora.","title":"Caso 02","summary":"Caso clínico integrado: interpreta los datos antes de elegir la mejor respuesta.","number":2},
+  {"organism":"E. coli · EPEC","group":"e-coli","difficulty":"Alta","stem":"Un lactante de 8 meses presenta diarrea acuosa prolongada y pérdida de peso durante un brote en una sala cuna. Una cepa de E. coli es eae positiva y bfp positiva, pero stx negativa. En el estudio de la mucosa se observa pérdida de microvellosidades y pedestales debajo de las bacterias, sin invasión citoplasmática significativa.","question":"¿Qué proceso explica mejor la lesión observada?","options":["Translocación de Tir, unión de intimina y reorganización del citoesqueleto","Unión de toxina Shiga a Gb3 e inhibición ribosomal","Producción de LT y activación de adenilato ciclasa","Escape de la vacuola y diseminación intracelular mediada por actina"],"correct":0,"explanation":"EPEC produce lesiones de adhesión y borramiento. Tras la adhesión inicial, su sistema de secreción tipo III introduce Tir en la membrana del enterocito; la intimina bacteriana se une a Tir y desencadena reorganización de actina, formación de pedestales y pérdida de microvellosidades. La disminución de la superficie absorbente y la alteración de la barrera contribuyen a la diarrea acuosa. Esto es distinto de STEC, cuyo daño sistémico se relaciona principalmente con la toxina Shiga, y de EIEC, que invade las células.","key":"EPEC se asocia con lesión de adhesión y borramiento; la invasión intracelular no es su mecanismo definitorio.","title":"Caso 03","summary":"Caso clínico integrado: interpreta los datos antes de elegir la mejor respuesta.","number":3},
+  {"organism":"E. coli · UPEC","group":"e-coli","difficulty":"Alta","stem":"Una mujer de 29 años presenta fiebre, escalofríos, vómitos y dolor lumbar con puñopercusión positiva. El urocultivo identifica E. coli. En un ensayo de virulencia, una adhesina del aislamiento se une a receptores globosídicos del uroepitelio renal; otra adhesina reconoce residuos de manosa y participa en la colonización vesical.","question":"¿Qué factor se relaciona más directamente con la unión a receptores globosídicos y con cepas asociadas a infección urinaria alta?","options":["Fimbrias tipo 1 mediante FimH","Fimbrias P mediante adhesinas Pap","Intimina mediante unión a Tir","Fimbrias de adherencia agregativa"],"correct":1,"explanation":"Las fimbrias P de UPEC reconocen receptores globosídicos y se asocian con cepas capaces de producir pielonefritis. Las fimbrias tipo 1, mediante FimH, reconocen residuos de manosa y participan especialmente en la adhesión a células de la vejiga. La adhesión ayuda a evitar el arrastre por el flujo urinario y facilita la colonización; la pielonefritis aparece cuando la infección asciende al tracto urinario superior.","key":"Distingue los receptores: FimH se une a manosa; las fimbrias P reconocen receptores globosídicos.","title":"Caso 04","summary":"Caso clínico integrado: interpreta los datos antes de elegir la mejor respuesta.","number":4},
+  {"organism":"Salmonella Typhi","group":"enterobacterales","difficulty":"Alta","stem":"Un viajero presenta fiebre progresiva durante nueve días, cefalea, malestar intenso, dolor abdominal y hepatoesplenomegalia. El hemocultivo identifica Salmonella enterica serovar Typhi. En un modelo celular, el microorganismo permanece viable dentro de macrófagos y mantiene capacidad de diseminación sistémica.","question":"¿Qué estrategia de virulencia contribuye de forma más directa a esa fase intracelular?","options":["Sistema de secreción que permite remodelar la vacuola y sostener la supervivencia intracelular","Adhesión inicial mediante intimina a receptores Tir","Producción de enterotoxinas que aumentan AMPc y GMPc","Producción de ureasa y alcalinización del medio"],"correct":0,"explanation":"S. Typhi puede atravesar la mucosa intestinal, ser captada por fagocitos y diseminarse hacia tejidos del sistema reticuloendotelial. Su supervivencia intracelular depende de efectores bacterianos que modifican el compartimento donde queda contenida la bacteria y limitan su eliminación. Esto ayuda a explicar por qué la fiebre tifoidea es una enfermedad sistémica y no solamente una gastroenteritis. El diagnóstico temprano se apoya en hemocultivos, cuyo rendimiento depende del momento de la enfermedad y de la exposición previa a antibióticos.","key":"La fiebre entérica se distingue de una gastroenteritis simple por la capacidad de producir infección sistémica.","title":"Caso 05","summary":"Caso clínico integrado: interpreta los datos antes de elegir la mejor respuesta.","number":5},
+  {"organism":"Shigella spp.","group":"enterobacterales","difficulty":"Alta","stem":"Un niño presenta fiebre, tenesmo y deposiciones pequeñas con sangre, moco y abundantes leucocitos. El coprocultivo muestra bacilos gramnegativos inmóviles, no fermentadores de lactosa y sin producción de H₂S. El cuadro aparece en un entorno con transmisión rápida entre contactos estrechos.","question":"¿Cuál es la interpretación etiológica más consistente?","options":["Shigella spp., agente invasivo del colon con transmisión fecal-oral eficiente","Salmonella no tifoidea, habitualmente móvil y productora de H₂S","ETEC, que causa diarrea secretora sin lesión inflamatoria predominante","Proteus mirabilis, asociado a motilidad intensa y ureasa"],"correct":0,"explanation":"El patrón de disentería, junto con bacilos inmóviles y H₂S negativos, favorece Shigella. La invasión del epitelio colónico produce inflamación, tenesmo y deposiciones de pequeño volumen con sangre y moco. Shigella tiene una dosis infectiva baja, de modo que la transmisión interpersonal puede ser eficiente en guarderías y espacios hacinados. Estos hallazgos orientan la identificación, pero deben integrarse con pruebas confirmatorias del laboratorio.","key":"Shigella puede transmitirse entre personas con una dosis infectiva baja y provocar colitis inflamatoria.","title":"Caso 06","summary":"Caso clínico integrado: interpreta los datos antes de elegir la mejor respuesta.","number":6},
+  {"organism":"Klebsiella pneumoniae hipervirulenta","group":"enterobacterales","difficulty":"Alta","stem":"Un hombre de 51 años, previamente independiente, presenta fiebre y dolor en hipocondrio derecho. La tomografía muestra un absceso hepático y posteriormente desarrolla endoftalmitis. El cultivo identifica un bacilo gramnegativo encapsulado, inmóvil y fermentador de lactosa, con fenotipo hipermucoviscoso.","question":"¿Qué interpretación integra mejor el cuadro invasivo y metastásico?","options":["Klebsiella pneumoniae con fenotipo hipervirulento","Klebsiella oxytoca como causa típica de colitis hemorrágica asociada a antibióticos","Proteus mirabilis con infección urinaria obstructiva","E. coli enterotoxigénica con diseminación extraintestinal típica"],"correct":0,"explanation":"Algunas cepas hipervirulentas de K. pneumoniae causan absceso hepático y focos metastásicos, incluida endoftalmitis, incluso en personas sin una exposición hospitalaria típica. La cápsula y sideróforos como aerobactina contribuyen a la evasión inmunitaria y a la obtención de hierro durante la infección. La hipermucoviscosidad apoya la sospecha, pero no define por sí sola toda la hipervirulencia; deben distinguirse los factores de virulencia de los mecanismos de resistencia antimicrobiana.","key":"Absceso hepático más endoftalmitis es una asociación importante con K. pneumoniae hipervirulenta.","title":"Caso 07","summary":"Caso clínico integrado: interpreta los datos antes de elegir la mejor respuesta.","number":7},
+  {"organism":"Proteus mirabilis","group":"enterobacterales","difficulty":"Alta","stem":"Un hombre con infecciones urinarias recurrentes presenta dolor en flanco y fiebre. La orina tiene pH elevado y la imagen revela un cálculo coraliforme compuesto por estruvita. El cultivo muestra un bacilo gramnegativo móvil, ureasa positivo, H₂S positivo, no fermentador de lactosa e indol negativo, con expansión en ondas sobre agar sangre.","question":"¿Qué proceso explica mejor la relación entre el microorganismo y la persistencia de la infección?","options":["La ureasa alcaliniza la orina, favorece la precipitación de estruvita y contribuye a un foco persistente","La toxina Shiga lesiona el endotelio renal y forma los cálculos","La cápsula causa hipermucoviscosidad y abscesos metastásicos","LT y ST alteran el transporte intestinal y generan cálculos urinarios"],"correct":0,"explanation":"P. mirabilis produce ureasa, que hidroliza urea y genera amoníaco; esto eleva el pH urinario y favorece la precipitación de estruvita. Los cálculos pueden obstruir el flujo, servir como reservorio bacteriano y mantener infecciones recurrentes. La motilidad intensa y el fenómeno de swarming apoyan la identificación del género; el indol negativo ayuda a distinguir P. mirabilis de P. vulgaris, que suele ser indol positivo.","key":"Ureasa + orina alcalina + estruvita vincula la bioquímica bacteriana con la litiasis infecciosa.","title":"Caso 08","summary":"Caso clínico integrado: interpreta los datos antes de elegir la mejor respuesta.","number":8},
+  {"organism":"Yersinia enterocolitica","group":"enterobacterales","difficulty":"Alta","stem":"Un adolescente presenta fiebre, diarrea y dolor intenso en fosa ilíaca derecha tras consumir cerdo poco cocido. La imagen muestra adenitis mesentérica sin inflamación apendicular. El aislamiento es un bacilo gramnegativo ureasa positivo, móvil a 25 °C pero inmóvil a 37 °C.","question":"¿Qué mecanismo permite al microorganismo interferir con la respuesta celular del huésped?","options":["Efectores bacterianos que alteran la señalización e inhiben la fagocitosis","Toxina Shiga que inhibe la síntesis proteica en el endotelio","Interacción intimina–Tir que produce lesión de adhesión y borramiento","Enterotoxinas LT y ST que activan segundos mensajeros intestinales"],"correct":0,"explanation":"Y. enterocolitica invade la mucosa del íleon terminal y puede alcanzar ganglios mesentéricos, causando enterocolitis y seudoapendicitis. Sus efectores Yop interfieren con la señalización de las células del huésped y dificultan la fagocitosis. La motilidad dependiente de la temperatura y la ureasa positiva apoyan la identificación en el contexto adecuado. La exposición a cerdo poco cocido es una pista epidemiológica importante, pero el diagnóstico se confirma mediante pruebas microbiológicas.","key":"Yersinia puede simular apendicitis por ileítis terminal y adenitis mesentérica.","title":"Caso 09","summary":"Caso clínico integrado: interpreta los datos antes de elegir la mejor respuesta.","number":9},
+  {"organism":"Citrobacter koseri","group":"enterobacterales","difficulty":"Alta","stem":"Un recién nacido desarrolla meningitis y convulsiones focales. La neuroimagen revela lesiones cavitadas múltiples compatibles con abscesos cerebrales. El LCR identifica un bacilo gramnegativo móvil; el aislamiento es indol positivo y no produce H₂S.","question":"¿Qué especie integra mejor el cuadro clínico y el perfil bioquímico?","options":["Citrobacter koseri","Citrobacter freundii","Morganella morganii","Enterobacter cloacae complex"],"correct":0,"explanation":"C. koseri se asocia especialmente con meningitis neonatal complicada por cerebritis y abscesos cerebrales. Su perfil de indol positivo y H₂S negativo ayuda a diferenciarlo de C. freundii, que con frecuencia es indol negativo y produce H₂S. La afectación del sistema nervioso central puede dejar secuelas neurológicas importantes, por lo que reconocer esta asociación clínica resulta relevante. La especie debe confirmarse con un método de identificación fiable.","key":"Meningitis neonatal con abscesos cerebrales es una asociación característica de C. koseri.","title":"Caso 10","summary":"Caso clínico integrado: interpreta los datos antes de elegir la mejor respuesta.","number":10},
+  {"organism":"E. coli · EAEC","group":"e-coli","difficulty":"Alta","stem":"Un niño de 3 años presenta diarrea acuosa y mucosa durante casi tres semanas, distensión abdominal y pérdida de peso. No tiene fiebre alta ni sangre persistente. El estudio de adherencia revela agrupaciones bacterianas sobre el epitelio intestinal y una matriz extracelular que favorece la permanencia en la mucosa.","question":"¿Qué estrategia de colonización explica mejor la persistencia?","options":["Adherencia agregativa y formación de biopelícula","Invasión intracelular seguida de propagación mediante actina","Toxina Shiga con lesión microvascular","Lesión de adhesión y borramiento dependiente de intimina-Tir"],"correct":0,"explanation":"EAEC puede producir adherencia agregativa y formar biopelícula, manteniendo una interacción prolongada con la mucosa intestinal. Sus adhesinas y otros factores pueden contribuir a una diarrea persistente y a consecuencias nutricionales, especialmente en niños vulnerables. La invasión intracelular no define este patotipo, y la ausencia de sangre y de un cuadro inflamatorio intenso hace menos probable una disentería invasiva. La identificación molecular debe interpretarse junto con el síndrome clínico.","key":"Diarrea persistente con adherencia agregativa orienta a EAEC.","title":"Caso 11","summary":"Caso clínico integrado: interpreta los datos antes de elegir la mejor respuesta.","number":11},
+  {"organism":"E. coli · EIEC","group":"e-coli","difficulty":"Alta","stem":"Un adulto presenta fiebre, tenesmo y diarrea con sangre y moco. Se identifica E. coli; el panel molecular no detecta genes stx. En un modelo celular, la bacteria invade células del epitelio colónico, escapa de la vacuola, se multiplica en el citoplasma y alcanza células vecinas.","question":"¿Qué proceso explica mejor la lesión inflamatoria intestinal?","options":["Invasión del epitelio colónico y diseminación intracelular entre células","Secreción de enterotoxinas que elevan AMPc y GMPc sin invasión","Adherencia agregativa sin invasión como rasgo definitorio","Producción de ureasa con alcalinización urinaria"],"correct":0,"explanation":"EIEC produce un síndrome disentérico mediante invasión del epitelio colónico, supervivencia intracelular y diseminación entre células, con destrucción tisular e inflamación. La presentación puede ser difícil de distinguir clínicamente de shigelosis porque ambos agentes comparten estrategias invasivas. La ausencia de genes stx reduce la probabilidad de STEC, aunque la identificación debe integrar el panel molecular y las pruebas microbiológicas disponibles.","key":"EIEC se caracteriza por invasión y colitis inflamatoria, no por secreción aislada de enterotoxinas.","title":"Caso 12","summary":"Caso clínico integrado: interpreta los datos antes de elegir la mejor respuesta.","number":12},
+  {"organism":"Salmonella no tifoidea","group":"enterobacterales","difficulty":"Alta","stem":"Un adolescente con drepanocitosis presenta fiebre y dolor focal en el fémur. La resonancia sugiere osteomielitis y los hemocultivos identifican un bacilo gramnegativo móvil. Una semana antes tuvo gastroenteritis tras consumir huevos poco cocidos. No hay herida, prótesis ni cirugía en la zona afectada.","question":"¿Qué agente debe considerarse especialmente por la asociación con la enfermedad de base?","options":["Salmonella enterica no tifoidea","Salmonella Typhi","Shigella sonnei","Klebsiella oxytoca"],"correct":0,"explanation":"La salmonelosis no tifoidea puede producir bacteriemia e infecciones focales, incluida osteomielitis, y tiene una asociación clásica con la drepanocitosis. La gastroenteritis previa puede preceder a la diseminación hematógena. Staphylococcus aureus sigue siendo una causa frecuente de osteomielitis, pero la drepanocitosis, la enteritis reciente y el aislamiento de un bacilo gramnegativo hacen especialmente importante considerar Salmonella no tifoidea.","key":"Drepanocitosis + antecedente de enteritis + osteomielitis es una asociación clínica relevante para Salmonella no tifoidea.","title":"Caso 13","summary":"Caso clínico integrado: interpreta los datos antes de elegir la mejor respuesta.","number":13},
+  {"organism":"Shigella spp.","group":"enterobacterales","difficulty":"Alta","stem":"En un refugio con hacinamiento aparecen varios casos de diarrea febril. Los pacientes presentan tenesmo y heces de pequeño volumen con sangre y moco. Los aislamientos son bacilos gramnegativos inmóviles, H₂S negativos y predominantemente no fermentadores de lactosa. La transmisión ocurre entre contactos estrechos sin que todos compartan un mismo alimento.","question":"¿Qué característica epidemiológica explica mejor la propagación?","options":["Dosis infectiva baja y transmisión fecal-oral eficiente","Necesidad de una carga bacteriana muy elevada en alimentos","Transmisión principalmente por picaduras de vectores","Dependencia de dispositivos invasivos y biopelícula hospitalaria"],"correct":0,"explanation":"Shigella tiene una dosis infectiva baja, por lo que la transmisión fecal-oral interpersonal puede ser eficiente en espacios hacinados. La invasión del colon causa inflamación, tenesmo y disentería. La morfología y los resultados bioquímicos orientan al género, pero la confirmación requiere pruebas microbiológicas adecuadas. El control de contactos, la higiene de manos y el saneamiento son fundamentales durante los brotes.","key":"La dosis infectiva baja de Shigella facilita los brotes interpersonales.","title":"Caso 14","summary":"Caso clínico integrado: interpreta los datos antes de elegir la mejor respuesta.","number":14},
+  {"organism":"Serratia marcescens","group":"enterobacterales","difficulty":"Alta","stem":"En una UCI aparecen varios casos de bacteriemia asociada a catéter. Los aislamientos son bacilos gramnegativos móviles, oxidasa negativos, DNasa positivos y con utilización tardía de lactosa. Algunos cultivos muestran pigmento rojizo a temperatura ambiente, pero otros no presentan pigmentación visible.","question":"¿Cuál es la interpretación más adecuada de estos hallazgos?","options":["Serratia marcescens es plausible; el pigmento apoya la identificación, pero su ausencia no la descarta","La ausencia de pigmento excluye Serratia marcescens","La oxidasa negativa confirma por sí sola Klebsiella pneumoniae","La resistencia hospitalaria demuestra infección por Pseudomonas aeruginosa"],"correct":0,"explanation":"Serratia marcescens es un oportunista asociado a infecciones hospitalarias, incluidas bacteriemias vinculadas a dispositivos. Algunas cepas producen prodigiosina, un pigmento rojo cuya expresión depende de la cepa y de las condiciones de cultivo; por eso, la ausencia de pigmento no excluye la especie. La oxidasa negativa y la DNasa positiva aportan información útil, pero la identificación debe integrar el perfil bioquímico o un método automatizado/molecular. Perla clínica: no conviertas una característica fenotípica variable en una regla absoluta de exclusión.","key":"La prodigiosina puede apoyar la identificación de Serratia, pero no todas las cepas la expresan.","title":"Caso 15","summary":"Caso clínico integrado: interpreta los datos antes de elegir la mejor respuesta.","number":15},
+  {"organism":"Enterobacter cloacae complex","group":"enterobacterales","difficulty":"Alta","stem":"Un paciente hospitalizado presenta bacteriemia. El primer aislamiento de Enterobacter cloacae complex parece susceptible a ceftriaxona, pero tras varios días se obtiene un aislamiento del mismo clon con sensibilidad disminuida. No se demuestra adquisición de una nueva β-lactamasa plasmídica y el informe destaca un mecanismo de resistencia cromosómico inducible.","question":"¿Qué explicación debe considerarse prioritariamente?","options":["Inducción o desrepresión de AmpC con resistencia emergente a determinados β-lactámicos","Producción de toxina Shiga inducida por ceftriaxona","Conversión de la bacteria a una forma grampositiva","Pérdida de flagelos que impide que el antibiótico alcance su diana"],"correct":0,"explanation":"E. cloacae complex puede expresar β-lactamasa AmpC cromosómica inducible. Durante la exposición a ciertos β-lactámicos puede seleccionarse una subpoblación con mayor expresión de la enzima, produciendo resistencia emergente. Por ello, la susceptibilidad inicial a algunas cefalosporinas debe interpretarse con cautela en infecciones invasivas por este complejo. La decisión antimicrobiana requiere considerar gravedad, foco, antibiograma actualizado y recomendaciones vigentes. Perla clínica: la identificación a nivel de especie o complejo puede influir en cómo se interpreta un antibiograma.","key":"AmpC puede generar resistencia emergente durante exposición a ciertos β-lactámicos.","title":"Caso 16","summary":"Caso clínico integrado: interpreta los datos antes de elegir la mejor respuesta.","number":16},
+  {"organism":"Morganella morganii","group":"enterobacterales","difficulty":"Alta","stem":"Un adulto mayor con sonda urinaria crónica presenta orina alcalina y la bolsa colectora se vuelve violeta, sin hematuria visible en la muestra recién obtenida. El cultivo identifica Morganella morganii: bacilo gramnegativo móvil, indol positivo, ureasa positivo y H₂S negativo. El paciente tiene estreñimiento crónico y episodios previos de bacteriuria.","question":"¿Qué proceso genera principalmente la coloración violeta de la bolsa?","options":["Transformación de metabolitos urinarios derivados del triptófano en índigo e indirubina","Producción obligatoria de prodigiosina dentro de la vejiga","Acumulación de hemoglobina por hemólisis intravascular","Depósito de bilirrubina por obstrucción biliar"],"correct":0,"explanation":"En el síndrome de la bolsa urinaria púrpura, el indoxil sulfato urinario puede ser transformado por enzimas bacterianas en índigo e indirubina; la mezcla de pigmentos azules y rojizos genera la tonalidad violeta. Se asocia con bacteriuria, catéteres y, con frecuencia, estreñimiento; se han implicado Morganella, Providencia y otros microorganismos, por lo que el color no identifica una especie concreta. Perla clínica: la coloración de la bolsa no equivale a hematuria y debe interpretarse junto con síntomas, cultivo y estado del paciente.","key":"El color violeta se debe a pigmentos derivados del indoxil sulfato, no a sangre en la orina.","title":"Caso 17","summary":"Caso clínico integrado: interpreta los datos antes de elegir la mejor respuesta.","number":17},
+  {"organism":"Klebsiella oxytoca","group":"enterobacterales","difficulty":"Alta","stem":"Una mujer desarrolla dolor abdominal cólico y diarrea sanguinolenta pocos días después de recibir amoxicilina-clavulánico. Está afebril y la imagen/endoscopia sugiere colitis segmentaria. Las pruebas para Clostridioides difficile son negativas. En heces se recupera Klebsiella oxytoca y se demuestra capacidad del aislamiento de producir metabolitos citotóxicos.","question":"¿Cuál es la interpretación etiológica más consistente?","options":["Colitis hemorrágica asociada a Klebsiella oxytoca","Colitis pseudomembranosa confirmada por C. difficile pese a pruebas negativas","Diarrea secretora clásica por ETEC","Disentería invasiva por Shigella como explicación de la asociación a antibióticos"],"correct":0,"explanation":"K. oxytoca puede proliferar después de que los antibióticos alteran la microbiota intestinal y algunas cepas producen metabolitos citotóxicos, como tilivallina, asociados a colitis hemorrágica. La relación temporal con el antibiótico, la diarrea sanguinolenta y la colitis segmentaria apoyan el diagnóstico. Aun así, el aislamiento fecal por sí solo no prueba causalidad, porque puede existir colonización; debe integrarse con el síndrome y la evidencia de toxigenicidad. Perla clínica: diarrea tras antibióticos no equivale automáticamente a infección por C. difficile.","key":"La colitis hemorrágica por K. oxytoca es una causa menos frecuente pero relevante de diarrea asociada a antibióticos.","title":"Caso 18","summary":"Caso clínico integrado: interpreta los datos antes de elegir la mejor respuesta.","number":18},
+  {"organism":"Yersinia enterocolitica","group":"enterobacterales","difficulty":"Alta","stem":"Dos semanas después de un episodio autolimitado de enterocolitis febril tras consumir carne de cerdo poco cocida, un adulto desarrolla artritis asimétrica de rodilla y tobillo y eritema nodoso. El líquido sinovial no muestra evidencia de infección bacteriana directa. Los síntomas digestivos ya han cedido.","question":"¿Qué proceso explica mejor las manifestaciones articulares?","options":["Artritis reactiva posinfecciosa","Artritis séptica por persistencia bacteriana demostrada en la articulación","Fiebre reumática después de una infección intestinal por estreptococo del grupo A","Artritis por cristales de estruvita"],"correct":0,"explanation":"Y. enterocolitica puede causar enterocolitis y, después de que los síntomas intestinales mejoran, desencadenar artritis reactiva y eritema nodoso. La inflamación articular es una complicación posinfecciosa, no necesariamente una invasión bacteriana directa de la articulación. La cronología y la ausencia de evidencia de un agente en el líquido sinovial favorecen ese mecanismo, aunque en la práctica es importante descartar artritis séptica si la presentación lo requiere. Perla clínica: una complicación inmunomediada puede aparecer cuando la infección gastrointestinal ya no es clínicamente evidente.","key":"La artritis reactiva puede aparecer después de la enteritis por Yersinia sin infección directa de la articulación.","title":"Caso 19","summary":"Caso clínico integrado: interpreta los datos antes de elegir la mejor respuesta.","number":19},
+  {"organism":"Salmonella Typhi · portador crónico","group":"enterobacterales","difficulty":"Alta","stem":"Un manipulador de alimentos tuvo fiebre entérica meses atrás y actualmente está asintomático. En coprocultivos separados en el tiempo se recupera Salmonella Typhi. La ecografía muestra cálculos biliares y no hay signos actuales de bacteriemia. La autoridad sanitaria investiga una fuente persistente de transmisión fecal-oral.","question":"¿Qué mecanismo explica mejor la eliminación fecal prolongada?","options":["Persistencia en la vesícula biliar y formación de biopelícula asociada a cálculos biliares","Producción continua de toxina Shiga con lesión endotelial renal","Adhesión al uroepitelio por FimH y ascenso a la vejiga","Formación de pedestales de actina mediante intimina–Tir"],"correct":0,"explanation":"S. Typhi puede persistir en la vesícula biliar después de la resolución clínica de la fiebre entérica y eliminarse de forma intermitente en heces. Los cálculos biliares pueden favorecer la formación de biopelícula y proporcionar un entorno para la persistencia bacteriana. Un portador crónico puede estar asintomático y aun así transmitir el microorganismo mediante contaminación fecal de agua o alimentos. Perla clínica: la mejoría clínica no demuestra eliminación microbiológica; el estado de portador tiene relevancia epidemiológica.","key":"S. Typhi puede persistir en la vesícula biliar y mantener transmisión fecal-oral sin síntomas.","title":"Caso 20","summary":"Caso clínico integrado: interpreta los datos antes de elegir la mejor respuesta.","number":20},
+  {"organism":"S. aureus","group":"gram-positive-cocci","difficulty":"Media-alta","stem":"Un hombre de 42 años desarrolla una lesión dolorosa y fluctuante en el muslo tras una pequeña herida. Contiene abundante pus y se observa una acumulación localizada de fibrina en el tejido. La tinción muestra cocos grampositivos en racimos; el aislamiento es catalasa positivo y coagulasa positivo.","question":"¿Qué factor de virulencia contribuye directamente a la formación de fibrina alrededor del foco?","options":["Coagulasa, que favorece la conversión de fibrinógeno en fibrina","Proteína A, que se une a la región Fc de IgG","Leucocidina, que forma poros en células inmunitarias","Hialuronidasa, que degrada componentes de matriz extracelular"],"correct":0,"explanation":"S. aureus es un coco grampositivo en racimos, catalasa y coagulasa positivo. La coagulasa favorece la formación de fibrina y contribuye a la organización del absceso, aunque el pus y la necrosis resultan de la interacción entre bacterias, neutrófilos y daño tisular. La proteína A interfiere con la opsonización al unirse a la región Fc de IgG, mientras que ciertas leucocidinas dañan células inmunitarias. Perla clínica: en abscesos cutáneos purulentos, el drenaje del foco suele ser una parte importante del manejo, además de evaluar la necesidad de antibióticos.","key":"Catalasa y coagulasa ayudan a distinguir S. aureus de los estafilococos coagulasa negativos.","title":"Caso 21","summary":"Caso clínico integrado: interpreta los datos antes de elegir la mejor respuesta.","number":21},
+  {"organism":"S. aureus","group":"gram-positive-cocci","difficulty":"Alta","stem":"Una mujer presenta fiebre elevada, hipotensión, vómitos, diarrea y exantema eritematoso difuso. Posteriormente aparece descamación en palmas y plantas. No se identifica un foco bacteriémico claro; la evaluación descubre una infección por S. aureus asociada a un dispositivo intravaginal utilizado durante muchas horas.","question":"¿Qué mecanismo explica mejor la afectación sistémica desproporcionada?","options":["Activación policlonal masiva de linfocitos T y liberación intensa de citocinas","Liberación de lipopolisacárido desde la membrana externa bacteriana","Anticuerpos que reaccionan de forma cruzada con tejido cardíaco","Inhibición de síntesis proteica por lesión del ARN ribosomal"],"correct":0,"explanation":"El síndrome de shock tóxico estafilocócico puede ser producido por una toxina superantigénica, como TSST-1. El superantígeno conecta MHC II y receptores de linfocitos T fuera del reconocimiento antigénico convencional, activando un gran número de linfocitos y liberando citocinas. Esto produce fiebre, exantema, hipotensión y disfunción multiorgánica; los hemocultivos pueden ser negativos porque la toxicidad no exige bacteriemia persistente. Perla clínica: el control del foco y la estabilización hemodinámica son urgentes.","key":"El shock tóxico estafilocócico es mediado por superantígenos, no por LPS.","title":"Caso 22","summary":"Caso clínico integrado: interpreta los datos antes de elegir la mejor respuesta.","number":22},
+  {"organism":"S. aureus","group":"gram-positive-cocci","difficulty":"Media-alta","stem":"Varias personas presentan vómitos intensos y cólicos unas tres horas después de consumir crema pastelera que permaneció varias horas a temperatura ambiente. La enfermedad dura poco y no predomina la fiebre. Del alimento se recuperan cocos grampositivos en racimos, catalasa positivos y coagulasa positivos.","question":"¿Qué propiedad del mecanismo tóxico explica mejor el inicio tan rápido?","options":["Ingestión de enterotoxina preformada en el alimento","Colonización intestinal seguida de producción progresiva de toxina","Invasión del epitelio con replicación intracelular","Bacteriemia establecida antes de la liberación de toxina"],"correct":0,"explanation":"La intoxicación alimentaria por S. aureus se debe a enterotoxinas producidas en el alimento antes de su ingestión. La presencia de toxina preformada explica el periodo de incubación corto y el predominio de náuseas y vómitos; no se necesita invasión intestinal ni multiplicación sistémica en el paciente. Algunas enterotoxinas son relativamente termoestables, de modo que recalentar el alimento puede no eliminar el riesgo. Perla clínica: inicio en pocas horas y varios comensales afectados sugieren intoxicación por toxina preformada.","key":"El tiempo de incubación muy corto diferencia una intoxicación por toxina preformada de una infección invasiva.","title":"Caso 23","summary":"Caso clínico integrado: interpreta los datos antes de elegir la mejor respuesta.","number":23},
+  {"organism":"S. pyogenes","group":"gram-positive-cocci","difficulty":"Alta","stem":"Una persona tuvo faringitis febril hace tres semanas. Ahora presenta poliartritis migratoria, fiebre y un soplo cardíaco nuevo. El cultivo faríngeo es negativo, pero los títulos de antiestreptolisina O están elevados. No hay evidencia de infección bacteriana activa en la articulación.","question":"¿Qué proceso explica mejor las manifestaciones cardíacas y articulares?","options":["Respuesta inmunitaria cruzada contra tejidos del huésped tras infección por estreptococo del grupo A","Invasión persistente de las articulaciones por bacterias vivas","Depósito renal de complejos inmunes como mecanismo principal de la carditis","Efecto directo de una enterotoxina sobre el miocardio"],"correct":0,"explanation":"La fiebre reumática puede aparecer semanas después de una faringitis por S. pyogenes. La similitud entre antígenos estreptocócicos y componentes del huésped favorece una respuesta inmunitaria cruzada que puede afectar válvulas cardíacas y articulaciones. Por eso, un cultivo faríngeo negativo no excluye la complicación tardía, mientras que la evidencia serológica puede apoyar una infección previa. No es una artritis séptica: las manifestaciones son inflamatorias e inmunomediadas. Perla clínica: prevenir y tratar adecuadamente la faringitis estreptocócica, según las indicaciones clínicas, reduce el riesgo de fiebre reumática.","key":"La fiebre reumática es una secuela inmunomediada de infección por S. pyogenes, no una infección articular persistente.","title":"Caso 24","summary":"Caso clínico integrado: interpreta los datos antes de elegir la mejor respuesta.","number":24},
+  {"organism":"S. pyogenes","group":"gram-positive-cocci","difficulty":"Alta","stem":"Un paciente desarrolla dolor extremo en una extremidad tras una lesión menor. En menos de 24 horas aparecen edema tenso, piel violácea, ampollas y shock. En la cirugía se observa necrosis fascial; el cultivo muestra cocos grampositivos en cadenas y β-hemólisis. La imagen no muestra producción evidente de gas.","question":"¿Qué actividad bacteriana contribuye a la rápida propagación por los tejidos conectivos?","options":["Hialuronidasa, que degrada componentes de la matriz extracelular","Proteína A, que bloquea la opsonización mediante IgG","Coagulasa, que forma fibrina como mecanismo principal de diseminación","Fimbrias P que reconocen receptores renales"],"correct":0,"explanation":"El cuadro es compatible con fascitis necrosante por S. pyogenes. La hialuronidasa puede degradar componentes de la matriz extracelular y facilitar la extensión por tejidos; estreptocinasa y DNasas también contribuyen a la diseminación. Las exotoxinas y la respuesta inflamatoria pueden agravar la toxicidad sistémica. La ausencia de gas no excluye fascitis necrosante. Perla clínica: dolor desproporcionado, progresión rápida y toxicidad sistémica requieren valoración quirúrgica urgente.","key":"La fascitis necrosante es una urgencia quirúrgica; no debe descartarse por ausencia de gas.","title":"Caso 25","summary":"Caso clínico integrado: interpreta los datos antes de elegir la mejor respuesta.","number":25},
+  {"organism":"S. agalactiae","group":"gram-positive-cocci","difficulty":"Alta","stem":"Un recién nacido de 18 horas presenta dificultad respiratoria, letargo e inestabilidad térmica. El hemocultivo muestra cocos grampositivos en cadenas cortas; el aislamiento es β-hemolítico, CAMP positivo e hipurato positivo. La madre tenía colonización genital documentada durante el embarazo.","question":"¿Qué factor favorece especialmente la supervivencia de este microorganismo en el recién nacido?","options":["Cápsula polisacárida con ácido siálico que reduce la eliminación inmunitaria","Proteína A que se une a la región Fc de IgG","Proteína M asociada a fiebre reumática posfaringitis","Cápsula PRP característica de Haemophilus influenzae tipo b"],"correct":0,"explanation":"S. agalactiae, o estreptococo del grupo B, puede transmitirse durante el parto y causar sepsis y meningitis neonatal. Su cápsula polisacárida rica en ácido siálico dificulta la opsonización y la eliminación por las defensas del huésped. La colonización materna es relativamente frecuente y no equivale por sí sola a enfermedad, pero constituye una fuente importante de transmisión neonatal. Perla clínica: los signos iniciales en el recién nacido pueden ser inespecíficos y la infección invasiva puede progresar con rapidez.","key":"CAMP positivo e hipurato positivo ayudan a identificar S. agalactiae en el contexto adecuado.","title":"Caso 26","summary":"Caso clínico integrado: interpreta los datos antes de elegir la mejor respuesta.","number":26},
+  {"organism":"S. pneumoniae","group":"gram-positive-cocci","difficulty":"Alta","stem":"Un hombre de 68 años con antecedente de esplenectomía presenta fiebre, dolor pleurítico, tos productiva y consolidación lobar. El esputo muestra diplococos grampositivos lanceolados; el aislamiento es α-hemolítico, sensible a optoquina y soluble en bilis. Evoluciona rápidamente a bacteriemia.","question":"¿Qué condición fisiopatológica explica mejor su riesgo de infección invasiva?","options":["La ausencia de función esplénica reduce la eliminación de bacterias encapsuladas","La esplenectomía impide producir todas las inmunoglobulinas","La pérdida del bazo incrementa directamente la producción de toxina neumocócica","El microorganismo solo se vuelve invasivo cuando pierde su cápsula"],"correct":0,"explanation":"S. pneumoniae es un diplococo grampositivo encapsulado. La cápsula dificulta la fagocitosis y hace especialmente importante la opsonización y el aclaramiento esplénico; por ello, la asplenia aumenta el riesgo de infección invasiva grave. La sensibilidad a optoquina y solubilidad en bilis ayudan a distinguirlo de estreptococos viridans. Perla clínica: personas sin función esplénica necesitan atención especial a la prevención de infecciones por bacterias encapsuladas, incluida la vacunación neumocócica según las recomendaciones vigentes.","key":"La cápsula neumocócica y la función del bazo son determinantes importantes de la defensa frente a enfermedad invasiva.","title":"Caso 27","summary":"Caso clínico integrado: interpreta los datos antes de elegir la mejor respuesta.","number":27},
+  {"organism":"S. pneumoniae","group":"gram-positive-cocci","difficulty":"Alta","stem":"Un niño con otitis media reciente presenta fiebre, cefalea, rigidez de nuca y alteración del estado de conciencia. El LCR muestra pleocitosis neutrofílica, proteínas elevadas y glucosa baja. Se observan diplococos grampositivos lanceolados; el aislamiento es α-hemolítico, sensible a optoquina y soluble en bilis.","question":"¿Cuál es el agente más probable?","options":["Streptococcus pneumoniae","Streptococcus pyogenes","Streptococcus agalactiae","Staphylococcus aureus"],"correct":0,"explanation":"S. pneumoniae es una causa importante de otitis media, neumonía, sinusitis y meningitis. Una infección de oído medio o de senos paranasales puede preceder a la invasión de estructuras contiguas o a la diseminación hematógena. La sensibilidad a optoquina y la solubilidad en bilis ayudan a distinguirlo de estreptococos viridans. Perla clínica: una sospecha de meningitis bacteriana requiere tratamiento urgente; la confirmación etiológica no debe retrasar el manejo inicial.","key":"Diplococos lanceolados α-hemolíticos, optoquina sensibles y solubles en bilis favorecen S. pneumoniae.","title":"Caso 28","summary":"Caso clínico integrado: interpreta los datos antes de elegir la mejor respuesta.","number":28},
+  {"organism":"N. meningitidis","group":"gram-negative-cocci","difficulty":"Alta","stem":"Un universitario presenta fiebre abrupta, cefalea intensa, rigidez de nuca y lesiones petequiales que progresan a púrpura. El LCR contiene diplococos gramnegativos oxidasa positivos; el aislamiento utiliza glucosa y maltosa. Ha sufrido episodios previos de infección invasiva por el mismo género y el estudio inmunológico identifica deficiencia de C7.","question":"¿Qué defecto de defensa explica mejor la susceptibilidad a episodios invasivos recurrentes?","options":["Formación deficiente del complejo de ataque a membrana del complemento","Ausencia de anticuerpos contra proteína M estreptocócica","Defecto de síntesis de ácido siálico bacteriano","Falla de producción de IgE frente a bacterias encapsuladas"],"correct":0,"explanation":"N. meningitidis es un diplococo gramnegativo que utiliza glucosa y maltosa. C7 forma parte de la vía terminal del complemento y es necesario para ensamblar el complejo de ataque a membrana; su deficiencia reduce la capacidad de lisar Neisseria y se asocia con episodios invasivos recurrentes. El lipooligosacárido meningocócico contribuye a la inflamación sistémica, al daño vascular y al shock. Perla clínica: infecciones invasivas recurrentes por Neisseria justifican evaluar el complemento terminal.","key":"La deficiencia de componentes terminales del complemento se asocia a riesgo de enfermedad invasiva recurrente por Neisseria.","title":"Caso 29","summary":"Caso clínico integrado: interpreta los datos antes de elegir la mejor respuesta.","number":29},
+  {"organism":"N. gonorrhoeae","group":"gram-negative-cocci","difficulty":"Alta","stem":"Una mujer de 23 años presenta dolor pélvico, fiebre y dolor a la movilización cervical. La muestra endocervical muestra diplococos gramnegativos dentro de neutrófilos; el aislamiento es oxidasa positivo y utiliza glucosa, pero no maltosa. Refiere una nueva pareja sexual semanas antes.","question":"¿Qué microorganismo explica mejor el cuadro y su posible progresión?","options":["Neisseria gonorrhoeae, capaz de ascender y causar enfermedad inflamatoria pélvica","Neisseria meningitidis, que utiliza glucosa y maltosa y suele transmitirse por secreciones respiratorias","Streptococcus pneumoniae, diplococo lanceolado α-hemolítico","Moraxella catarrhalis, causa típica de infección pélvica ascendente"],"correct":0,"explanation":"N. gonorrhoeae es oxidasa positiva y utiliza glucosa, pero no maltosa; los diplococos intracelulares en una muestra genital apoyan el diagnóstico. La infección puede producir cervicitis y ascender al endometrio y las trompas, causando enfermedad inflamatoria pélvica, infertilidad y embarazo ectópico. Para el diagnóstico, las pruebas de amplificación de ácidos nucleicos suelen ser preferidas; deben considerarse además evaluación de parejas y pruebas para otras ITS según el contexto. Perla clínica: una infección inicial poco sintomática no excluye complicaciones ascendentes.","key":"N. gonorrhoeae utiliza glucosa, pero no maltosa; puede producir cervicitis y enfermedad inflamatoria pélvica.","title":"Caso 30","summary":"Caso clínico integrado: interpreta los datos antes de elegir la mejor respuesta.","number":30},
+  {"organism":"N. gonorrhoeae","group":"gram-negative-cocci","difficulty":"Alta","stem":"Un hombre ha presentado varios episodios de gonorrea separados por meses. Cada episodio respondió al tratamiento indicado y no se ha demostrado resistencia antimicrobiana. Los aislamientos muestran cambios en antígenos de superficie implicados en adhesión. El paciente pregunta por qué una infección anterior no le protegió frente a la siguiente.","question":"¿Qué propiedad contribuye a la falta de protección duradera?","options":["Variación antigénica y de expresión de pili y proteínas Opa","Formación obligatoria de esporas resistentes al tratamiento","Producción persistente de toxina Shiga","Cápsula K1 que impide la invasión del sistema nervioso central"],"correct":0,"explanation":"N. gonorrhoeae puede modificar la expresión y la estructura antigénica de pili y proteínas Opa. Esta variación dificulta que los anticuerpos generados frente a un aislamiento reconozcan con eficacia aislamientos posteriores. Las recurrencias también pueden deberse a reinfección por una pareja no tratada o a nuevas exposiciones, por lo que no deben atribuirse automáticamente a variación antigénica. Perla clínica: una infección previa no garantiza inmunidad protectora frente a futuras gonorreas.","key":"La variación antigénica ayuda a la evasión inmune y contribuye a las reinfecciones gonocócicas.","title":"Caso 31","summary":"Caso clínico integrado: interpreta los datos antes de elegir la mejor respuesta.","number":31},
+  {"organism":"Campylobacter jejuni","group":"other-bacteria","difficulty":"Alta","stem":"Un joven desarrolla fiebre, dolor abdominal y diarrea sanguinolenta tras consumir pollo poco cocido. El coprocultivo muestra bacilos gramnegativos curvos, oxidasa positivos y microaerófilos, con crecimiento favorecido a 42 °C. Dos semanas después, cuando la enteritis se ha resuelto, aparece debilidad ascendente, parestesias y arreflexia.","question":"¿Qué mecanismo explica mejor la complicación neurológica?","options":["Mimetismo molecular entre componentes bacterianos y gangliósidos de nervios periféricos","Invasión bacteriana persistente de los nervios desde el intestino","Activación de Gsα y aumento del AMPc en neuronas motoras","Depósito de complejos inmunes en glomérulos renales"],"correct":0,"explanation":"Campylobacter jejuni es una causa importante de gastroenteritis asociada a aves poco cocidas. En algunos pacientes, sus lipooligosacáridos presentan similitud estructural con gangliósidos neuronales; la respuesta inmunitaria puede reaccionar de forma cruzada con nervios periféricos y desencadenar síndrome de Guillain-Barré. La latencia tras la enteritis y la debilidad ascendente con arreflexia apoyan una complicación inmunomediada. Perla clínica: la progresión de la debilidad exige vigilar la función respiratoria.","key":"Guillain-Barré puede aparecer después de resolver la enteritis por Campylobacter; no implica necesariamente invasión neural directa.","title":"Caso 32","summary":"Caso clínico integrado: interpreta los datos antes de elegir la mejor respuesta.","number":32},
+  {"organism":"Vibrio cholerae","group":"other-bacteria","difficulty":"Alta","stem":"Tras una interrupción del suministro de agua potable, una comunidad presenta diarrea acuosa de gran volumen, vómitos y deshidratación rápida. Las heces son pálidas y acuosas, sin sangre ni inflamación intestinal marcada. El aislamiento es un bacilo gramnegativo curvo, móvil y oxidasa positivo, y produce colonias amarillas en agar TCBS.","question":"¿Qué alteración molecular explica mejor la pérdida masiva de agua y electrolitos?","options":["ADP-ribosilación de Gsα, con activación persistente de adenilato ciclasa y aumento de AMPc","Activación de guanilato ciclasa C por una toxina termoestable de E. coli","Inhibición de la síntesis proteica por lesión del ARN ribosomal","Invasión del colon con destrucción tisular y respuesta neutrofílica intensa"],"correct":0,"explanation":"V. cholerae toxigénico produce una toxina AB5 que ADP-ribosila Gsα, manteniendo activada la adenilato ciclasa y elevando el AMPc. Esto estimula la secreción de cloruro y agua hacia la luz intestinal, causando diarrea de gran volumen sin requerir invasión profunda de la mucosa. La combinación de transmisión por agua, diarrea profusa y colonias amarillas en TCBS apoya la sospecha. Perla clínica: la rehidratación rápida y adecuada es la intervención central para prevenir shock hipovolémico.","key":"V. cholerae fermenta sacarosa en TCBS y puede causar diarrea secretora masiva mediada por AMPc.","title":"Caso 33","summary":"Caso clínico integrado: interpreta los datos antes de elegir la mejor respuesta.","number":33},
+  {"organism":"Vibrio parahaemolyticus","group":"other-bacteria","difficulty":"Alta","stem":"Un adulto desarrolla diarrea, dolor abdominal y fiebre moderada tras consumir mariscos crudos. El laboratorio recupera bacilos gramnegativos curvos y oxidasa positivos que requieren NaCl para crecer adecuadamente. En TCBS aparecen colonias verdes y el estudio adicional demuestra una hemolisina asociada a enterotoxicidad.","question":"¿Qué especie es más probable y qué dato ayuda a diferenciarla del agente clásico del cólera?","options":["Vibrio parahaemolyticus; halofilia y colonias verdes en TCBS apoyan la identificación","Vibrio cholerae; halofilia obligatoria y colonias verdes son su perfil típico","Campylobacter jejuni; crecimiento a 42 °C produce colonias verdes en TCBS","Helicobacter pylori; la ureasa genera colonias verdes en TCBS"],"correct":0,"explanation":"V. parahaemolyticus se asocia con mariscos crudos o poco cocidos y suele ser halófilo; por lo general no fermenta sacarosa y produce colonias verdes en TCBS. Algunas cepas expresan hemolisinas, como TDH, relacionadas con enterotoxicidad. V. cholerae toxigénico, en cambio, suele producir colonias amarillas en TCBS por fermentación de sacarosa y se asocia especialmente con transmisión por agua o alimentos contaminados. Perla clínica: interpretar conjuntamente exposición, requerimientos de sal y cultivo ayuda a diferenciar Vibrio con síndromes gastrointestinales distintos.","key":"V. parahaemolyticus se asocia a mariscos, halofilia y colonias verdes en TCBS.","title":"Caso 34","summary":"Caso clínico integrado: interpreta los datos antes de elegir la mejor respuesta.","number":34},
+  {"organism":"Helicobacter pylori","group":"other-bacteria","difficulty":"Alta","stem":"Un hombre de 48 años presenta gastritis crónica y una úlcera duodenal. La biopsia identifica una bacteria espiral gramnegativa, microaerófila y ureasa positiva. En el aislamiento se identifica un sistema de secreción tipo IV capaz de transferir una proteína al interior de las células epiteliales, donde altera la señalización y la organización celular.","question":"¿Qué asociación de factores explica mejor la colonización y el daño epitelial?","options":["La ureasa amortigua localmente la acidez, mientras que CagA altera la señalización celular","La ureasa inhibe EF-2 y CagA produce hemólisis de eritrocitos","La cápsula K1 neutraliza el ácido gástrico y la proteína M causa la úlcera","La toxina Shiga facilita la colonización gástrica y la exotoxina A activa el complemento"],"correct":0,"explanation":"H. pylori usa ureasa para generar amoníaco a partir de urea y amortiguar localmente la acidez, facilitando su supervivencia cerca de la mucosa. Algunas cepas introducen CagA en las células epiteliales mediante un sistema de secreción tipo IV; CagA altera señalización y organización celular y se asocia con inflamación y mayor riesgo de enfermedad gástrica grave. La úlcera resulta de una interacción prolongada entre colonización, respuesta inflamatoria y defensa mucosa. Perla clínica: ureasa positiva apoya la identificación, pero no explica por sí sola todo el daño gástrico.","key":"Ureasa facilita supervivencia gástrica; CagA altera la señalización del epitelio.","title":"Caso 35","summary":"Caso clínico integrado: interpreta los datos antes de elegir la mejor respuesta.","number":35}
+];
 
-  <main>
-    <div class="breadcrumb">
-      <a href="index.html">Inicio</a>
-      <span>/</span>
-      <a href="cursos.html">Cursos</a>
-      <span>/</span>
-      <a href="inmunidad-infectologia.html">Inmunidad e Infectología</a>
-      <span>/</span>
-      <span>Casos clínicos</span>
-    </div>
+const list = document.getElementById("case-list");
+const quiz = document.getElementById("quiz");
+const search = document.getElementById("search");
+const filters = document.querySelectorAll(".filter");
+const empty = document.getElementById("empty");
+const simResults = document.getElementById("sim-results");
+const practiceButton = document.getElementById("practice-mode");
+const simulationButton = document.getElementById("simulation-mode");
 
-    <div class="kicker">BEYONDERMED / Aplicación clínica</div>
+let activeFilter = "todos";
+let mode = "practice";
+let currentIndex = 0;
+let selected = null;
+let answered = false;
+const completed = new Set();
+let simulationAnswers = {};
 
-    <h1>Casos clínicos y preguntas</h1>
+function setMode(nextMode){
+  mode = nextMode;
+  const isPractice = mode === "practice";
+  practiceButton.classList.toggle("active", isPractice);
+  practiceButton.setAttribute("aria-pressed", String(isPractice));
+  simulationButton.classList.toggle("active", !isPractice);
+  simulationButton.setAttribute("aria-pressed", String(!isPractice));
 
-    <p class="intro">
-      No memorices únicamente el nombre del microorganismo.
-      Interpreta los hallazgos, identifica el mecanismo de patogenia
-      y conecta cada pista clínica con la respuesta más probable.
-    </p>
+  document.querySelectorAll(".tools,.filters").forEach(el=>{
+    el.classList.toggle("mode-hidden", !isPractice);
+  });
 
-    <div class="overview">
-      <div class="overview-item">
-        <strong id="available-count">01</strong>
-        <span>Casos disponibles</span>
-      </div>
-      <div class="overview-item">
-        <strong>MCQ</strong>
-        <span>Preguntas de opción múltiple</span>
-      </div>
-      <div class="overview-item">
-        <strong>ENFOQUE</strong>
-        <span>Razonamiento clínico</span>
-      </div>
-    </div>
+  list.classList.toggle("mode-hidden", !isPractice);
+  empty.classList.toggle("mode-hidden", !isPractice);
 
-    <div class="section-heading">
-      <span class="section-line"></span>
-      <h2>Explorar por área</h2>
-    </div>
+  if(isPractice){
+    simResults.classList.remove("visible");
+  }
+}
 
-    <div class="filters" aria-label="Filtrar casos por área">
-      <button class="filter-button active" data-filter="todos" aria-pressed="true">
-        Todos
-      </button>
-      <button class="filter-button" data-filter="inmunologia" aria-pressed="false">
-        Inmunología
-      </button>
-      <button class="filter-button" data-filter="bacteriologia" aria-pressed="false">
-        Bacteriología
-      </button>
-      <button class="filter-button" data-filter="virologia" aria-pressed="false">
-        Virología
-      </button>
-    </div>
+function renderCards(){
+  list.innerHTML = "";
+  let shown = 0;
+  const q = search.value.trim().toLowerCase();
 
-    <section class="case-list" aria-label="Lista de casos clínicos">
+  cases.forEach((item,index)=>{
+    const matchesFilter = activeFilter === "todos" || item.group === activeFilter;
+    const haystack = `${item.title} ${item.organism} ${item.summary} ${item.stem} ${item.question} ${item.options.join(" ")}`.toLowerCase();
+    const matchesSearch = !q || haystack.includes(q);
+    if(!matchesFilter || !matchesSearch) return;
 
-      <article class="case-card" data-area="bacteriologia">
-        <div class="case-meta">
-          <span class="tag tag-red">Bacteriología</span>
-          <span class="tag">Dificultad media</span>
-        </div>
+    shown++;
 
-        <h3>Diarrea del viajero</h3>
+    const card = document.createElement("article");
+    card.className = "case-card";
 
-        <p>
-          Un paciente presenta diarrea acuosa después de viajar.
-          Analiza los datos clínicos para identificar el patotipo
-          de Escherichia coli más probable.
-        </p>
+    const meta = document.createElement("div");
+    meta.className = "meta";
 
-        <div class="case-card-bottom">
-          <span class="question-count">01 pregunta · Caso introductorio</span>
-          <button class="text-button" id="open-case">
-            Resolver caso →
-          </button>
-        </div>
-      </article>
+    const label = document.createElement("span");
+    label.className = "tag red";
+    label.textContent = "Caso clínico";
 
-      <article class="case-card" data-area="inmunologia">
-        <div class="case-meta">
-          <span class="tag">Inmunología</span>
-          <span class="tag">Próximamente</span>
-        </div>
+    const difficulty = document.createElement("span");
+    difficulty.className = "tag";
+    difficulty.textContent = `Dificultad ${item.difficulty.toLowerCase()}`;
 
-        <h3>Respuesta inmunitaria</h3>
+    meta.append(label,difficulty);
 
-        <p>
-          Casos orientados a identificar células, mediadores,
-          mecanismos de defensa y alteraciones de la respuesta inmune.
-        </p>
+    const heading = document.createElement("h3");
+    heading.textContent = `Caso ${String(index+1).padStart(2,"0")}`;
 
-        <div class="case-card-bottom">
-          <span class="question-count">En preparación</span>
-        </div>
-      </article>
+    const desc = document.createElement("p");
+    desc.textContent = "Integra datos clínicos, microbiológicos y fisiopatológicos.";
 
-      <article class="case-card" data-area="virologia">
-        <div class="case-meta">
-          <span class="tag">Virología</span>
-          <span class="tag">Próximamente</span>
-        </div>
+    const bottom = document.createElement("div");
+    bottom.className = "card-bottom";
 
-        <h3>Patogenia viral</h3>
+    const state = document.createElement("small");
+    state.textContent = completed.has(index) ? "Resuelto" : "1 pregunta · Caso clínico";
 
-        <p>
-          Casos para relacionar el tipo de genoma, la replicación,
-          los mecanismos de lesión y las manifestaciones clínicas.
-        </p>
+    const btn = document.createElement("button");
+    btn.className = "open-case";
+    btn.type = "button";
+    btn.textContent = "Resolver caso →";
+    btn.addEventListener("click",()=>openCase(index));
 
-        <div class="case-card-bottom">
-          <span class="question-count">En preparación</span>
-        </div>
-      </article>
+    bottom.append(state,btn);
+    card.append(meta,heading,desc,bottom);
+    list.append(card);
+  });
 
-    </section>
+  empty.classList.toggle("visible",shown===0);
+  document.getElementById("case-count").textContent = String(cases.length).padStart(2,"0");
+}
 
-    <p class="empty-state" id="empty-state">
-      No hay casos disponibles en esta área todavía.
-    </p>
+filters.forEach(button=>button.addEventListener("click",()=>{
+  activeFilter = button.dataset.filter;
+  filters.forEach(b=>{
+    const on = b===button;
+    b.classList.toggle("active",on);
+    b.setAttribute("aria-pressed",String(on));
+  });
+  renderCards();
+}));
 
-    <section class="quiz" id="quiz" aria-labelledby="quiz-title">
-      <div class="quiz-header">
-        <div>
-          <div class="quiz-label">Caso clínico 01 / Bacteriología</div>
-          <h2 id="quiz-title">Diarrea del viajero</h2>
-        </div>
-        <div class="quiz-counter" id="quiz-counter">Pregunta 1 de 1</div>
-      </div>
+search.addEventListener("input",renderCards);
 
-      <div class="progress-track" aria-hidden="true">
-        <div class="progress-fill" id="progress-fill"></div>
-      </div>
+practiceButton.addEventListener("click",()=>{
+  setMode("practice");
+  quiz.classList.remove("visible");
+  renderCards();
+});
 
-      <p class="clinical-case">
-        Un varón de 24 años regresa de un viaje de cinco días.
-        Desde hace 24 horas presenta deposiciones acuosas abundantes,
-        cólicos abdominales y náuseas. No presenta fiebre alta ni
-        sangre visible en las heces. Otros viajeros que consumieron
-        alimentos en el mismo lugar desarrollaron síntomas similares.
-        Se sospecha una infección intestinal por Escherichia coli.
-      </p>
+simulationButton.addEventListener("click",startSimulation);
+document.getElementById("repeat-simulation").addEventListener("click",startSimulation);
 
-      <p class="question">
-        ¿Qué patotipo es el más probable en este paciente?
-      </p>
+document.getElementById("return-practice").addEventListener("click",()=>{
+  setMode("practice");
+  quiz.classList.remove("visible");
+  renderCards();
+  list.scrollIntoView({behavior:"smooth",block:"start"});
+});
 
-      <div class="options" id="options">
-        <button class="option" data-answer="A">
-          <span class="option-letter">A</span>
-          <span>Escherichia coli enteroinvasiva (EIEC).</span>
-        </button>
+function openCase(index){
+  setMode("practice");
+  currentIndex = index;
+  simResults.classList.remove("visible");
+  resetQuiz();
+  quiz.classList.add("visible");
+  renderQuestion();
+  quiz.scrollIntoView({behavior:"smooth",block:"start"});
+}
 
-        <button class="option" data-answer="B">
-          <span class="option-letter">B</span>
-          <span>Escherichia coli productora de toxina Shiga (STEC).</span>
-        </button>
+function startSimulation(){
+  setMode("simulation");
+  simulationAnswers = {};
+  completed.clear();
+  currentIndex = 0;
+  simResults.classList.remove("visible");
+  resetQuiz();
+  quiz.classList.add("visible");
+  renderQuestion();
+  document.getElementById("quiz").scrollIntoView({behavior:"smooth",block:"start"});
+}
 
-        <button class="option" data-answer="C">
-          <span class="option-letter">C</span>
-          <span>Escherichia coli enterotoxigénica (ETEC).</span>
-        </button>
+function resetQuiz(){
+  selected = null;
+  answered = false;
+  document.getElementById("feedback").className = "feedback";
+  document.getElementById("result").classList.remove("visible");
+  document.getElementById("actions").hidden = false;
+  document.getElementById("check").hidden = false;
+  document.getElementById("check").disabled = true;
+  document.getElementById("progress-fill").style.width = "0";
+}
 
-        <button class="option" data-answer="D">
-          <span class="option-letter">D</span>
-          <span>Escherichia coli enteropatógena (EPEC).</span>
-        </button>
-      </div>
+function renderQuestion(){
+  const item = cases[currentIndex];
 
-      <div class="feedback" id="feedback" aria-live="polite">
-        <h3 id="feedback-title"></h3>
-        <p id="feedback-text"></p>
-        <p class="key-point" id="key-point"></p>
-      </div>
+  document.getElementById("quiz-label").textContent =
+    `${mode === "simulation" ? "SIMULACRO" : "PRÁCTICA INDIVIDUAL"} / Dificultad ${item.difficulty.toLowerCase()}`;
 
-      <div class="quiz-actions" id="quiz-actions">
-        <button class="primary-button" id="check-answer" disabled>
-          Comprobar respuesta
-        </button>
-        <button class="secondary-button" id="close-quiz">
-          Cerrar caso
-        </button>
-      </div>
+  document.getElementById("quiz-title").textContent =
+    `Caso ${String(currentIndex+1).padStart(2,"0")}`;
 
-      <div class="quiz-result" id="quiz-result" aria-live="polite">
-        <h3 id="result-title">Caso completado</h3>
-        <p id="result-text"></p>
-        <button class="primary-button" id="retry-case">
-          Volver a resolver
-        </button>
-      </div>
-    </section>
+  document.getElementById("quiz-counter").textContent =
+    `Caso ${currentIndex+1} de ${cases.length}`;
 
-  </main>
+  document.getElementById("case-text").textContent = item.stem;
+  document.getElementById("question").textContent = item.question;
 
-  <footer>
-    <div class="footer-inner">
-      <div class="footer-brand">BEYONDERMED</div>
+  const options = document.getElementById("options");
+  options.innerHTML = "";
 
-      <div class="footer-links">
-        <a href="index.html">Inicio</a>
-        <a href="metodo.html">Método</a>
-        <a href="cursos.html">Cursos</a>
-      </div>
-    </div>
-  </footer>
+  item.options.forEach((text,index)=>{
+    const button = document.createElement("button");
+    button.className = "option";
+    button.type = "button";
+    button.setAttribute("aria-pressed","false");
 
-  <script>
-    const filterButtons = document.querySelectorAll(".filter-button");
-    const caseCards = document.querySelectorAll(".case-card");
-    const emptyState = document.getElementById("empty-state");
-    const quiz = document.getElementById("quiz");
-    const openCaseButton = document.getElementById("open-case");
-    const closeQuizButton = document.getElementById("close-quiz");
-    const optionButtons = document.querySelectorAll(".option");
-    const checkButton = document.getElementById("check-answer");
+    const letter = document.createElement("span");
+    letter.className = "letter";
+    letter.textContent = String.fromCharCode(65+index);
+
+    const label = document.createElement("span");
+    label.textContent = text;
+
+    button.append(letter,label);
+
+    button.addEventListener("click",()=>{
+      if(answered) return;
+      selected = index;
+
+      options.querySelectorAll(".option").forEach((b,i)=>{
+        b.classList.toggle("selected",i===index);
+        b.setAttribute("aria-pressed",String(i===index));
+      });
+
+      document.getElementById("check").disabled = false;
+    });
+
+    options.append(button);
+  });
+
+  document.getElementById("check").textContent =
+    mode === "simulation"
+      ? (currentIndex===cases.length-1 ? "Finalizar simulacro" : "Registrar y continuar →")
+      : "Comprobar respuesta";
+
+  document.getElementById("back-to-list").hidden = mode === "simulation";
+
+  document.getElementById("progress-fill").style.width =
+    mode === "simulation" ? `${(currentIndex/cases.length)*100}%` : "0";
+}
+
+document.getElementById("check").addEventListener("click",()=>{
+  if(selected===null || answered) return;
+
+  answered = true;
+  const item = cases[currentIndex];
+  completed.add(currentIndex);
+
+  document.querySelectorAll(".option").forEach((button,index)=>{
+    button.disabled = true;
+
+    if(mode === "practice"){
+      if(index===item.correct) button.classList.add("correct");
+      else if(index===selected) button.classList.add("incorrect");
+    }
+  });
+
+  document.getElementById("progress-fill").style.width = "100%";
+  document.getElementById("check").hidden = true;
+
+  if(mode === "simulation"){
+    simulationAnswers[currentIndex] = selected;
+
+    document.getElementById("feedback").className = "feedback visible";
+    document.getElementById("feedback-title").textContent = "Respuesta registrada";
+    document.getElementById("feedback-text").textContent =
+      "La corrección y la explicación se mostrarán al finalizar el simulacro.";
+    document.getElementById("key-point").textContent = "";
+
+    document.getElementById("result").classList.add("visible");
+    document.getElementById("result-text").textContent =
+      currentIndex===cases.length-1
+        ? "Has respondido los 35 casos. Finaliza para ver tu resultado y revisar las explicaciones."
+        : "Avanza al siguiente caso sin ver la respuesta correcta.";
+
+    const next = document.getElementById("next");
+    next.textContent =
+      currentIndex===cases.length-1 ? "Ver resultados del simulacro" : "Siguiente caso →";
+
+    next.onclick = ()=>{
+      if(currentIndex===cases.length-1){
+        finishSimulation();
+        return;
+      }
+
+      currentIndex++;
+      resetQuiz();
+      renderQuestion();
+    };
+  } else {
+    const correct = selected===item.correct;
     const feedback = document.getElementById("feedback");
-    const feedbackTitle = document.getElementById("feedback-title");
-    const feedbackText = document.getElementById("feedback-text");
-    const keyPoint = document.getElementById("key-point");
-    const resultPanel = document.getElementById("quiz-result");
-    const resultTitle = document.getElementById("result-title");
-    const resultText = document.getElementById("result-text");
-    const retryButton = document.getElementById("retry-case");
 
-    let selectedAnswer = null;
-    let answered = false;
-    let score = 0;
+    feedback.classList.add("visible",correct?"good":"bad");
 
-    filterButtons.forEach((button) => {
-      button.addEventListener("click", () => {
-        const filter = button.dataset.filter;
+    document.getElementById("feedback-title").textContent =
+      correct ? "Respuesta correcta" : "Respuesta incorrecta";
 
-        filterButtons.forEach((item) => {
-          const active = item === button;
-          item.classList.toggle("active", active);
-          item.setAttribute("aria-pressed", String(active));
-        });
+    document.getElementById("feedback-text").textContent = item.explanation;
+    document.getElementById("key-point").textContent = `Perla clínica: ${item.key}`;
+    document.getElementById("result").classList.add("visible");
 
-        let visibleCount = 0;
+    document.getElementById("result-text").textContent =
+      correct
+        ? "Caso resuelto. Revisa la perla clínica antes de continuar."
+        : "Caso revisado. Contrasta los datos del enunciado con el mecanismo explicado.";
 
-        caseCards.forEach((card) => {
-          const visible =
-            filter === "todos" || card.dataset.area === filter;
+    const next = document.getElementById("next");
 
-          card.hidden = !visible;
+    next.textContent =
+      currentIndex===cases.length-1 ? "Volver al primer caso ↻" : "Siguiente caso →";
 
-          if (visible) visibleCount++;
-        });
+    next.onclick = ()=>openCase(currentIndex===cases.length-1 ? 0 : currentIndex+1);
+  }
 
-        emptyState.classList.toggle("visible", visibleCount === 0);
-      });
-    });
+  renderCards();
+});
 
-    function resetCase() {
-      selectedAnswer = null;
-      answered = false;
-      score = 0;
+function finishSimulation(){
+  const correctCount = cases.reduce(
+    (n,item,index)=>n+(simulationAnswers[index]===item.correct?1:0),
+    0
+  );
 
-      optionButtons.forEach((button) => {
-        button.disabled = false;
-        button.classList.remove("correct", "incorrect");
-        button.setAttribute("aria-pressed", "false");
-      });
+  document.getElementById("sim-summary").textContent =
+    `Puntaje: ${correctCount} de ${cases.length} (${Math.round(correctCount/cases.length*100)}%). Las respuestas y explicaciones aparecen a continuación para que puedas revisar los errores.`;
 
-      feedback.className = "feedback";
-      feedbackTitle.textContent = "";
-      feedbackText.textContent = "";
-      keyPoint.textContent = "";
+  const review = document.getElementById("sim-review");
+  review.innerHTML = "";
 
-      checkButton.disabled = true;
-      checkButton.hidden = false;
-      checkButton.textContent = "Comprobar respuesta";
+  cases.forEach((item,index)=>{
+    const selectedAnswer = simulationAnswers[index];
+    const correct = selectedAnswer===item.correct;
 
-      document.getElementById("quiz-actions").hidden = false;
-      resultPanel.classList.remove("visible");
-      document.getElementById("progress-fill").style.width = "0%";
-    }
+    const details = document.createElement("details");
+    details.className = "sim-item";
 
-    function openQuiz() {
-      resetCase();
-      quiz.classList.add("visible");
-      quiz.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
+    const summary = document.createElement("summary");
+    summary.className = correct ? "correct-summary" : "incorrect-summary";
 
-    openCaseButton.addEventListener("click", openQuiz);
-    retryButton.addEventListener("click", openQuiz);
+    const yourAnswer =
+      selectedAnswer===undefined
+        ? "Sin responder"
+        : `${String.fromCharCode(65+selectedAnswer)}. ${item.options[selectedAnswer]}`;
 
-    closeQuizButton.addEventListener("click", () => {
-      quiz.classList.remove("visible");
-    });
+    summary.textContent =
+      `Caso ${String(index+1).padStart(2,"0")} · ${correct ? "Correcto" : "Incorrecto"} · Tu respuesta: ${yourAnswer}`;
 
-    optionButtons.forEach((button) => {
-      button.setAttribute("aria-pressed", "false");
+    const correctText = document.createElement("p");
+    correctText.className = "sim-answer";
+    correctText.textContent =
+      `Respuesta correcta: ${String.fromCharCode(65+item.correct)}. ${item.options[item.correct]}`;
 
-      button.addEventListener("click", () => {
-        if (answered) return;
+    const explanation = document.createElement("p");
+    explanation.textContent = item.explanation;
 
-        selectedAnswer = button.dataset.answer;
+    const pearl = document.createElement("p");
+    pearl.textContent = `Perla clínica: ${item.key}`;
 
-        optionButtons.forEach((item) => {
-          item.setAttribute(
-            "aria-pressed",
-            String(item === button)
-          );
+    details.append(summary,correctText,explanation,pearl);
+    review.append(details);
+  });
 
-          item.style.borderColor =
-            item === button ? "#b3262e" : "";
-        });
+  quiz.classList.remove("visible");
+  simResults.classList.add("visible");
+  simResults.scrollIntoView({behavior:"smooth",block:"start"});
+}
 
-        checkButton.disabled = false;
-      });
-    });
+document.getElementById("back-to-list").addEventListener("click",()=>{
+  quiz.classList.remove("visible");
+  if(mode === "practice") list.scrollIntoView({behavior:"smooth",block:"start"});
+});
 
-    checkButton.addEventListener("click", () => {
-      if (!selectedAnswer || answered) return;
+document.getElementById("close").addEventListener("click",()=>{
+  quiz.classList.remove("visible");
+  if(mode === "simulation") setMode("practice");
+});
 
-      answered = true;
-
-      const correctAnswer = "C";
-      const isCorrect = selectedAnswer === correctAnswer;
-
-      if (isCorrect) score++;
-
-      optionButtons.forEach((button) => {
-        button.disabled = true;
-        button.style.borderColor = "";
-
-        if (button.dataset.answer === correctAnswer) {
-          button.classList.add("correct");
-        } else if (button.dataset.answer === selectedAnswer) {
-          button.classList.add("incorrect");
-        }
-      });
-
-      feedback.classList.add("visible");
-      feedback.classList.add(
-        isCorrect ? "correct-feedback" : "incorrect-feedback"
-      );
-
-      feedbackTitle.textContent = isCorrect
-        ? "Respuesta correcta"
-        : "Respuesta incorrecta";
-
-      feedbackText.textContent =
-        "ETEC produce enterotoxinas que alteran el transporte de agua y electrolitos en el intestino delgado, generando diarrea acuosa. La asociación con viajes y alimentos o agua contaminados es una pista clásica. La ausencia de sangre y de un síndrome inflamatorio marcado también orienta hacia este patotipo.";
-
-      keyPoint.textContent =
-        "Clave de razonamiento: diarrea acuosa del viajero → considerar ETEC. Si predominan diarrea sanguinolenta y riesgo de síndrome urémico hemolítico, considera STEC.";
-
-      document.getElementById("progress-fill").style.width = "100%";
-      checkButton.hidden = true;
-
-      resultPanel.classList.add("visible");
-      resultTitle.textContent = isCorrect
-        ? "Caso completado: 1/1"
-        : "Caso completado: 0/1";
-
-      resultText.textContent = isCorrect
-        ? "Identificaste el patotipo más probable a partir de las pistas clínicas."
-        : "Revisa la explicación y compara el patrón clínico con las características de cada patotipo.";
-    });
-  </script>
-
+renderCards();
+</script>
 </body>
 </html>
